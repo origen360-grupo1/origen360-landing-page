@@ -37,3 +37,20 @@ formulario.addEventListener('submit', function (evento) {
 });
 
 document.getElementById('anio').textContent = new Date().getFullYear();
+
+// Videos locales: al encontrar el archivo, se muestra el reproductor.
+// Solo debes copiar los MP4 en public/assets/videos con los nombres indicados.
+const videos = document.querySelectorAll('.video-player');
+
+videos.forEach(function (video) {
+    video.addEventListener('loadedmetadata', function () {
+        video.parentElement.classList.add('video-listo');
+    });
+
+    // Si no existe el video, se conserva la tarjeta de "Próximamente".
+    video.addEventListener('error', function () {
+        video.parentElement.classList.remove('video-listo');
+    });
+
+    video.load();
+});
