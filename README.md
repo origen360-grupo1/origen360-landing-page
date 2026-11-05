@@ -1,6 +1,6 @@
 # Origen360 Perú — Landing Page (Work-in-progress)
 
-> **Para empezar en WebStorm:** abre la carpeta del proyecto y luego `public/index.html`. Las carpetas son similares a la práctica `16734` del profesor: `styles` equivale a `css`, `images` a `Imagenes` y `scripts` a `js`. La carpeta `videos` está creada como espacio opcional. Lee `COMIENZA_AQUI.txt` para verlo paso a paso. Conservamos la ruta `public/assets/` porque es obligatoria para el challenge.
+> **Para empezar en WebStorm:** abre la carpeta del proyecto y luego `public/index.html`. Las carpetas son similares a la práctica `16734` del profesor: `styles` equivale a `css`, `images` a `Imagenes` y `scripts` a `js`. La carpeta `videos` contiene una guía para agregar tres clips de Pexels. Lee `COMIENZA_AQUI.txt` para verlo paso a paso. Conservamos la ruta `public/assets/` porque es obligatoria para el challenge.
 
 ## Información del proyecto
 Proyecto académico del curso **IHC y Tecnologías Móviles (SI385)**, NRC **16734**, de la Universidad Peruana de Ciencias Aplicadas (UPC). Startup: **Origen360 Perú**.
@@ -34,8 +34,21 @@ Integrantes identificados en el informe del proyecto proporcionado por el equipo
 - Hero con propuesta de valor y tarjeta demostrativa del pasaporte digital.
 - Sección del problema, cuatro beneficios, tres pasos de funcionamiento.
 - Segmentos objetivo, tecnologías propuestas, llamado a la acción y pie de página.
+- Nueva sección **Del campo a tus manos** con tres espacios para videos de cosecha, distribución y mercado. Las tarjetas muestran "Próximamente" hasta que se agreguen los archivos MP4.
 - Diseño adaptable a escritorio, tablet y móvil (CSS media queries).
 - Menú móvil y formulario de consulta de un **lote ficticio** usando JavaScript.
+
+## Videos ilustrativos — para agregar más adelante
+
+La sección **Del campo a tus manos** está preparada con HTML5, CSS y JavaScript sencillo. **No incluye videos descargados todavía**. Cuando coloques los tres MP4 en `public/assets/videos/`, aparecerán automáticamente al actualizar el navegador. Mientras tanto se muestran tarjetas de espera.
+
+| Tarjeta | Nombre exacto del archivo |
+|---|---|
+| Cultivo y cosecha | `campo-cosecha.mp4` |
+| Distribución y entrega | `distribucion.mp4` |
+| Mercado y consumidor | `mercado.mp4` |
+
+Abre `public/assets/videos/COMO_AGREGAR_VIDEOS.txt` para encontrar los enlaces sugeridos de Pexels y una explicación paso a paso. Los clips son ilustrativos; no deben confundirse con evidencia real de trazabilidad, proveedores o lotes verificados por Origen360.
 
 ## Tecnologías utilizadas
 - HTML5
@@ -57,11 +70,12 @@ Origen360_LandingPage_Challenge/
         ├── styles/
         │   └── styles.css
         ├── images/
+        │   ├── logo-origen360.png
         │   └── referencia-mockup-origen360.png
         ├── scripts/
         │   └── main.js
         └── videos/
-            └── .gitkeep (carpeta opcional, sin videos todavía)
+            └── COMO_AGREGAR_VIDEOS.txt (aquí van los 3 MP4)
 ```
 
 ## Cómo ejecutar
@@ -76,6 +90,7 @@ Origen360_LandingPage_Challenge/
 - `feature/landing-page-inicial`: implementación de la estructura HTML.
 - `feature/diseno-responsive`: estilos y adaptabilidad.
 - `feature/interacciones-basicas`: navegación y demostración de JavaScript.
+- `feature/galeria-videos`: galería para añadir clips MP4 locales.
 
 **Convención:** cada nueva funcionalidad se crea con `feature/nombre-descriptivo` desde `develop`; luego se integra en `develop` mediante merge o pull request.
 
