@@ -3,13 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origen360 Perú</title>
-    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Origen360 Perú: conoce el origen, recorrido y evidencia disponible de los lotes agrícolas mediante un pasaporte digital.">
+    <title>Origen360 Perú | Trazabilidad agrícola</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <script src="assets/scripts/main.js" defer></script>
 </head>
 <body>
-    <header><h1>Origen360 Perú</h1></header>
-    <main><p>Landing Page en desarrollo.</p></main>
+    <!-- Encabezado y navegación principal -->
+    <header class="header" id="inicio">
+        <div class="brand">
+            <a class="brand-link" href="#inicio" aria-label="Origen360 Perú, ir al inicio">
+                <span class="brand-icon" aria-hidden="true">✿</span>
+                <span>Origen<span class="brand-number">360</span> <small>Perú</small></span>
+            </a>
+        </div>
+        <button class="menu-btn" id="menu-btn" type="button" aria-controls="menu-principal" aria-expanded="false" aria-label="Mostrar menú">☰</button>
+        <nav class="nav" id="menu-principal" aria-label="Navegación principal">
+            <a href="#problema">El problema</a>
+            <a href="#como-funciona">Cómo funciona</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#para-quien">Para quién</a>
+            <a href="#contacto" class="nav-contacto">Conoce Origen360</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección principal -->
+        <section class="hero" aria-labelledby="hero-titulo">
+            <div class="hero-content">
+                <span class="etiqueta-verde">🌱 Del campo al consumidor, con confianza</span>
+                <h1 id="hero-titulo">Trazabilidad agrícola <span>clara y confiable</span></h1>
+                <p>Consulta lotes, verifica su procedencia y comprende la información disponible sobre tus alimentos.</p>
+                <div class="hero-actions">
+                    <a class="primary-btn" href="#como-funciona">Conocer la solución <span aria-hidden="true">→</span></a>
+                    <a class="secondary-btn" href="#consulta">Ver demostración <span aria-hidden="true">▶</span></a>
+                </div>
+                <p class="hero-note">Una propuesta digital para consumidores y responsables de abastecimiento.</p>
+            </div>
+            <div class="hero-image">
+                <!-- Vista ilustrativa hecha en HTML y CSS, no son datos reales -->
+                <article class="passport" aria-label="Ejemplo de pasaporte digital de un lote">
+                    <div class="passport-sidebar">
+                        <div class="passport-logo">✿ Origen360</div>
+                        <span class="sidebar-item active">⌂ Inicio</span>
+                        <span class="sidebar-item">▣ Lotes</span>
+                        <span class="sidebar-item">◷ Trazabilidad</span>
+                        <span class="sidebar-item">▤ Reportes</span>
+                    </div>
+                    <div class="passport-info">
+                        <div class="passport-top"><strong>Detalle del lote</strong><span class="demo-tag">DEMO</span></div>
+                        <div class="passport-data">
+                            <div class="product-emoji" role="img" aria-label="Ilustración de una palta">🥑</div>
+                            <div>
+                                <h2>Palta Hass</h2>
+                                <p>Código: O360-DEMO-001</p>
+                                <p>Origen: Perú</p>
+                                <p>Información de ejemplo</p>
+                            </div>
+                        </div>
+                        <div class="passport-status">✓ Pasaporte digital demostrativo</div>
+                        <div class="passport-steps" aria-label="Etapas de ejemplo">
+                            <span><i>1</i>Siembra</span><span><i>2</i>Cosecha</span><span><i>3</i>Distribución</span><span><i>4</i>Consulta</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Explicación del problema -->
+        <section class="section problem-section" id="problema">
+            <div class="section-title">
+                <span class="overline">EL PROBLEMA</span>
+                <h2>La información del producto suele estar dispersa</h2>
+                <p>Durante una compra o recepción de mercadería, conocer el origen y las evidencias de un lote no siempre es sencillo. Origen360 busca reunir esa información en un mismo lugar.</p>
+            </div>
+        </section>
+
+        <!-- Beneficios -->
+        <section class="section beneficios" id="beneficios">
+            <div class="section-title">
+                <span class="overline">LO QUE OFRECEMOS</span>
+                <h2>Beneficios principales</h2>
+                <p>Una solución simple para una cadena agrícola más transparente y eficiente.</p>
+            </div>
+            <div class="cards">
+                <article class="card"><div class="icon-box" aria-hidden="true">▤</div><h3>Consulta de lotes</h3><p>Accede a datos disponibles de identificación del lote y procedencia desde un mismo lugar.</p></article>
+                <article class="card"><div class="icon-box" aria-hidden="true">⌕</div><h3>Revisa la trazabilidad</h3><p>Visualiza el historial del recorrido del producto, desde su origen hasta su destino.</p></article>
+                <article class="card"><div class="icon-box" aria-hidden="true">♧</div><h3>Alertas por lote</h3><p>Identifica observaciones y avisos documentados, con su fuente y alcance correspondiente.</p></article>
+                <article class="card"><div class="icon-box" aria-hidden="true">▦</div><h3>Pasaporte digital</h3><p>Reúne datos, evidencia y seguimiento en una vista comprensible para cada lote.</p></article>
+            </div>
+        </section>
+
+        <!-- Flujo de uso -->
+        <section class="section como-funciona" id="como-funciona">
+            <div class="section-title">
+                <span class="overline">UN PROCESO SENCILLO</span>
+                <h2>¿Cómo funciona?</h2>
+                <p>En tres pasos, puedes comenzar a explorar la trazabilidad de tus productos.</p>
+            </div>
+            <div class="steps">
+                <article class="step"><div class="step-icon"><span>1</span> ▤</div><div><h3>Registra o consulta</h3><p>Ingresa un código de lote o, cuando esté disponible, utiliza su código QR.</p></div></article>
+                <article class="step"><div class="step-icon"><span>2</span> ▦</div><div><h3>Revisa la evidencia</h3><p>Consulta procedencia, información registrada y respaldos disponibles.</p></div></article>
+                <article class="step"><div class="step-icon"><span>3</span> ⇢</div><div><h3>Comprende y comparte</h3><p>Conoce el recorrido y comprende el alcance de cada dato y alerta.</p></div></article>
+            </div>
+        </section>
+
+        <!-- Público objetivo -->
+        <section class="section para-quien" id="para-quien">
+            <div class="section-title">
+                <span class="overline">NUESTRA COMUNIDAD</span>
+                <h2>¿Para quién es Origen360?</h2>
+                <p>Conectamos a los actores de la cadena agrícola para una mayor transparencia.</p>
+            </div>
+            <div class="audience-cards">
+                <article class="audience"><div class="audience-icon" aria-hidden="true">▣</div><div><h3>Comerciantes</h3><p>Facilita la verificación de procedencia de lotes y el respaldo de datos durante la recepción de productos.</p></div></article>
+                <article class="audience"><div class="audience-icon" aria-hidden="true">♧</div><div><h3>Consumidores</h3><p>Accede a información confiable sobre el origen de los productos que consumes.</p></div></article>
+            </div>
+        </section>
+
+        <!-- Tecnología -->
+        <section class="section tecnologia" id="tecnologia">
+            <div class="section-title">
+                <span class="overline">INFORMACIÓN QUE AYUDA</span>
+                <h2>Tecnología inteligente</h2>
+                <p>Estas tecnologías forman parte de la propuesta de Origen360 y se implementarán progresivamente.</p>
+            </div>
+            <div class="tech-cards">
+                <article class="tech-card"><span class="tech-icon" aria-hidden="true">▤</span><div><h3>Big Data</h3><p>Integración de registros de lotes, recorridos y evidencias para su consulta y análisis.</p></div></article>
+                <article class="tech-card"><span class="tech-icon" aria-hidden="true">⚙</span><div><h3>Machine Learning</h3><p>Identificación preventiva de patrones; las estimaciones no sustituyen fuentes oficiales.</p></div></article>
+                <article class="tech-card"><span class="tech-icon" aria-hidden="true">▥</span><div><h3>IA aplicada</h3><p>Apoyo para comprender datos complejos con explicaciones accesibles y prudentes.</p></div></article>
+            </div>
+        </section>
+
+        <!-- Consulta demostrativa que funciona solo en el navegador -->
+        <section class="section demo-section" id="consulta">
+            <div class="demo-box">
+                <div><span class="overline">DEMOSTRACIÓN DEL AVANCE</span><h2>Prueba una consulta de ejemplo</h2><p>Esta sección simula la visualización de un lote. No consulta una base de datos ni verifica certificados reales.</p></div>
+                <form id="consulta-form" class="demo-form">
+                    <label for="codigo-lote">Código de lote demostrativo</label>
+                    <div class="form-row"><input id="codigo-lote" name="codigo-lote" type="text" value="O360-DEMO-001" autocomplete="off" placeholder="O360-DEMO-001" required><button class="primary-btn" type="submit">Consultar</button></div>
+                    <p id="resultado-consulta" class="form-message" role="status" aria-live="polite">Ingresa el código indicado para mostrar un ejemplo.</p>
+                </form>
+            </div>
+        </section>
+
+        <section class="cta-section" id="contacto">
+            <div class="cta-text"><span class="overline">ORIGEN360 PERÚ</span><h2>Empieza a digitalizar tu trazabilidad</h2><p>Únete a una comunidad que impulsa una agricultura más transparente, conectada y sostenible.</p></div>
+            <a class="cta-button" href="#consulta">Ver demostración ↗</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div><strong>✿ Origen360 <span>Perú</span></strong><p>Transparencia y trazabilidad para la cadena agrícola peruana.</p></div>
+        <div class="footer-links"><a href="#inicio">Inicio</a><a href="#como-funciona">Cómo funciona</a><a href="#para-quien">Para quién</a></div>
+        <div class="footer-note"><p>Proyecto académico — IHC y Tecnologías Móviles</p><p>© <span id="anio">2026</span> Origen360 Perú</p><small>Interfaz en desarrollo. Datos demostrativos.</small></div>
+    </footer>
 </body>
 </html>
