@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="Portada ilustrativa MERCADO Y CONSUMIDOR">
+<defs><linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a5141"/><stop offset="1" stop-color="#9ac192"/></linearGradient></defs>
+<rect width="1000" height="560" fill="url(#fondo)"/><path d="M90 230h820l-80 120H170Z" fill="#d3e1b8"/><path d="M160 350h670v148H160z" fill="#285e43"/><path d="M145 350h715" stroke="#edf4d3" stroke-width="15"/><g><circle cx="340" cy="418" r="34" fill="#b7d568"/><circle cx="417" cy="418" r="34" fill="#e6b659"/><circle cx="492" cy="418" r="34" fill="#85ba70"/><circle cx="570" cy="418" r="34" fill="#d5cc84"/><circle cx="645" cy="418" r="34" fill="#95ce86"/></g>
+<rect width="1000" height="560" fill="#102b22" opacity=".15"/>
+</svg>

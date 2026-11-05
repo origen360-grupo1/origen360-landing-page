@@ -1,0 +1,33 @@
+# Publicación manual opcional. No cambia la estructura public/assets del challenge.
+name: Publicar Origen360 en GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Subir carpeta public
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./public
+      - name: Publicar sitio
+        id: deployment
+        uses: actions/deploy-pages@v4
