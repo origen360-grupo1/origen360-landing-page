@@ -1,5 +1,4 @@
-// Origen360 Perú - interacciones sencillas basadas en JavaScript Foundation.
-// No utiliza frameworks ni servicios externos.
+// Origen360 Perú - JavaScript de la Landing Page.
 
 // 1. Menú para pantallas pequeñas.
 const menuBtn = document.getElementById('menu-btn');
@@ -121,7 +120,7 @@ document.querySelectorAll('.codigo-sugerido').forEach(function (boton) {
 // 3. Año del pie de página.
 document.getElementById('anio').textContent = new Date().getFullYear();
 
-// 4. Videos HTML5: se muestran cuando se hayan copiado los MP4 a la carpeta.
+// 4. Reproductores de video HTML5.
 const videos = document.querySelectorAll('.video-player');
 videos.forEach(function (video) {
     const contenedor = video.parentElement;
