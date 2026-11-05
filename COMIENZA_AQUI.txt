@@ -1,33 +1,21 @@
-ORIGEN360 PERÚ — GUÍA RÁPIDA DE CARPETAS (SEMANA 10)
+ORIGEN360 PERÚ — COMIENZA AQUÍ (SEMANA 12)
 
-En la práctica del profesor viste: index.html, css, Imagenes, js, videos.
-En este challenge hay que usar los mismos tipos de archivos, pero dentro
-la ruta obligatoria public/assets/:
+1. Descomprime el archivo ZIP.
+2. Abre WebStorm y selecciona la carpeta Origen360_LandingPage_MEJORADO (la que contiene README.md).
+3. En el explorador, abre public → index.html y elige "Open in Browser".
+4. Prueba el menú en una ventana pequeña. Pulsa Escape para cerrarlo.
+5. Baja a "Explora un pasaporte digital": usa O360-DEMO-001 (Palta Hass) u O360-DEMO-002 (Café).
+6. Si todavía no descargaste videos, verás tres portadas ilustrativas. Es normal.
+7. Cuando tengas los MP4, colócalos en public/assets/videos/, con los nombres de la guía.
+8. Lee GUIA_ENTREGA.md para subir las ramas a GitHub, transferir el repositorio y crear el PDF.
 
-Origen360_LandingPage_Challenge/
-|-- public/                  ← carpeta principal de la página
-|   |-- index.html           ← ABRE ESTE ARCHIVO para ver la web
-|   |-- favicon.ico          ← icono de la pestaña del navegador
-|   `-- assets/
-|       |-- styles/
-|       |   `-- styles.css    ← CSS (como css/index.css del profesor)
-|       |-- images/
-|       |   `-- referencia-mockup-origen360.png  ← imagen de referencia
-|       |-- scripts/
-|       |   `-- main.js       ← JavaScript (como la carpeta js)
-|       `-- videos/          ← aquí pondrás los archivos MP4 de Pexels
-|-- README.md                ← explicación del proyecto y autores
-`-- GUIA_ENTREGA.md          ← pasos para GitHub y PDF
+CARPETAS COMO EN CLASE:
+- El profesor: css/index.css       → Nuestro challenge: public/assets/styles/styles.css
+- El profesor: Imagenes/          → Nuestro challenge: public/assets/images/
+- El profesor: js/                → Nuestro challenge: public/assets/scripts/main.js
+- El profesor: videos/            → Nuestro challenge: public/assets/videos/
+- El profesor: index.html         → Nuestro challenge: public/index.html
 
-1. En WebStorm: File > Open > selecciona Origen360_LandingPage_Challenge.
-2. En el panel izquierdo, abre public > assets para ver las carpetas.
-3. Abre public/index.html con el navegador.
-4. Si modificas el diseño, edita public/assets/styles/styles.css.
-5. Si modificas interacciones, edita public/assets/scripts/main.js.
-6. No muevas index.html a la raíz: el enunciado exige public/index.html.
-7. No cambies los nombres de styles, images o scripts: el reto los exige así.
-8. Para los videos, abre public/assets/videos/COMO_AGREGAR_VIDEOS.txt.
-9. Para subir a GitHub y preparar la entrega, lee GUIA_ENTREGA.md.
-
-NOTA: la sección de videos aparece al abrir el Landing Page.
-Los 3 MP4 son opcionales por ahora; se colocarán cuando tú los descargues.
+No cambies estos nombres: el enunciado exige la estructura public/assets.
+La ficha demo NO verifica certificados reales ni usa una base de datos.
+Los pasos de GitHub se hacen desde la cuenta del equipo; este ZIP no está publicado.

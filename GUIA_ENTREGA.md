@@ -1,122 +1,97 @@
 # Guía de entrega — Challenge: Landing Page Work-in-progress
 
-**Curso:** IHC y Tecnologías Móviles (SI385) · **NRC:** 16734 · **Grupo:** 1 · **Proyecto:** Origen360 Perú
+**SI385 · NRC 16734 · Grupo 1 · Origen360 Perú**
 
-## 1. Abrir el proyecto en WebStorm
+## A. Abrir en WebStorm y probar
 
-1. Extrae el ZIP completo en una carpeta de tu computadora.
-2. Abre **WebStorm → Open** y selecciona la carpeta `Origen360_LandingPage_Challenge` (la carpeta que contiene `README.md` y `public`).
-3. Abre `public/index.html` con el navegador desde WebStorm.
-4. Verifica que aparezcan los estilos verdes, las tarjetas y el pasaporte de muestra.
-5. Cambia el tamaño de la ventana: el menú debe adaptarse a celular.
-6. Prueba el formulario con el código `O360-DEMO-001`: mostrará un resultado **ficticio**, no una consulta real.
+1. Extrae `Origen360_LandingPage_MEJORADO.zip` y abre su carpeta principal en **WebStorm → Open**.
+2. Abre `public/index.html` en el navegador.
+3. Revisa la página en computadora y con la ventana estrecha; abre y cierra el menú móvil.
+4. En **Explora un pasaporte digital**, prueba `O360-DEMO-001` y `O360-DEMO-002`. Cada código muestra una ficha ficticia; prueba también un código incorrecto.
+5. Comprueba los espacios de video; si todavía no tienes MP4, las portadas son intencionales.
 
-## 2. Revisar Git y GitFlow (ya configurado localmente)
+## B. GitFlow local
 
-Este ZIP **incluye la carpeta oculta `.git`**, con historial y ramas creados para la práctica. En la terminal de WebStorm, ejecuta:
+El ZIP contiene `.git`, con ramas `main`, `develop` y `feature/...`. En la terminal de WebStorm:
 
 ```bash
 git status
 git branch
-git log --oneline --graph --all
+git log --all --oneline --graph
 ```
 
-Deben verse:
-
-- `main`: rama principal, con el avance integrado.
-- `develop`: rama de integración.
-- `feature/landing-page-inicial`: estructura HTML.
-- `feature/diseno-responsive`: CSS responsive.
-- `feature/interacciones-basicas`: JavaScript.
-
-**Importante:** Los commits del ZIP son el trabajo inicial de preparación. Cuando un compañero haga cambios nuevos debe configurar su nombre/correo en Git y hacer sus propios commits. No atribuyan commits iniciales a otra persona.
-
-Para crear otra feature desde `develop`:
+Para trabajar nuevas funciones en equipo, crea las ramas desde develop:
 
 ```bash
 git switch develop
-git pull origin develop
-git switch -c feature/nombre-de-la-tarea
-# Modificar archivos y verificar los cambios
+git switch -c feature/nombre-descriptivo
+# editar y probar archivos
 git add .
 git commit -m "feat: descripcion del cambio"
-git push -u origin feature/nombre-de-la-tarea
 ```
 
-El comando `git pull` corresponde a **después** de crear el repositorio remoto. Si aún no lo has publicado, omite esa línea.
+Cada integrante debe registrar sus aportes propios; los commits iniciales del ZIP son preparación de la práctica.
 
-## 3. Crear un repositorio personal en GitHub y publicar el proyecto
+## C. Crear el repositorio personal y subir ramas
 
-1. En GitHub, elige **New repository**.
-2. Nombre sugerido: `origen360-landing-page`.
-3. Elige **Public** si el profesor necesita verlo sin solicitar acceso.
-4. **No** marques `Add README`, `.gitignore` ni licencia: ya existen archivos e historial Git local.
-5. Copia la URL HTTPS de tu repositorio.
-6. En la terminal de WebStorm, dentro del proyecto, ejecuta:
+1. En GitHub crea `origen360-landing-page` (preferiblemente **Public** para que el profesor pueda abrirlo).
+2. No agregues otro README ni `.gitignore`: ya están incluidos.
+3. En WebStorm ejecuta, reemplazando TU_USUARIO:
 
 ```bash
 git remote add origin https://github.com/TU_USUARIO/origen360-landing-page.git
 git push -u origin main
 git push -u origin develop
+# Sube cada rama feature por separado (ver 'git branch')
 git push origin feature/landing-page-inicial
-git push origin feature/diseno-responsive
-git push origin feature/interacciones-basicas
 ```
 
-**Reemplaza `TU_USUARIO`** por tu usuario real. GitHub puede pedir inicio de sesión mediante el navegador o token; no escribas contraseñas en el código.
+**Nota:** repite `git push origin feature/nombre` con cada rama que aparezca en `git branch` (incluidas las nuevas). Si el remoto ya existe, usa `git remote set-url origin URL_CORRECTA`.
 
-Si `git remote add origin` indica que `origin` ya existe, usa:
+## D. Crear organización y transferir
 
-```bash
-git remote set-url origin https://github.com/TU_USUARIO/origen360-landing-page.git
-```
-
-## 4. Crear la organización y transferir el repositorio
-
-1. En GitHub: foto de perfil → **Settings → Organizations → New organization**.
-2. Elige un nombre disponible (ejemplo: `origen360-grupo1`, si no está ocupado).
-3. Invita a los integrantes del equipo.
-4. En el **repositorio personal**, ve a **Settings → General → Danger Zone → Transfer ownership**.
-5. Indica la organización como propietario nuevo y confirma el traslado.
-6. Comprueba que ahora el repositorio tenga una URL parecida a:
-
-   `https://github.com/NOMBRE_ORGANIZACION/origen360-landing-page`
-
-7. Actualiza el remoto en WebStorm:
+1. GitHub → foto de perfil → Settings → Organizations → New organization.
+2. Invita a tus compañeros.
+3. En el repositorio personal → Settings → General → Danger Zone → Transfer ownership, selecciona la organización.
+4. Copia la URL final: `https://github.com/ORGANIZACION/origen360-landing-page`.
+5. Actualiza el remoto local:
 
 ```bash
-git remote set-url origin https://github.com/NOMBRE_ORGANIZACION/origen360-landing-page.git
+git remote set-url origin https://github.com/ORGANIZACION/origen360-landing-page.git
 git remote -v
 ```
 
-**No basta con crear la organización:** el repositorio debe pertenecer realmente a ella.
+La organización debe ser dueña del repositorio, no basta con crearla.
 
-## 5. Obtener las capturas para el documento de entrega
+## E. Publicación web opcional con GitHub Pages
 
-Debes sacar **capturas reales** después de la publicación:
+Esto NO es obligatorio en el texto del challenge, que solo exige publicar el repositorio.
 
-- **Captura 1 (Landing Page):** abre `public/index.html` en el navegador y haz una captura que muestre el encabezado y el avance visual (preferentemente escritorio).
-- **Captura 2 (GitHub Insights):** abre el repositorio ya transferido, selecciona **Insights**; entra a **Network** para mostrar el trabajo con ramas y merges, o a **Contributors** si el profesor pide contribuciones. Toma una captura donde se vea el nombre de la organización y del repositorio.
-- **Captura 3 (opcional):** menú **Branches** de GitHub mostrando `main`, `develop` y las tres ramas `feature/...`.
+La carpeta exigida `public` no se puede elegir directamente en Pages → Deploy from a branch. Para usarla sin reorganizar nada:
 
-El enunciado menciona expresamente «Screenshot del avance de la Landing Page (sección Insights de GitHub)». Como puede interpretarse de dos formas, **incluye tanto la captura del avance visual como una captura de Insights** en el mismo PDF para evitar omisiones.
+1. Publica primero el repositorio con la rama `main`.
+2. En GitHub → **Settings → Pages**, selecciona **Source: GitHub Actions**.
+3. En **Actions**, busca **Publicar Origen360 en GitHub Pages** y pulsa **Run workflow** para la rama `main`.
+4. Revisa el resultado de la ejecución y visita la URL que GitHub muestre. La primera publicación puede requerir activar Pages y autorizar Actions en la organización.
 
-## 6. Preparar y entregar el PDF
+El archivo del workflow ya está en `.github/workflows/publicar-pages.yml` y despliega solo `public/`. No se ha ejecutado ni publicado desde aquí.
 
-1. Abre el archivo de apoyo `PLANTILLA_ENTREGA_Origen360.docx` (se entrega fuera del ZIP).
-2. Sustituye el texto `PENDIENTE` por la URL real del repositorio en la organización.
-3. Pega la captura real del Landing Page y la captura real de **Insights**.
-4. Elimina las instrucciones para completar y exporta el documento **como PDF**.
-5. Entrega **el enlace al repositorio de la organización y el PDF** antes de la hora indicada por el profesor.
+## F. Capturas y documento PDF
 
-**Nombre recomendado del PDF:** `Challenge_LandingPage_WorkInProgress_Grupo1_Origen360.pdf`.
+El profesor pide enviar el enlace del repositorio y un PDF con una captura del avance (menciona Insights de GitHub). Para cubrirlo:
 
-## 7. Posible publicación con GitHub Pages (opcional)
+- Captura del encabezado del Landing Page y su contenido en el navegador.
+- Captura de GitHub → **Insights → Network** mostrando ramas y merges, si esa vista está disponible.
+- Recomendado: captura de la pestaña **Branches** mostrando `main`, `develop` y ramas feature.
 
-El challenge exige publicar el **repositorio**; no exige expresamente publicar una página con GitHub Pages. Además, los archivos HTML están en `public/`, como pide la actividad. GitHub Pages mediante `Deploy from a branch` solo permite publicar desde `/(root)` o `/docs`; **no desde `/public` directamente**. Para publicar la web en una URL sin alterar esta estructura, se puede usar un workflow de **GitHub Actions** que despliegue `public/`. Eso es trabajo adicional al mínimo solicitado.
+En la plantilla `PLANTILLA_ENTREGA_Origen360.docx` reemplaza los campos pendientes por la URL real y las capturas. Exporta a PDF y envía ambos elementos antes de la hora indicada.
 
-## 8. Qué está hecho y qué falta
+**Nombre recomendado:** `Challenge_LandingPage_WorkInProgress_Grupo1_Origen360.pdf`
 
-**Hecho en el ZIP:** estructura de carpetas, `index.html`, `favicon.ico`, CSS, JS, README, Git inicializado, `main`, `develop`, tres features creadas desde `develop`, commits y merges de trabajo, Landing Page responsive con demostración.
+## G. Qué está listo y qué falta
 
-**Pendiente en tu cuenta:** crear repositorio GitHub, subir ramas, crear organización, transferir el repositorio, tomar capturas reales de GitHub Insights, completar PDF y enviarlo al profesor.
+**Listo:** estructura exigida, HTML, CSS, JavaScript, logo, favicon, demos accesibles, espacios de videos, README, GitFlow local, workflow opcional Pages.
+
+**Pendiente del equipo:** descargar MP4 de Pexels (si desean incluirlos), crear repositorio GitHub, subir ramas, crear organización y transferir, ejecutar Pages si les interesa, tomar captura real de GitHub Insights y generar el PDF final.
+
+**No instalar frameworks CSS:** el challenge solo permite HTML, CSS y JavaScript. Google Fonts y bibliotecas autorizadas son opcionales; el sitio no las necesita.
