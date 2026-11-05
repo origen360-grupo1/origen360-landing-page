@@ -1,5 +1,7 @@
 # Origen360 Perú — Landing Page (Work-in-progress)
 
+> **Para empezar en WebStorm:** abre la carpeta del proyecto y luego `public/index.html`. Las carpetas son similares a la práctica `16734` del profesor: `styles` equivale a `css`, `images` a `Imagenes` y `scripts` a `js`. La carpeta `videos` está creada como espacio opcional. Lee `COMIENZA_AQUI.txt` para verlo paso a paso. Conservamos la ruta `public/assets/` porque es obligatoria para el challenge.
+
 ## Información del proyecto
 Proyecto académico del curso **IHC y Tecnologías Móviles (SI385)**, NRC **16734**, de la Universidad Peruana de Ciencias Aplicadas (UPC). Startup: **Origen360 Perú**.
 
@@ -46,17 +48,20 @@ No se utiliza Bootstrap, Materialize, Foundation ni otros frameworks CSS.
 ```text
 Origen360_LandingPage_Challenge/
 ├── README.md
+├── COMIENZA_AQUI.txt
 ├── .gitignore
 └── public/
     ├── index.html
     ├── favicon.ico
     └── assets/
+        ├── styles/
+        │   └── styles.css
         ├── images/
         │   └── referencia-mockup-origen360.png
         ├── scripts/
         │   └── main.js
-        └── styles/
-            └── styles.css
+        └── videos/
+            └── .gitkeep (carpeta opcional, sin videos todavía)
 ```
 
 ## Cómo ejecutar
