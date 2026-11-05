@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="Portada ilustrativa DISTRIBUCIÓN">
+<defs><linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#204b44"/><stop offset="1" stop-color="#80b7a1"/></linearGradient></defs>
+<rect width="1000" height="560" fill="url(#fondo)"/><path d="M85 365h520v110H85z" fill="#9bc8a6" opacity=".85"/><path d="M605 403h115l75 72H605z" fill="#bcd9bf"/><circle cx="230" cy="476" r="44" fill="#17372e"/><circle cx="655" cy="476" r="44" fill="#17372e"/><path d="M154 278h125v88H154zM295 278h125v88H295zM436 278h125v88H436z" fill="#d5e9ba" opacity=".9"/><path d="M0 515H1000" stroke="#e0f0d3" stroke-width="9" opacity=".5"/>
+<rect width="1000" height="560" fill="#102b22" opacity=".15"/>
+</svg>

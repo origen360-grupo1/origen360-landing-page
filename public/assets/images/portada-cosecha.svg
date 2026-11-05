@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="Portada ilustrativa CULTIVO Y COSECHA">
+<defs><linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#24583e"/><stop offset="1" stop-color="#85b97e"/></linearGradient></defs>
+<rect width="1000" height="560" fill="url(#fondo)"/><path d="M0 440 Q210 355 460 438 T1000 420 V560 H0Z" fill="#396e46"/><path d="M0 488 Q320 412 670 497 T1000 470 V560 H0Z" fill="#1d4634"/><g stroke="#d4edc8" stroke-width="7" stroke-linecap="round"><path d="M755 420V175M755 270q-80-75-121-22M755 306q76-87 130-55M755 360q-72-78-128-44"/></g><circle cx="220" cy="190" r="78" fill="#d6e2ab" opacity=".45"/>
+<rect width="1000" height="560" fill="#102b22" opacity=".15"/>
+</svg>
