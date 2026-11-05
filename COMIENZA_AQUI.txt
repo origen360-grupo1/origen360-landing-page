@@ -1,0 +1,32 @@
+ORIGEN360 PERÚ — GUÍA RÁPIDA DE CARPETAS (SEMANA 10)
+
+En la práctica del profesor viste: index.html, css, Imagenes, js, videos.
+En este challenge hay que usar los mismos tipos de archivos, pero dentro
+la ruta obligatoria public/assets/:
+
+Origen360_LandingPage_Challenge/
+|-- public/                  ← carpeta principal de la página
+|   |-- index.html           ← ABRE ESTE ARCHIVO para ver la web
+|   |-- favicon.ico          ← icono de la pestaña del navegador
+|   `-- assets/
+|       |-- styles/
+|       |   `-- styles.css    ← CSS (como css/index.css del profesor)
+|       |-- images/
+|       |   `-- referencia-mockup-origen360.png  ← imagen de referencia
+|       |-- scripts/
+|       |   `-- main.js       ← JavaScript (como la carpeta js)
+|       `-- videos/          ← opcional; vacía por ahora
+|-- README.md                ← explicación del proyecto y autores
+`-- GUIA_ENTREGA.md          ← pasos para GitHub y PDF
+
+1. En WebStorm: File > Open > selecciona Origen360_LandingPage_Challenge.
+2. En el panel izquierdo, abre public > assets para ver las carpetas.
+3. Abre public/index.html con el navegador.
+4. Si modificas el diseño, edita public/assets/styles/styles.css.
+5. Si modificas interacciones, edita public/assets/scripts/main.js.
+6. No muevas index.html a la raíz: el enunciado exige public/index.html.
+7. No cambies los nombres de styles, images o scripts: el reto los exige así.
+8. Para subir a GitHub y preparar la entrega, lee GUIA_ENTREGA.md.
+
+NOTA: los archivos HTML, CSS y JavaScript mantienen su contenido original.
+Solo se agregó esta guía y una carpeta opcional de videos.
