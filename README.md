@@ -89,3 +89,8 @@ Completar una vez publicada la entrega:
 
 ## Observación
 Este repositorio representa un avance académico. No debe interpretarse como un producto disponible ni como un sistema de verificación de inocuidad operativo.
+
+
+## Logo del proyecto
+
+El logotipo oficial `public/assets/images/logo-origen360.png` se utiliza en el encabezado y en el pie de página. El `favicon.ico` se ha actualizado utilizando el ícono del mismo logotipo.
