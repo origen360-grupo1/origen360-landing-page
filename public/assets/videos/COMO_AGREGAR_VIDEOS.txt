@@ -38,3 +38,14 @@ CONSEJOS:
 Licencia Pexels: https://www.pexels.com/es-es/license/
 Revisa las condiciones de licencia del material específico. La atribución no es obligatoria,
 pero puedes incluir los créditos de los autores si lo deseas.
+
+ACCESIBILIDAD Y PORTADAS:
+- La página incluye portadas ilustradas en public/assets/images/ para que se vea bien antes de añadir los MP4.
+- Al copiar un MP4 con el nombre correcto, aparecerá el reproductor HTML5 con controles.
+- Si alguno de tus videos contiene diálogo, narración o información verbal importante, prepara subtítulos en español en formato .vtt.
+- Cuando tengas el archivo de subtítulos, agrega dentro del elemento <video> correspondiente en public/index.html la etiqueta:
+  <track kind="captions" src="assets/videos/cosecha-es.vtt" srclang="es" label="Español">
+- Guarda el VTT en esta carpeta, y usa su nombre real en el atributo src.
+- No añadas un track vacío o inventado: los subtítulos deben corresponder al contenido del video.
+- Si no tienes subtítulos todavía, busca clips sin narración y acompaña los videos con el texto de la tarjeta.
+- Evita la reproducción automática con sonido y verifica la legibilidad de los controles en el celular.
