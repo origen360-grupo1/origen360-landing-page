@@ -1,0 +1,89 @@
+name: Preparar y publicar Origen360 en Pages
+
+# La incorporación de este archivo no publica el sitio al hacer push.
+# Ejecutar manualmente; publish=false valida sin crear un despliegue.
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publicar public/ (activar únicamente después de autorizar el despliegue)
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validar aplicación y rutas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Comprobar rama de publicación
+        env:
+          PAGES_PUBLISH: ${{ inputs.publish }}
+          PAGES_REF: ${{ github.ref }}
+          PAGES_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          if [[ "$PAGES_PUBLISH" == "true" && "$PAGES_REF" != "refs/heads/$PAGES_DEFAULT_BRANCH" ]]; then
+            echo "La publicación solo se permite desde la rama predeterminada del repositorio."
+            exit 1
+          fi
+
+      - name: Obtener el código
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Preparar Node para las comprobaciones
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Ejecutar las 35 pruebas de la aplicación
+        run: node tests/run.mjs
+
+      - name: Verificar contenido publicable y rutas bajo subdirectorio
+        run: node scripts/check-pages.mjs
+
+  deploy:
+    name: Publicar solo public/
+    if: ${{ inputs.publish && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Obtener el código validado
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Preparar Pages (debe habilitarse previamente en Settings)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: false
+
+      - name: Empaquetar exclusivamente los archivos del sitio
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public/
+          retention-days: 1
+
+      - name: Desplegar el artefacto validado
+        id: deployment
+        uses: actions/deploy-pages@v5

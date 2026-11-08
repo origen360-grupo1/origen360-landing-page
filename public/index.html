@@ -129,9 +129,9 @@
                         <div class="video-placeholder">
                             <span class="video-play" aria-hidden="true">▶</span>
                             <span>Video de cultivo y cosecha</span>
-                            <small>Próximamente</small>
+                            <small>Vista previa ilustrativa</small>
                         </div>
-                        <video class="video-player" controls preload="metadata" playsinline aria-label="Video ilustrativo de cultivo y cosecha" poster="assets/images/portada-cosecha.svg">
+                        <video class="video-player" controls preload="metadata" playsinline aria-label="Video ilustrativo de cultivo y cosecha" aria-describedby="estado-video-cosecha" poster="assets/images/portada-cosecha.svg">
                             <source src="assets/videos/campo-cosecha.mp4" type="video/mp4">
                             Tu navegador no admite videos HTML5.
                         </video>
@@ -140,6 +140,7 @@
                         <span class="video-numero">01 / ORIGEN</span>
                         <h3>Cultivo y cosecha</h3>
                         <p>Conoce el trabajo detrás del origen de los productos agrícolas.</p>
+                        <p id="estado-video-cosecha" class="video-estado estado-cargando" role="status" aria-live="polite" aria-atomic="true">Cargando información del video…</p>
                     </div>
                 </article>
                 <article class="video-card">
@@ -147,9 +148,9 @@
                         <div class="video-placeholder">
                             <span class="video-play" aria-hidden="true">▶</span>
                             <span>Video de distribución</span>
-                            <small>Próximamente</small>
+                            <small>Vista previa ilustrativa</small>
                         </div>
-                        <video class="video-player" controls preload="metadata" playsinline aria-label="Video ilustrativo de distribución de alimentos" poster="assets/images/portada-distribucion.svg">
+                        <video class="video-player" controls preload="metadata" playsinline aria-label="Video ilustrativo de distribución de alimentos" aria-describedby="estado-video-distribucion" poster="assets/images/portada-distribucion.svg">
                             <source src="assets/videos/distribucion.mp4" type="video/mp4">
                             Tu navegador no admite videos HTML5.
                         </video>
@@ -158,6 +159,7 @@
                         <span class="video-numero">02 / RECORRIDO</span>
                         <h3>Distribución y entrega</h3>
                         <p>El traslado de los alimentos es una parte importante de su trazabilidad.</p>
+                        <p id="estado-video-distribucion" class="video-estado estado-cargando" role="status" aria-live="polite" aria-atomic="true">Cargando información del video…</p>
                     </div>
                 </article>
                 <article class="video-card">
@@ -165,9 +167,9 @@
                         <div class="video-placeholder">
                             <span class="video-play" aria-hidden="true">▶</span>
                             <span>Video de productos en el mercado</span>
-                            <small>Próximamente</small>
+                            <small>Vista previa ilustrativa</small>
                         </div>
-                        <video class="video-player" controls preload="metadata" playsinline aria-label="Video ilustrativo de compra de productos agrícolas" poster="assets/images/portada-mercado.svg">
+                        <video class="video-player" controls preload="metadata" playsinline aria-label="Video ilustrativo de compra de productos agrícolas" aria-describedby="estado-video-mercado" poster="assets/images/portada-mercado.svg">
                             <source src="assets/videos/mercado.mp4" type="video/mp4">
                             Tu navegador no admite videos HTML5.
                         </video>
@@ -176,6 +178,7 @@
                         <span class="video-numero">03 / DESTINO</span>
                         <h3>Del mercado al consumidor</h3>
                         <p>Comprender la procedencia permite tomar decisiones más informadas.</p>
+                        <p id="estado-video-mercado" class="video-estado estado-cargando" role="status" aria-live="polite" aria-atomic="true">Cargando información del video…</p>
                     </div>
                 </article>
             </div>
@@ -208,54 +211,383 @@
             </div>
         </section>
 
-        <!-- Consulta demostrativa: JavaScript local sin base de datos -->
+        <!-- Etapa 1: identificación, confirmación y acceso al pasaporte local. -->
         <section class="section demo-section" id="consulta" aria-labelledby="consulta-titulo">
-            <div class="demo-box">
-                <div class="demo-intro">
-                    <span class="overline">PON A PRUEBA LA IDEA</span>
-                    <h2 id="consulta-titulo">Explora un pasaporte digital</h2>
-                    <p>Escribe uno de los códigos de muestra y consulta una ficha de trazabilidad. Los productos, lugares, fechas y etapas son <strong>datos inventados para la demostración académica</strong>.</p>
-                    <div class="ejemplos" aria-label="Códigos disponibles">
-                        <button class="codigo-sugerido" type="button" data-codigo="O360-DEMO-001">Ejemplo: Palta Hass</button>
-                        <button class="codigo-sugerido" type="button" data-codigo="O360-DEMO-002">Ejemplo: Café</button>
-                    </div>
+            <div class="section-title consulta-intro">
+                <span class="overline">EXPLORA EL ORIGEN</span>
+                <h2 id="consulta-titulo">Un lote. Su origen. La información disponible.</h2>
+                <p>Busca por producto o código, confirma el lote y abre su pasaporte digital. También puedes identificarlo con un QR desde un navegador compatible.</p>
+            </div>
+            <div class="consulta-workspace">
+                <div class="consulta-cabecera">
+                    <span class="consulta-sello">Demostración académica</span>
+                    <p>Datos ficticios · Sin verificación oficial</p>
                 </div>
-                <form id="consulta-form" class="demo-form">
-                    <label for="codigo-lote">Código de lote (demostrativo)</label>
-                    <p id="codigo-ayuda" class="form-help">Puedes usar O360-DEMO-001 u O360-DEMO-002.</p>
-                    <div class="form-row">
-                        <input id="codigo-lote" name="codigo-lote" type="text" value="O360-DEMO-001" maxlength="20" autocomplete="off" aria-describedby="codigo-ayuda" placeholder="O360-DEMO-001" required>
-                        <button class="primary-btn" type="submit">Consultar</button>
+                <div class="consulta-modos" role="group" aria-label="Contexto de consulta">
+                    <button id="abrir-consulta-publica" class="consulta-modo" type="button" aria-pressed="true" aria-controls="consulta-publica">Consultar un lote</button>
+                    <button id="abrir-recepcion" class="consulta-modo" type="button" aria-pressed="false" aria-controls="recepcion-comercial">Recepción de mercadería</button>
+                </div>
+                <div id="consulta-publica">
+                <ol class="consulta-progreso" aria-label="Pasos de la consulta">
+                    <li id="paso-identificar" aria-current="step"><span>01</span> Identifica</li>
+                    <li id="paso-confirmar"><span>02</span> Confirma</li>
+                    <li id="paso-pasaporte"><span>03</span> Explora</li>
+                </ol>
+                <div class="consulta-entrada">
+                    <form id="consulta-form" class="demo-form consulta-buscador" novalidate>
+                        <label for="codigo-lote" id="consulta-label">Producto o código de lote</label>
+                        <p id="codigo-ayuda" class="form-help">Prueba con Palta Hass, Café u O360-DEMO-001.</p>
+                        <div class="form-row">
+                            <input id="codigo-lote" name="codigo-lote" type="search" maxlength="80" autocomplete="off" spellcheck="false" aria-describedby="codigo-ayuda resultado-consulta" placeholder="Escribe un producto o código" required>
+                            <button class="primary-btn" type="submit">Buscar lote <span aria-hidden="true">→</span></button>
+                        </div>
+                        <div class="consulta-ejemplos">
+                            <span>Prueba un ejemplo</span>
+                            <button class="codigo-sugerido" type="button" data-codigo="O360-DEMO-001">Palta Hass</button>
+                            <button class="codigo-sugerido" type="button" data-codigo="O360-DEMO-002">Café en grano</button>
+                        </div>
+                        <button id="buscar-producto" class="text-btn" type="button" hidden>Buscar por producto o código</button>
+                        <p id="resultado-consulta" class="form-message" role="status" aria-live="polite" aria-atomic="true">Dos lotes de ejemplo disponibles para explorar.</p>
+                    </form>
+                    <aside class="consulta-qr-acceso" aria-labelledby="qr-acceso-titulo">
+                        <span class="consulta-qr-icono" aria-hidden="true">▦</span>
+                        <h3 id="qr-acceso-titulo">¿Tienes el QR del lote?</h3>
+                        <p>Identifícalo con tu cámara. La lectura depende de la compatibilidad del navegador.</p>
+                        <button id="abrir-escaner" class="secondary-btn" type="button" aria-haspopup="dialog" aria-controls="escaner-lote">Escanear QR</button>
+                    </aside>
+                </div>
+
+                <section id="busqueda-resultados" class="consulta-resultados" aria-labelledby="resultados-titulo" tabindex="-1" hidden>
+                    <div class="consulta-resultados-cabecera">
+                        <h3 id="resultados-titulo">Resultados de búsqueda</h3>
+                        <span id="resultados-total" class="consulta-contador"></span>
                     </div>
-                    <p id="resultado-consulta" class="form-message" role="status" aria-live="polite">Selecciona un ejemplo y pulsa Consultar.</p>
-                </form>
-                <section class="resultado-card" id="pasaporte-resultado" aria-labelledby="resultado-titulo" tabindex="-1" hidden>
-                    <div class="resultado-encabezado">
+                    <ul id="lista-resultados" class="consulta-lista"></ul>
+                    <div id="consulta-vacia" class="consulta-vacia" hidden>
+                        <h4 id="consulta-vacia-titulo">Sin coincidencias</h4>
+                        <p id="consulta-vacia-texto"></p>
+                        <button id="corregir-busqueda" class="secondary-btn" type="button">Corregir búsqueda</button>
+                    </div>
+                </section>
+
+                <section id="lote-confirmacion" class="consulta-confirmacion" aria-labelledby="confirmacion-producto" tabindex="-1" hidden>
+                    <div class="consulta-confirmacion-cabecera">
                         <div>
-                            <span class="overline">PASAPORTE DIGITAL · MUESTRA</span>
-                            <h3 id="resultado-titulo">Ficha de lote</h3>
+                            <span id="confirmacion-contexto" class="overline">LOTE SELECCIONADO</span>
+                            <h3 id="confirmacion-producto">Resumen del lote</h3>
                         </div>
                         <span class="resultado-badge">DATOS SIMULADOS</span>
                     </div>
-                    <div class="resultado-contenido">
-                        <dl class="lote-datos">
-                            <div><dt>Código</dt><dd id="dato-codigo">—</dd></div>
-                            <div><dt>Producto</dt><dd id="dato-producto">—</dd></div>
-                            <div><dt>Origen registrado</dt><dd id="dato-origen">—</dd></div>
-                            <div><dt>Productor</dt><dd id="dato-productor">—</dd></div>
-                            <div><dt>Fecha de cosecha</dt><dd id="dato-cosecha">—</dd></div>
-                            <div><dt>Estado</dt><dd id="dato-estado">—</dd></div>
+                    <dl class="consulta-resumen-datos">
+                        <div><dt>Identificador del lote</dt><dd id="resumen-codigo">—</dd></div>
+                        <div><dt>Procedencia registrada</dt><dd id="resumen-origen">—</dd></div>
+                    </dl>
+                    <p id="resumen-disponibilidad" class="consulta-disponibilidad"></p>
+                    <p class="consulta-limitacion">Esta información es ficticia y no constituye una certificación sanitaria.</p>
+                    <div class="consulta-acciones">
+                        <button id="ver-pasaporte" class="primary-btn" type="button">Ver pasaporte digital <span aria-hidden="true">→</span></button>
+                        <button id="otra-consulta" class="text-btn" type="button">Elegir otro lote</button>
+                    </div>
+                </section>
+
+                </div>
+                <!-- Etapa 5: un único paso visible y el mismo pasaporte para los detalles. -->
+                <section id="recepcion-comercial" class="recepcion" aria-labelledby="recepcion-titulo" hidden>
+                    <div class="recepcion-cabecera"><div><span class="overline">ESPACIO DEL COMERCIANTE</span><h3 id="recepcion-titulo">Recepción de mercadería</h3><p>Identifica el lote recibido, consulta sus registros y deja constancia de tu revisión interna.</p></div><span class="resultado-badge">SIMULACIÓN ACADÉMICA</span></div>
+                    <ol class="consulta-progreso recepcion-progreso" aria-label="Pasos de recepción">
+                        <li id="recepcion-paso-1" aria-current="step"><span>01</span> Identificar lote</li>
+                        <li id="recepcion-paso-2"><span>02</span> Revisar información</li>
+                        <li id="recepcion-paso-3"><span>03</span> Registrar revisión</li>
+                    </ol>
+                    <div id="recepcion-contexto" class="recepcion-contexto" hidden><div><span class="overline">LOTE RECIBIDO · DATOS SIMULADOS</span><strong id="recepcion-producto"></strong></div><span id="recepcion-lote" class="consulta-identificador"></span></div>
+                    <p id="recepcion-mensaje" class="form-message recepcion-mensaje" role="status" aria-live="polite" aria-atomic="true"></p>
+                    <section id="recepcion-identificar" class="recepcion-panel" aria-labelledby="recepcion-identificar-titulo" tabindex="-1">
+                        <h4 id="recepcion-identificar-titulo">Identifica el lote recibido</h4>
+                        <div class="consulta-entrada">
+                            <form id="recepcion-form" class="demo-form consulta-buscador" novalidate>
+                                <label for="recepcion-codigo">Código del lote</label><p id="recepcion-codigo-ayuda" class="form-help">Ingresa O360-DEMO-001 (Palta Hass) u O360-DEMO-002 (Café en grano).</p>
+                                <div class="form-row"><input id="recepcion-codigo" name="recepcion-codigo" type="search" maxlength="20" autocomplete="off" spellcheck="false" required placeholder="O360-DEMO-001" aria-describedby="recepcion-codigo-ayuda recepcion-mensaje"><button class="primary-btn" type="submit">Identificar lote</button></div>
+                            </form>
+                            <aside class="consulta-qr-acceso" aria-labelledby="recepcion-qr-titulo"><h4 id="recepcion-qr-titulo">Identificación con cámara</h4><p>Usa el lector QR nativo cuando sea compatible. El ingreso manual siempre está disponible.</p><button id="recepcion-escanear" class="secondary-btn" type="button" aria-haspopup="dialog" aria-controls="escaner-lote">Escanear QR</button></aside>
+                        </div>
+                    </section>
+                    <section id="recepcion-revisar" class="recepcion-panel" aria-labelledby="recepcion-revisar-titulo" tabindex="-1" hidden>
+                        <div class="recepcion-panel-cabecera"><h4 id="recepcion-revisar-titulo">Revisa los datos disponibles</h4><button id="recepcion-cambiar-lote" class="text-btn" type="button">Identificar otro lote</button></div>
+                        <dl class="consulta-resumen-datos recepcion-datos">
+                            <div><dt>Procedencia registrada</dt><dd id="recepcion-origen"></dd></div>
+                            <div><dt>Proveedor registrado</dt><dd id="recepcion-proveedor"></dd></div>
+                            <div><dt>Productor declarado</dt><dd id="recepcion-productor"></dd></div>
+                            <div><dt>Fecha de cosecha registrada</dt><dd id="recepcion-cosecha"></dd></div>
                         </dl>
-                        <div class="resultado-trayecto">
-                            <h4>Recorrido ilustrativo</h4>
-                            <ol class="trazabilidad-lista" id="recorrido-lote">
-                                <!-- Los pasos se agregan desde main.js. -->
-                            </ol>
+                        <p class="recepcion-fuente">Fuente: dataset académico local de Origen360. Productor y proveedor son roles distintos; estos registros no acreditan verificación oficial.</p>
+                        <div id="recepcion-alertas" class="recepcion-alertas" aria-labelledby="recepcion-alertas-titulo"><h5 id="recepcion-alertas-titulo"></h5><p id="recepcion-alertas-resumen"></p><p id="recepcion-alertas-orientacion"></p><button id="recepcion-ver-alertas" class="text-btn" type="button">Consultar alertas y sus detalles</button></div>
+                        <div class="recepcion-accesos" role="group" aria-label="Detalles del lote recibido"><button id="recepcion-trazabilidad" class="secondary-btn" type="button" aria-controls="pasaporte-trazabilidad">Consultar trazabilidad</button><button id="recepcion-controles" class="secondary-btn" type="button" aria-controls="pasaporte-evidencias">Consultar controles y evidencias</button></div>
+                        <p id="recepcion-revision-previa" class="recepcion-revision-previa"></p>
+                        <div class="recepcion-acciones"><button id="recepcion-continuar" class="primary-btn" type="button">Continuar al registro <span aria-hidden="true">→</span></button></div>
+                    </section>
+                    <section id="recepcion-registrar" class="recepcion-panel" aria-labelledby="recepcion-registrar-titulo" tabindex="-1" hidden>
+                        <h4 id="recepcion-registrar-titulo">Deja constancia de tu revisión</h4>
+                        <p class="recepcion-alcance">Se registra una <strong>revisión interna simulada</strong>. No equivale a certificación sanitaria, aprobación de la mercadería ni validación oficial.</p>
+                        <div id="recepcion-registro" class="recepcion-registro" role="region" aria-labelledby="recepcion-registro-estado" tabindex="-1"><span class="overline">REGISTRO INTERNO DE ESTE NAVEGADOR</span><h5 id="recepcion-registro-estado"></h5><p id="recepcion-registro-detalle"></p><time id="recepcion-registro-fecha" hidden></time></div>
+                        <p class="recepcion-fuente">Solo se guarda el identificador del lote, la fecha/hora y el estado de revisión interna. No identifica a una persona ni se sincroniza con otros equipos. Por cada lote se conserva una única revisión.</p>
+                        <div class="recepcion-acciones"><button id="recepcion-guardar" class="primary-btn" type="button">Registrar verificación</button><button id="recepcion-volver-revisar" class="secondary-btn" type="button">Volver a revisar</button></div>
+                        <div id="recepcion-recuperacion" class="recepcion-recuperacion" hidden><p>El registro local de este lote contiene datos inválidos. No se sobrescribirá automáticamente.</p><button id="recepcion-descartar-invalido" class="text-btn" type="button" aria-expanded="false" aria-controls="recepcion-confirmar-descarte">Descartar registro local inválido</button><div id="recepcion-confirmar-descarte" hidden><p>Se eliminará únicamente el registro local inválido de este lote. Los datos de demostración no cambian.</p><button id="recepcion-confirmar-borrado" class="secondary-btn" type="button">Confirmar descarte</button><button id="recepcion-cancelar-borrado" class="text-btn" type="button">Cancelar</button></div></div>
+                    </section>
+                </section>
+
+                <section class="resultado-card consulta-pasaporte" id="pasaporte-resultado" aria-labelledby="resultado-titulo" tabindex="-1" hidden>
+                    <div class="resultado-encabezado">
+                        <div>
+                            <span class="overline">PASAPORTE DIGITAL · DEMOSTRACIÓN</span>
+                            <h3 id="resultado-titulo">Ficha de lote</h3>
+                            <p id="pasaporte-codigo" class="consulta-identificador"></p>
+                        </div>
+                        <span class="resultado-badge">DATOS SIMULADOS</span>
+                    </div>
+                    <div class="pasaporte-estado-grid">
+                        <section class="pasaporte-estado" aria-labelledby="pasaporte-estado-titulo">
+                            <span class="overline">INFORMACIÓN DISPONIBLE</span>
+                            <h4 id="pasaporte-estado-titulo">Estado del pasaporte</h4>
+                            <p id="pasaporte-disponibilidad" class="pasaporte-disponibilidad"></p>
+                            <p id="pasaporte-disponibilidad-detalle" class="pasaporte-ayuda"></p>
+                            <div id="pasaporte-niveles" class="pasaporte-niveles" aria-label="Niveles presentes en los registros"></div>
+                            <a id="abrir-leyenda-pasaporte" class="text-btn" href="#leyenda-evidencia">¿Cómo interpreto estos niveles?</a>
+                        </section>
+                        <section class="pasaporte-cobertura" aria-labelledby="pasaporte-cobertura-titulo">
+                            <h4 id="pasaporte-cobertura-titulo">Cobertura de esta demostración</h4>
+                            <dl>
+                                <div><dt>Origen y actores</dt><dd id="cobertura-origen"></dd></div>
+                                <div><dt>Trazabilidad</dt><dd id="cobertura-trazabilidad"></dd></div>
+                                <div><dt>Controles y evidencias</dt><dd id="cobertura-evidencias"></dd></div>
+                                <div><dt>Alertas</dt><dd id="cobertura-alertas"></dd></div>
+                                <div><dt>Estimaciones predictivas</dt><dd id="cobertura-analisis"></dd></div>
+                            </dl>
+                        </section>
+                    </div>
+                    <details id="leyenda-evidencia" class="leyenda-evidencia" tabindex="-1">
+                        <summary>Cómo interpretar el nivel de respaldo</summary>
+                        <p>Esta leyenda explica las categorías. No atribuye verificación a los lotes de demostración. Las etiquetas «Simulado» identifican los ejemplos académicos.</p>
+                        <dl class="leyenda-niveles">
+                            <div><dt><span aria-hidden="true">▤</span> Declarada</dt><dd>Información declarada o registrada por un actor. No implica comprobación independiente.</dd></div>
+                            <div><dt><span aria-hidden="true">▦</span> Verificada por terceros</dt><dd>Una fuente identifica una comprobación por un tercero y su alcance. No equivale por sí sola a una garantía sanitaria.</dd></div>
+                            <div><dt><span aria-hidden="true">▣</span> Oficial</dt><dd>Información atribuida a una autoridad identificada. Deben consultarse su fuente y alcance. Un ejemplo simulado no es un registro oficial real.</dd></div>
+                            <div><dt><span aria-hidden="true">⌕</span> Predictiva</dt><dd>Estimación a partir de datos o patrones. No es una certificación ni una alerta oficial. Análisis preventivo usa una regla documental académica, sin IA ni ML conectado.</dd></div>
+                            <div><dt><span aria-hidden="true">?</span> No disponible / no determinado</dt><dd>Falta el dato o no hay información suficiente para identificar su nivel y fuente. No se deduce un respaldo inexistente.</dd></div>
+                        </dl>
+                        <p class="leyenda-separacion"><strong>Estimaciones y fuentes oficiales se interpretan por separado.</strong> Una etiqueta predictiva nunca sustituye una certificación, un control documental o una alerta oficial. Consultar metadatos documentales no equivale a validar el producto. Tanto las alertas como las estimaciones de esta demostración son simulaciones académicas.</p>
+                    </details>
+
+                    <div id="pasaporte-navegacion" class="pasaporte-navegacion-fija">
+                    <div class="pasaporte-contexto-fijo" aria-label="Contexto del lote consultado">
+                        <strong id="pasaporte-contexto-producto"></strong>
+                        <span id="pasaporte-contexto-lote"></span>
+                        <small>Muestra académica</small>
+                        <button id="volver-recepcion" class="text-btn" type="button" hidden>← Volver a recepción</button>
+                    </div>
+                        <div class="pasaporte-accesos pasaporte-tabs" role="tablist" aria-label="Secciones del pasaporte" aria-orientation="horizontal">
+                            <button id="pestana-origen" class="pasaporte-tab" type="button" role="tab" aria-selected="true" aria-controls="pasaporte-origen" tabindex="0">Origen y actores</button>
+                            <button id="pestana-trazabilidad" class="pasaporte-tab" type="button" role="tab" aria-selected="false" aria-controls="pasaporte-trazabilidad" tabindex="-1">Trazabilidad</button>
+                            <button id="pestana-evidencias" class="pasaporte-tab" type="button" role="tab" aria-selected="false" aria-controls="pasaporte-evidencias" tabindex="-1">Controles y evidencias</button>
+                            <button id="pestana-alertas" class="pasaporte-tab" type="button" role="tab" aria-selected="false" aria-controls="pasaporte-alertas" tabindex="-1">Alertas</button>
+                            <button id="pestana-analisis" class="pasaporte-tab" type="button" role="tab" aria-selected="false" aria-controls="pasaporte-analisis" tabindex="-1">Análisis preventivo</button>
                         </div>
                     </div>
+                    <div id="pasaporte-paneles" class="pasaporte-paneles">
+                    <section class="pasaporte-seccion" id="pasaporte-origen" role="tabpanel" aria-labelledby="pestana-origen" tabindex="0">
+                        <div class="pasaporte-seccion-titulo"><span class="overline">PROCEDENCIA Y PARTICIPANTES</span><h4 id="origen-titulo">Origen y actores del lote</h4><p>El origen, el productor y el proveedor son registros distintos. Su respaldo se indica junto a cada dato.</p></div>
+                        <dl class="origen-localizacion">
+                            <div><dt>Procedencia registrada</dt><dd id="dato-origen">—</dd><dd id="respaldo-origen" class="dato-respaldo"></dd></div>
+                        </dl>
+                        <dl class="pasaporte-actores">
+                            <div><dt><span aria-hidden="true">▣</span> Productor registrado</dt><dd id="dato-productor">—</dd><dd id="respaldo-productor" class="dato-respaldo"></dd></div>
+                            <div><dt><span aria-hidden="true">▣</span> Proveedor registrado</dt><dd id="dato-proveedor">—</dd><dd id="respaldo-proveedor" class="dato-respaldo"></dd></div>
+                        </dl>
+                        <p id="actores-disponibilidad" class="pasaporte-ayuda"></p>
+                        <section class="pasaporte-datos-comunes" aria-labelledby="pasaporte-principales-titulo">
+                            <div class="pasaporte-seccion-titulo"><span class="overline">IDENTIFICACIÓN</span><h5 id="pasaporte-principales-titulo">Datos principales del lote</h5></div>
+                            <dl class="lote-datos">
+                                <div><dt>Código</dt><dd id="dato-codigo">—</dd><dd id="respaldo-codigo" class="dato-respaldo"></dd></div>
+                                <div><dt>Producto</dt><dd id="dato-producto">—</dd><dd id="respaldo-producto" class="dato-respaldo"></dd></div>
+                                <div><dt>Fecha de cosecha</dt><dd id="dato-cosecha">—</dd><dd id="respaldo-cosecha" class="dato-respaldo"></dd></div>
+                                <div><dt>Estado del registro</dt><dd id="dato-estado">—</dd><dd id="respaldo-estado" class="dato-respaldo"></dd></div>
+                            </dl>
+                        </section>
+                    </section>
+
+                    <section class="resultado-trayecto pasaporte-seccion" id="pasaporte-trazabilidad" role="tabpanel" aria-labelledby="pestana-trazabilidad" tabindex="0" hidden>
+                        <div class="pasaporte-seccion-titulo"><span class="overline">RECORRIDO REGISTRADO</span><h4 id="trayecto-titulo">Trazabilidad por etapas</h4><p id="trayecto-ayuda">Selecciona una etapa para consultar su detalle y procedencia. Se muestran únicamente eventos registrados; no se reconstruyen etapas ausentes.</p></div>
+                        <div class="trazabilidad-interactiva">
+                            <ol class="trazabilidad-lista" id="recorrido-lote" aria-label="Eventos registrados del lote">
+                                <!-- Eventos seleccionables generados desde el dataset existente. -->
+                            </ol>
+                            <div class="traza-panel">
+                                <p id="traza-sin-seleccion" class="traza-instruccion">Elige una etapa del recorrido para ver la información asociada.</p>
+                                <section id="detalle-etapa" class="traza-detalle" aria-labelledby="detalle-etapa-titulo" tabindex="-1" hidden>
+                                    <span class="overline">DETALLE DE LA ETAPA</span>
+                                    <h5 id="detalle-etapa-titulo"></h5>
+                                    <p id="detalle-etapa-lote" class="consulta-identificador"></p>
+                                    <dl class="traza-detalle-datos">
+                                        <div><dt>Identificador del evento</dt><dd id="detalle-evento-id"></dd></div>
+                                        <div><dt>Fecha registrada</dt><dd id="detalle-evento-fecha"></dd><dd id="respaldo-evento-fecha" class="dato-respaldo"></dd></div>
+                                        <div><dt>Información registrada</dt><dd id="detalle-evento-descripcion"></dd><dd id="respaldo-evento-descripcion" class="dato-respaldo"></dd></div>
+                                    </dl>
+                                    <div id="respaldo-evento-etapa" class="dato-respaldo"></div>
+                                    <button id="volver-etapas" class="text-btn" type="button">← Volver al recorrido</button>
+                                </section>
+                            </div>
+                        </div>
+                        <p id="traza-vacia" class="pasaporte-vacio" hidden>Información no disponible: no hay eventos registrados para este lote.</p>
+                    </section>
+
+                    <section id="pasaporte-evidencias" class="pasaporte-seccion evidencias-seccion" role="tabpanel" aria-labelledby="pestana-evidencias" tabindex="0" hidden>
+                        <div class="pasaporte-seccion-titulo">
+                            <span class="overline">RESPALDO REGISTRADO</span>
+                            <h4 id="evidencias-titulo">Controles y evidencias</h4>
+                            <p>Revisa los registros vinculados a este lote. Un registro consultable permite revisar sus metadatos; no implica que exista un archivo adjunto ni una certificación válida.</p>
+                        </div>
+                        <div class="evidencias-aviso"><span class="nivel-demo">SIMULACIÓN ACADÉMICA</span><p>Las entidades y los registros de esta demostración son ficticios. No son documentos oficiales ni resultados de un laboratorio real.</p></div>
+                        <div class="evidencias-cabecera-lista"><p id="evidencias-resumen"></p><span id="evidencias-total" class="consulta-contador"></span></div>
+
+                        <div id="evidencias-vista-lista">
+                            <div id="evidencias-vacias" class="pasaporte-vacio" hidden><h5>Sin controles registrados</h5><p>Evidencia no disponible. No hay controles asociados a este lote; esta ausencia no permite concluir que se haya realizado una verificación.</p></div>
+                            <div id="evidencias-grupos" class="evidencias-grupos">
+                                <section aria-labelledby="evidencias-documentos-titulo">
+                                    <h5 id="evidencias-documentos-titulo">Certificaciones y documentos</h5>
+                                    <ul id="evidencias-documentos-lista" class="evidencias-lista"></ul>
+                                    <p id="evidencias-documentos-vacios" class="pasaporte-vacio" hidden>Evidencia no disponible: no hay certificaciones ni documentos registrados para este lote.</p>
+                                </section>
+                                <section aria-labelledby="evidencias-laboratorio-titulo">
+                                    <h5 id="evidencias-laboratorio-titulo">Análisis de laboratorio</h5>
+                                    <ul id="evidencias-laboratorio-lista" class="evidencias-lista"></ul>
+                                    <p id="evidencias-laboratorio-vacios" class="pasaporte-vacio" hidden>Análisis de laboratorio no disponible. No hay un registro de análisis asociado a este lote.</p>
+                                </section>
+                            </div>
+                        </div>
+
+                        <section id="evidencia-detalle" class="evidencia-detalle" aria-labelledby="evidencia-detalle-titulo" tabindex="-1" hidden>
+                            <div class="evidencia-detalle-cabecera">
+                                <div><span class="overline">DETALLE DEL REGISTRO</span><h5 id="evidencia-detalle-titulo"></h5></div>
+                                <button id="volver-evidencias-arriba" class="text-btn" type="button">← Volver al listado</button>
+                            </div>
+                            <div class="evidencia-contexto"><strong id="evidencia-producto"></strong><span id="evidencia-lote"></span><span class="nivel-demo">Simulado</span></div>
+                            <p id="evidencia-disponibilidad" class="evidencia-disponibilidad"></p>
+                            <dl class="evidencia-metadatos">
+                                <div><dt>Identificador del registro</dt><dd id="evidencia-id"></dd></div>
+                                <div><dt>Tipo de registro</dt><dd id="evidencia-tipo"></dd></div>
+                                <div><dt>Entidad registrada</dt><dd id="evidencia-entidad"></dd></div>
+                                <div><dt>Fecha registrada</dt><dd id="evidencia-fecha"></dd></div>
+                                <div><dt>Vigencia registrada</dt><dd id="evidencia-vigencia"></dd></div>
+                                <div><dt>Fuente del registro</dt><dd id="evidencia-fuente"></dd></div>
+                                <div><dt>Nivel de evidencia</dt><dd id="evidencia-nivel" class="dato-respaldo"></dd></div>
+                                <div><dt>Última actualización registrada</dt><dd id="evidencia-actualizacion"></dd></div>
+                            </dl>
+                            <p id="evidencia-predictiva" class="respaldo-predictivo" hidden>Registro etiquetado como estimación predictiva. No es una certificación ni una alerta oficial.</p>
+                            <section id="evidencia-laboratorio" class="evidencia-laboratorio" aria-labelledby="evidencia-analisis-titulo" hidden>
+                                <h6 id="evidencia-analisis-titulo">Información del análisis</h6>
+                                <dl>
+                                    <div><dt>Tipo de análisis registrado</dt><dd id="evidencia-analisis-tipo"></dd></div>
+                                    <div><dt>Contenido registrado</dt><dd id="evidencia-analisis-resultado"></dd></div>
+                                </dl>
+                                <p>Se reproduce únicamente la información registrada. Este ejemplo académico no permite concluir la inocuidad del lote.</p>
+                            </section>
+                            <div class="evidencia-alcance"><h6>Alcance y limitaciones</h6><p id="evidencia-alcance"></p><p id="evidencia-limitaciones"></p></div>
+                            <p id="evidencia-archivo" class="evidencia-archivo"></p>
+                            <button id="volver-evidencias" class="secondary-btn" type="button">← Volver al listado de controles</button>
+                        </section>
+                    </section>
+
+                    <section id="pasaporte-alertas" class="pasaporte-seccion" role="tabpanel" aria-labelledby="pestana-alertas" tabindex="0" hidden>
+                        <div class="pasaporte-seccion-titulo"><span class="overline">AVISOS Y FUENTES</span><h4 id="alertas-pendientes-titulo">Consulta de alertas</h4><p>Revisa coincidencias por código y conoce el alcance de cada aviso antes de interpretarlo.</p></div>
+                        <div class="alertas-aviso"><strong>Simulación académica</strong><p>Estos avisos son ficticios. No representan alertas de SENASA ni de ninguna autoridad y no se consultan fuentes oficiales en tiempo real.</p></div>
+                        <form id="alertas-form" class="alertas-form" novalidate>
+                            <label for="alertas-codigo">Código de lote para consultar alertas</label>
+                            <p id="alertas-ayuda" class="form-help">Usa O360-DEMO-001 u O360-DEMO-002. Si buscas otro lote registrado, su pasaporte se abrirá en esta misma pestaña.</p>
+                            <div class="form-row"><input id="alertas-codigo" name="alertas-codigo" type="search" maxlength="20" autocomplete="off" spellcheck="false" placeholder="O360-DEMO-001" required aria-describedby="alertas-ayuda alertas-mensaje"><button class="primary-btn" type="submit">Buscar alertas</button></div>
+                            <div class="alertas-form-acciones"><button id="alertas-lote-actual" class="text-btn" type="button">Consultar lote del pasaporte</button><button id="alertas-nueva-consulta" class="text-btn" type="button">Nueva consulta</button></div>
+                            <p id="alertas-mensaje" class="form-message" role="status" aria-live="polite" aria-atomic="true"></p>
+                        </form>
+                        <section id="alertas-resultados" class="alertas-resultados" aria-labelledby="alertas-resultados-titulo" tabindex="-1" hidden>
+                            <div class="alertas-resultados-cabecera"><h5 id="alertas-resultados-titulo">Resultados de la consulta</h5><span id="alertas-total" class="consulta-contador"></span></div>
+                            <p id="alertas-contexto-consulta" class="alertas-contexto-consulta"></p>
+                            <p id="alertas-contexto-pasaporte" class="pasaporte-ayuda"></p>
+                            <div id="alertas-vista-lista">
+                                <ul id="alertas-lista" class="alertas-lista"></ul>
+                                <div id="alertas-sin-coincidencias" class="alertas-vacio" hidden>
+                                    <h6>No se encontraron coincidencias en las fuentes consultadas</h6>
+                                    <p>Código consultado: <strong id="alertas-vacio-codigo"></strong></p>
+                                    <p>La consulta se limita al dataset académico local. La ausencia de coincidencias no constituye una garantía de inocuidad ni descarta riesgos.</p>
+                                    <button id="alertas-volver-pasaporte" class="secondary-btn" type="button">Volver al pasaporte</button>
+                                </div>
+                            </div>
+                            <section id="alerta-detalle" class="alerta-detalle" aria-labelledby="alerta-detalle-titulo" tabindex="-1" hidden>
+                                <div class="alerta-detalle-cabecera"><div><span class="overline">DETALLE DEL AVISO</span><h6 id="alerta-detalle-titulo"></h6></div><button id="alertas-volver-listado-arriba" class="text-btn" type="button">← Volver a coincidencias</button></div>
+                                <div class="alerta-contexto"><strong id="alerta-producto"></strong><span id="alerta-lote"></span><span class="alerta-simulacion">Simulación académica</span></div>
+                                <p id="alerta-descripcion" class="alerta-descripcion"></p>
+                                <dl class="alerta-metadatos">
+                                    <div><dt>Identificador del aviso</dt><dd id="alerta-id"></dd></div>
+                                    <div><dt>Fecha registrada</dt><dd id="alerta-fecha"></dd></div>
+                                    <div><dt>Estado registrado</dt><dd id="alerta-estado"></dd></div>
+                                    <div><dt>Fuente</dt><dd id="alerta-fuente"></dd></div>
+                                    <div><dt>Naturaleza de la fuente</dt><dd id="alerta-naturaleza"></dd></div>
+                                    <div><dt>Actualización registrada</dt><dd id="alerta-actualizacion"></dd></div>
+                                </dl>
+                                <div class="alerta-alcance"><h6>Alcance del registro</h6><p id="alerta-alcance"></p><p id="alerta-limitaciones"></p></div>
+                                <button id="alertas-volver-listado" class="secondary-btn" type="button">← Volver a coincidencias</button>
+                            </section>
+                        </section>
+                        <p class="alertas-separacion">Las estimaciones predictivas se interpretan por separado y no son alertas oficiales. Puedes consultar su simulación académica en Análisis preventivo.</p>
+                    </section>
+
+                    <section id="pasaporte-analisis" class="pasaporte-seccion analisis-seccion" role="tabpanel" aria-labelledby="pestana-analisis" tabindex="0" hidden>
+                        <div class="pasaporte-seccion-titulo"><span class="overline">CRITERIOS PARA REVISAR</span><h4 id="analisis-titulo">Análisis preventivo</h4><p>Consulta una prioridad de revisión documental y comprende los datos que la sustentan. No es un diagnóstico sanitario.</p></div>
+                        <div class="analisis-contexto"><div><span class="overline">LOTE CONSULTADO</span><strong id="analisis-producto"></strong></div><span id="analisis-lote" class="consulta-identificador"></span><span class="analisis-etiqueta">Simulación académica</span></div>
+                        <p class="analisis-limite"><strong>Una estimación no constituye una alerta sanitaria oficial.</strong> No es una alerta oficial ni una certificación. No hay modelos de IA/ML ni fuentes oficiales conectadas.</p>
+                        <p id="analisis-mensaje" class="analisis-mensaje" role="status" aria-live="polite" aria-atomic="true"></p>
+                        <div class="analisis-resumen-grid">
+                            <section class="analisis-solicitud" aria-labelledby="analisis-solicitud-titulo">
+                                <span class="analisis-etiqueta">Estimación predictiva</span><h5 id="analisis-solicitud-titulo">¿Qué documentación revisar primero?</h5><p>La regla de demostración cuenta factores documentales registrados. La falta de un adjunto no demuestra un problema sanitario.</p>
+                                <button id="analisis-solicitar" class="primary-btn" type="button" aria-controls="analisis-resultado">Solicitar estimación del lote</button>
+                            </section>
+                            <aside class="analisis-alertas" aria-labelledby="analisis-alertas-titulo"><span class="analisis-aviso-etiqueta">Avisos académicos · Fuente separada</span><h5 id="analisis-alertas-titulo">Alertas registradas del lote</h5><p id="analisis-alertas-resumen"></p><p id="analisis-alertas-fuente"></p><button id="analisis-ver-alertas" class="text-btn" type="button" aria-controls="pasaporte-alertas">Consultar alertas del mismo lote</button></aside>
+                        </div>
+                        <section id="analisis-resultado" class="analisis-resultado" aria-labelledby="analisis-categoria" tabindex="-1" hidden>
+                            <div class="analisis-resultado-cabecera"><span class="analisis-etiqueta">Estimación predictiva</span><span class="nivel-demo">Simulación académica</span></div>
+                            <h5 id="analisis-categoria"></h5><p id="analisis-significado"></p><p id="analisis-recuento" class="analisis-recuento"></p>
+                            <dl class="analisis-metadatos"><div><dt>Registro de estimación</dt><dd id="analisis-registro"></dd></div><div><dt>Regla registrada</dt><dd id="analisis-modelo"></dd></div><div><dt>Fecha de registro de la estimación</dt><dd id="analisis-fecha"></dd></div><div><dt>Última actualización de la estimación</dt><dd id="analisis-actualizacion"></dd></div><div><dt>Fuente de la estimación</dt><dd id="analisis-fuente"></dd></div></dl>
+                            <p id="analisis-limitaciones" class="analisis-ayuda"></p>
+                        </section>
+                        <div class="analisis-acciones"><button id="analisis-ver-factores" class="secondary-btn" type="button" aria-expanded="false" aria-controls="analisis-factores" disabled>¿Por qué esta estimación?</button><button id="analisis-explicar" class="secondary-btn" type="button" aria-expanded="false" aria-controls="analisis-explicacion">Solicitar explicación simulada</button></div>
+                        <section id="analisis-factores" class="analisis-desplegable" aria-labelledby="analisis-factores-titulo" tabindex="-1" hidden><h5 id="analisis-factores-titulo">Factores registrados</h5><p>¿Por qué veo este resultado? Solo se muestran factores disponibles y vinculados a evidencias de este lote. No constituyen una certificación ni una alerta oficial.</p><p id="analisis-factores-estado" class="analisis-ayuda"></p><ul id="analisis-factores-lista" class="analisis-factores-lista"></ul></section>
+                        <section id="analisis-explicacion" class="analisis-desplegable" aria-labelledby="analisis-explicacion-titulo" tabindex="-1" hidden><div class="analisis-explicacion-cabecera"><h5 id="analisis-explicacion-titulo">Explicación en lenguaje claro</h5><span class="analisis-etiqueta">Explicación simulada</span></div><p>Este texto se construye con los datos locales disponibles. No lo genera una IA conectada.</p><div class="analisis-explicacion-grid"><section aria-labelledby="analisis-conocido-titulo"><h6 id="analisis-conocido-titulo">Información conocida</h6><ul id="analisis-conocido"></ul></section><section aria-labelledby="analisis-ausente-titulo"><h6 id="analisis-ausente-titulo">Datos ausentes</h6><ul id="analisis-ausente"></ul></section></div><div class="analisis-explicacion-estimacion"><h6>Estimación predictiva · Simulación académica</h6><p id="analisis-explicacion-estimacion"></p><p>Una estimación no constituye una alerta sanitaria oficial. Los avisos académicos se consultan por separado.</p></div></section>
+                        <section class="analisis-priorizacion" aria-labelledby="analisis-priorizacion-titulo"><div class="analisis-priorizacion-cabecera"><div><span class="overline">REVISIÓN ENTRE LOTES</span><h5 id="analisis-priorizacion-titulo">Prioridad preventiva de revisión</h5><p>Ordena la atención documental de los lotes de ejemplo. No determina que un lote sea seguro o inseguro.</p></div><button id="analisis-priorizar" class="secondary-btn" type="button" aria-controls="analisis-prioridades">Consultar prioridad de lotes</button></div>
+                            <details class="analisis-regla"><summary>Criterio utilizado y límites de la regla</summary><p>Regla documental demostrativa v1: se requieren al menos dos factores distintos, con evidencia asociada, descripción, fuente y señal coherentes. Cada factor que registra un adjunto ausente suma una señal de revisión.</p><p>Dos o más señales: revisión prioritaria. Una señal: revisión programada. Cero señales: revisión habitual. Las estimaciones disponibles se ordenan por cantidad de señales, de mayor a menor; los empates se resuelven por código de lote.</p><p>Los lotes sin datos suficientes aparecen en un grupo separado, sin posición ni prioridad predictiva. Esto no implica menor necesidad de revisión humana. No se evalúan contaminantes, inocuidad ni incidentes sanitarios.</p></details>
+                            <section id="analisis-prioridades" class="analisis-prioridades" aria-labelledby="analisis-prioridades-titulo" tabindex="-1" hidden><h6 id="analisis-prioridades-titulo">Orden documental de demostración</h6><p id="analisis-prioridades-resumen" class="analisis-ayuda"></p><ol id="analisis-prioridad-lista" class="analisis-prioridad-lista"></ol><p id="analisis-prioridades-vacias" class="analisis-vacio" hidden>No hay estimaciones disponibles para ordenar.</p><div id="analisis-sin-prioridad" hidden><h6>Sin prioridad asignada · Sin datos suficientes</h6><ul id="analisis-prioridad-sin-datos" class="analisis-prioridad-lista sin-orden"></ul></div><p id="analisis-sin-lotes" class="analisis-vacio" hidden>No hay lotes de demostración disponibles.</p></section>
+                        </section>
+                    </section>
+                    </div>
                     <p class="aviso-demo"><strong>Importante:</strong> esta ficha se genera dentro del navegador. No consulta servidores, no certifica productos y no representa una verificación oficial.</p>
+                    <button id="volver-resumen" class="text-btn" type="button">← Volver al resumen del lote</button>
                 </section>
+                <noscript><p class="aviso-demo">Activa JavaScript para buscar lotes y consultar esta demostración. No se realizan consultas a servidores.</p></noscript>
             </div>
+
+            <dialog id="escaner-lote" class="escaner-dialog" aria-labelledby="escaner-titulo" aria-describedby="escaner-ayuda">
+                <div class="escaner-cabecera">
+                    <div><span id="escaner-contexto" class="overline">IDENTIFICACIÓN POR CÁMARA</span><h3 id="escaner-titulo">Escanea el QR del lote</h3></div>
+                    <button id="cerrar-escaner" class="escaner-cerrar" type="button" aria-label="Cerrar escáner">×</button>
+                </div>
+                <p id="escaner-ayuda">El QR debe contener O360-DEMO-001 u O360-DEMO-002. La cámara se activa solo cuando lo solicitas y se detiene al salir.</p>
+                <div class="escaner-visor" id="escaner-visor">
+                    <video id="camara-qr" autoplay playsinline muted aria-label="Vista de la cámara para identificar un QR" hidden></video>
+                    <div id="escaner-espera"><span aria-hidden="true">▦</span><p>Coloca el QR dentro de la vista de cámara</p></div>
+                </div>
+                <p id="escaner-estado" class="escaner-estado" role="status" aria-live="polite" aria-atomic="true">Comprobando compatibilidad del navegador…</p>
+                <div class="escaner-acciones">
+                    <button id="activar-camara" class="primary-btn" type="button" disabled>Activar cámara</button>
+                    <button id="ingresar-codigo" class="secondary-btn" type="button">Ingresar código</button>
+                </div>
+                <p class="consulta-limitacion">Lectura nativa del navegador. No se simulan reconocimientos ni se envían imágenes a servidores.</p>
+            </dialog>
         </section>
 
         <section class="cta-section" id="contacto">
