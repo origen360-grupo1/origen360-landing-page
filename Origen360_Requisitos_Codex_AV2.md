@@ -1,4 +1,5 @@
-# Origen360 Perú — Especificación de User Stories para Codex (AV2)
+# Origen360 Perú — Especificación de User Stories 
+(AV2)
 
 **Fuente del texto de las historias:** informe `upc-pre-202610-1ASI0385-16734-Origen360-report-av1(1).pdf`, apartado 3.2 (pp. 71–107). Las descripciones y criterios se transcriben del informe, con normalización de espacios; la selección web y las dependencias de este archivo son una **propuesta de implementación**, no un texto originalmente rotulado como selección oficial en el informe.
 
