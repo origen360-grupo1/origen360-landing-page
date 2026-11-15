@@ -260,15 +260,19 @@ test('F23 — videos distinguen carga, espera, disponibilidad y error de fuente'
     const demo = createDemo();
     for (const video of demo.context.document.querySelectorAll('.video-player')) {
         const media = video.parentElement, status = media.parentElement.querySelector('.video-estado');
-        assert.equal(video.loadCount, 1); assert.equal(media.getAttribute('data-estado-video'), 'cargando');
+        // 4D: no se solicita carga anticipada; los controles están disponibles.
+        assert.equal(video.loadCount, 0); assert.equal(video.getAttribute('preload'), 'none'); assert.equal(media.getAttribute('data-estado-video'), 'listo');
         assert.equal(status.getAttribute('role'), 'status'); assert.notEqual(video.getAttribute('controls'), null);
         await demo.emit(video, 'loadedmetadata'); assert.equal(media.classList.contains('video-listo'), true);
         await demo.emit(video, 'waiting'); assert.equal(media.getAttribute('aria-busy'), 'true'); assert.equal(media.classList.contains('video-listo'), true);
         await demo.emit(video, 'canplay'); assert.equal(media.getAttribute('aria-busy'), 'false');
         await demo.emit(video.querySelector('source'), 'error'); assert.equal(media.getAttribute('data-estado-video'), 'error');
         assert.match(status.textContent, /No se pudo cargar/); assert(!status.textContent.includes('Próximamente'));
-        await demo.emit(video, 'loadstart'); assert.equal(media.getAttribute('data-estado-video'), 'cargando');
+        await demo.emit(video, 'loadstart'); assert.equal(media.getAttribute('data-estado-video'), 'cargando'); // readyState 3 tras canplay: hay una carga en curso
+        video.readyState = 0; await demo.emit(video, 'loadstart');
+        assert.equal(media.getAttribute('data-estado-video'), 'listo'); assert.match(status.textContent, /sin cargar/); // bajo demanda: nada se descarga todavía
         await demo.emit(video, 'canplay'); assert.equal(media.classList.contains('video-listo'), true);
+        assert.equal(video.loadCount, 0, 'ningún flujo debe llamar a load() sin acción del usuario');
     }
 });
 
@@ -311,4 +315,149 @@ test('F27 — alertas ordenadas por fecha y entrada inválida diferenciada', asy
     demo.elements.get('alertas-codigo').value = '!!!'; await demo.emit('alertas-form', 'submit');
     assert.equal(demo.elements.get('alertas-codigo').getAttribute('aria-invalid'), 'true');
     assert.equal(demo.elements.get('alertas-resultados').hidden, true);
+});
+
+test('F28 — entrada Alertas conserva intención y exige confirmar el lote', async () => {
+    const demo = createDemo();
+    await demo.emit('nav-alertas');
+    assert.equal(demo.elements.get('consulta-intencion').hidden, false);
+    demo.elements.get('codigo-lote').value = ids[1];
+    await demo.emit('consulta-form', 'submit');
+    assert.equal(demo.elements.get('hero-muestra').hidden, true);
+    // 4B: coincidencia única lleva al resumen, sin la lista intermedia.
+    assert.equal(demo.elements.get('busqueda-resultados').hidden, true);
+    assert.equal(demo.elements.get('lote-confirmacion').hidden, false);
+    assert.equal(demo.elements.get('pasaporte-resultado').hidden, true);
+    assert.equal(demo.text('resumen-codigo'), ids[1]);
+    await demo.emit('ver-pasaporte');
+    assert.equal(demo.api.state.pestanaPasaporteActiva, 'alertas');
+    assert.equal(demo.elements.get('alertas-codigo').value, ids[1]);
+    assert.equal(demo.focus.id, 'pestana-alertas');
+    assert.equal(demo.elements.get('consulta-intencion').hidden, true);
+    assert.deepEqual(demo.hiddenFocus, []);
+});
+
+test('F29 — cancelar Alertas o entrar en consulta normal limpia la intención', async () => {
+    for (const cancel of ['salir-alertas', 'nav-consulta', 'abrir-consulta-publica', 'otra-consulta']) {
+        const demo = createDemo();
+        await demo.emit('nav-alertas');
+        if (cancel === 'otra-consulta') demo.api.mostrarConfirmacion(ids[0]);
+        await demo.emit(cancel);
+        assert.equal(demo.elements.get('consulta-intencion').hidden, true, cancel);
+        await demo.openPassport(ids[1]);
+        assert.equal(demo.api.state.pestanaPasaporteActiva, 'origen', cancel);
+        assert.equal(demo.api.state.loteActivoId, ids[1]);
+        assert.deepEqual(demo.hiddenFocus, []);
+    }
+});
+
+test('F30 — navegación al lote activo y retorno comercial conservan identidad', async () => {
+    const demo = createDemo();
+    await demo.openPassport(ids[1]); await demo.emit('nav-alertas');
+    assert.equal(demo.api.state.pestanaPasaporteActiva, 'alertas');
+    assert.equal(demo.api.state.loteActivoId, ids[1]);
+    await demo.emit('nav-recepcion');
+    assert.equal(demo.elements.get('consulta-acceso').hidden, true);
+    assert.equal(demo.elements.get('hero-muestra').hidden, true);
+    assert.equal(demo.elements.get('consulta-operacion').hidden, false);
+    await demo.identify(ids[0]); await demo.emit('nav-alertas');
+    assert.equal(demo.api.state.recepcionActiva, true);
+    assert.equal(demo.api.state.loteActivoId, ids[0]);
+    assert.equal(demo.api.state.pestanaPasaporteActiva, 'alertas');
+    await demo.emit('volver-recepcion');
+    assert.equal(demo.focus.id, 'recepcion-ver-alertas');
+    await demo.emit('nav-consulta');
+    assert.equal(demo.elements.get('consulta-acceso').hidden, false);
+    assert.equal(demo.elements.get('hero-muestra').hidden, false);
+    assert.equal(demo.elements.get('consulta-operacion').hidden, true);
+    assert.equal(demo.focus.id, 'codigo-lote');
+    assert.deepEqual(demo.hiddenFocus, []);
+});
+
+test('F31 — muestra estática se retira de resultados y vuelve tras limpiar', async () => {
+    const demo = createDemo();
+    for (const id of ids) {
+        demo.elements.get('codigo-lote').value = id;
+        await demo.emit('consulta-form', 'submit');
+        assert.equal(demo.elements.get('hero-muestra').hidden, true);
+        demo.api.mostrarConfirmacion(id); await demo.emit('ver-pasaporte');
+        assert.equal(demo.elements.get('hero-muestra').hidden, true);
+        assert.equal(demo.text('pasaporte-contexto-lote'), id);
+        await demo.emit('volver-resumen'); await demo.emit('otra-consulta');
+        assert.equal(demo.elements.get('hero-muestra').hidden, false);
+        assert.equal(demo.elements.get('consulta-operacion').hidden, true);
+    }
+});
+
+test('F32 — ejemplos abren confirmación en una activación y nunca el pasaporte', async () => {
+    const demo = createDemo();
+    const examples = demo.elements.get('consulta-form').querySelectorAll('.codigo-sugerido');
+    for (const [index, id] of ids.entries()) {
+        await demo.emit(examples[index]);
+        assert.equal(demo.elements.get('codigo-lote').value, id);
+        assert.equal(demo.text('resumen-codigo'), id);
+        assert.equal(demo.elements.get('lote-confirmacion').hidden, false);
+        assert.equal(demo.elements.get('pasaporte-resultado').hidden, true);
+        assert.equal(demo.focus.id, 'lote-confirmacion');
+        await demo.emit('ver-pasaporte');
+        assert.equal(demo.text('pasaporte-contexto-lote'), id);
+        assert.equal(demo.text('resultado-titulo'), demo.api.datosDemo.lotes[id].producto);
+        assert.equal(demo.text('pasaporte-codigo'), id);
+    }
+    assert.deepEqual(demo.hiddenFocus, []);
+});
+
+test('F33 — búsqueda única confirma; múltiples y errores mantienen su salida', async () => {
+    const demo = createDemo();
+    for (const [query,id] of [['Palta',ids[0]],['CAFE',ids[1]],[' o360-demo-001 ',ids[0]]]) {
+        demo.elements.get('codigo-lote').value = query;
+        await demo.emit('consulta-form','submit');
+        assert.equal(demo.text('resumen-codigo'),id);
+        assert.equal(demo.elements.get('pasaporte-resultado').hidden,true);
+        assert.equal(demo.focus.id,'lote-confirmacion');
+    }
+    demo.elements.get('codigo-lote').value = 'a'; await demo.emit('consulta-form','submit');
+    assert.equal(demo.elements.get('lista-resultados').children.length,2);
+    assert.equal(demo.elements.get('lote-confirmacion').hidden,true);
+    await demo.emit(findButton(demo.elements.get('lista-resultados').children[1], 'Ver resumen'));
+    assert.equal(demo.text('resumen-codigo'),ids[1]);
+    for (const query of ['', '!!!', 'O360-DEMO-01', 'Tomate']) {
+        demo.elements.get('codigo-lote').value = query; await demo.emit('consulta-form','submit');
+        assert.equal(demo.elements.get('codigo-lote').value,query);
+        assert.equal(demo.elements.get('lote-confirmacion').hidden,true);
+        assert.equal(demo.api.state.loteActivoId,null);
+        assert.equal(demo.elements.get('consulta-vacia').hidden,false);
+    }
+});
+
+test('F34 — ejemplo preserva intención de Alertas y otro lote invalida el anterior', async () => {
+    const demo=createDemo();
+    const examples=demo.elements.get('consulta-form').querySelectorAll('.codigo-sugerido');
+    await demo.emit('nav-alertas'); await demo.emit(examples[1]); await demo.emit('ver-pasaporte');
+    assert.equal(demo.api.state.pestanaPasaporteActiva,'alertas');
+    assert.equal(demo.elements.get('alertas-codigo').value,ids[1]);
+    await demo.emit('volver-resumen'); await demo.emit('otra-consulta');
+    assert.equal(demo.text('pasaporte-origen-resumen'),'');
+    await demo.emit(examples[0]); await demo.emit('ver-pasaporte');
+    assert.equal(demo.api.state.pestanaPasaporteActiva,'origen');
+    assert.equal(demo.text('pasaporte-origen-resumen'),demo.api.datosDemo.lotes[ids[0]].origen);
+});
+
+test('F35 — selector Consulta enfoca entrada visible y conserva una búsqueda en curso', async () => {
+    const demo=createDemo();
+    demo.elements.get('codigo-lote').value='Café';
+    await demo.emit('abrir-consulta-publica');
+    assert.equal(demo.focus.id,'codigo-lote'); assert.equal(demo.elements.get('codigo-lote').value,'Café');
+    await demo.emit('nav-recepcion'); await demo.emit('abrir-consulta-publica');
+    assert.equal(demo.elements.get('consulta-acceso').hidden,false);
+    assert.equal(demo.focus.id,'codigo-lote');
+    assert.deepEqual(demo.hiddenFocus,[]);
+});
+
+test('F36 — volver a secciones recupera la pestaña actual sin cambiar el lote', async () => {
+    const demo=createDemo();await demo.openPassport(ids[1]);
+    await demo.emit('pestana-evidencias');await demo.emit('volver-secciones');
+    assert.equal(demo.focus.id,'pestana-evidencias');
+    assert.equal(demo.api.state.pestanaPasaporteActiva,'evidencias');
+    assert.equal(demo.api.state.loteActivoId,ids[1]);
 });

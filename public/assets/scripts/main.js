@@ -3,6 +3,17 @@
 // 1. Menú para pantallas pequeñas.
 const menuBtn = document.getElementById('menu-btn');
 const menu = document.getElementById('menu-principal');
+menu.classList.add('enhanced');
+menuBtn.hidden = false;
+
+// Modalidad visual únicamente; no intercepta ni retrasa acciones.
+const superficiesInteraccion = [document.getElementById('inicio'), document.getElementById('contenido-principal')];
+document.addEventListener('pointerdown', function () {
+    superficiesInteraccion.forEach(function (superficie) { superficie.setAttribute('data-entrada', 'puntero'); });
+}, true);
+document.addEventListener('keydown', function () {
+    superficiesInteraccion.forEach(function (superficie) { superficie.setAttribute('data-entrada', 'teclado'); });
+}, true);
 
 function cerrarMenu() {
     menu.classList.remove('open');
@@ -27,7 +38,7 @@ document.addEventListener('keydown', function (evento) {
     }
 });
 
-// 2. Base de demostración (etapa 0). Ningún registro es oficial o verificado.
+// 2. Base de demostración. Ningún registro es oficial o verificado.
 // El análisis preventivo usa una regla documental demostrativa; no hay IA o ML conectado.
 function congelarDatos(objeto) {
     Object.values(objeto).forEach(function (valor) {
@@ -235,6 +246,8 @@ let alertaActivaId = null;
 let botonesAlertas = new Map();
 // Recepción comparte lote activo, lector y pasaporte; solo conserva su paso de navegación.
 let recepcionActiva = false;
+// Intención de navegación; no cambia reglas ni registros de los lotes.
+let entradaAlertas = false;
 let pasoRecepcion = 1;
 let guardandoRecepcion = false;
 let retornoRecepcionId = 'recepcion-trazabilidad';
@@ -242,7 +255,7 @@ const prefijoRevisionRecepcion = 'origen360.recepcion.v1.';
 let estimacionConsultadaId = null;
 let priorizacionConsultadaId = null;
 
-// Etapa 3.1: un único panel activo, sin cambiar el lote ni reconstruir secciones.
+// Un único panel activo, sin cambiar el lote ni reconstruir secciones.
 const pestanasPasaporte = [
     { clave: 'origen', botonId: 'pestana-origen', panelId: 'pasaporte-origen' },
     { clave: 'trazabilidad', botonId: 'pestana-trazabilidad', panelId: 'pasaporte-trazabilidad' },
@@ -279,7 +292,12 @@ function activarPestanaPasaporte(clave, opciones = {}) {
         else if (!activa) panel.classList.remove('pasaporte-panel-entrando');
     });
     ficha.setAttribute('data-pestana-activa', clave);
-    if (opciones.enfocar) document.getElementById(elegida.botonId).focus({ preventScroll: true });
+    if (opciones.enfocar) {
+        const boton = document.getElementById(elegida.botonId);
+        boton.focus({ preventScroll: true });
+        // Conserva visible la pestaña elegida en la fila desplazable móvil.
+        if (typeof boton.scrollIntoView === 'function') boton.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+    }
     if (cambio && opciones.ajustarVista) alinearPanelSiEsNecesario();
     return true;
 }
@@ -306,6 +324,11 @@ pestanasPasaporte.forEach(function (pestana, indice) {
     });
 });
 activarPestanaPasaporte('origen');
+
+document.getElementById('volver-secciones').addEventListener('click', function (evento) {
+    evento.preventDefault();
+    activarPestanaPasaporte(pestanaPasaporteActiva, { enfocar: true });
+});
 
 document.getElementById('abrir-leyenda-pasaporte').addEventListener('click', function () {
     document.getElementById('leyenda-evidencia').open = true;
@@ -381,7 +404,66 @@ function actualizarPaso(paso) {
         if (indice === paso - 1) elemento.setAttribute('aria-current', 'step');
         else elemento.removeAttribute('aria-current');
     });
+    actualizarApertura();
 }
+
+function actualizarApertura() {
+    const operativo = recepcionActiva || !resultados.hidden || !confirmacion.hidden || !ficha.hidden;
+    document.getElementById('hero-muestra').hidden = operativo;
+    document.getElementById('consulta-operacion').hidden = !operativo;
+    document.getElementById('consulta-operacion').setAttribute('data-contexto', recepcionActiva && ficha.hidden ? 'recepcion' : !ficha.hidden ? 'pasaporte' : 'consulta');
+    document.getElementById('consulta-acceso').hidden = recepcionActiva;
+    document.getElementById('consulta-intencion').hidden = !entradaAlertas || recepcionActiva;
+}
+
+function definirEntradaAlertas(activa) {
+    entradaAlertas = activa;
+    actualizarApertura();
+}
+
+function enfocarDestino(elemento) {
+    elemento.focus();
+    if (typeof elemento.scrollIntoView === 'function') elemento.scrollIntoView({ block: 'center', behavior: 'instant' });
+}
+
+function enfocarDocumento(elemento) {
+    elemento.focus({ preventScroll: true });
+    if (typeof elemento.scrollIntoView === 'function') elemento.scrollIntoView({ block: 'start', behavior: 'instant' });
+}
+
+function abrirAlertasDesdeInicio() {
+    const contexto = obtenerContextoLoteActivo();
+    // Un resumen seleccionado todavía necesita la confirmación explícita del usuario.
+    if (contexto && (recepcionActiva || !ficha.hidden)) {
+        definirEntradaAlertas(false);
+        if (recepcionActiva) abrirDetalleDesdeRecepcion('alertas', 'recepcion-ver-alertas');
+        else activarPestanaPasaporte('alertas');
+        enfocarDestino(document.getElementById('pestana-alertas'));
+        return;
+    }
+    cambiarContextoConsulta(false);
+    definirEntradaAlertas(true);
+    if (!confirmacion.hidden) enfocarDestino(confirmacion);
+    else enfocarDestino(codigo);
+}
+
+document.querySelectorAll('.acceso-alertas').forEach(function (enlace) {
+    enlace.addEventListener('click', function (evento) { evento.preventDefault(); cerrarMenu(); abrirAlertasDesdeInicio(); });
+});
+document.querySelectorAll('.acceso-recepcion').forEach(function (enlace) {
+    enlace.addEventListener('click', function (evento) {
+        evento.preventDefault(); cerrarMenu(); cambiarContextoConsulta(true);
+    });
+});
+document.querySelectorAll('a').forEach(function (enlace) {
+    if (enlace.getAttribute('href') !== '#consulta' || enlace.classList.contains('acceso-alertas') || enlace.classList.contains('acceso-recepcion')) return;
+    enlace.addEventListener('click', function (evento) {
+        evento.preventDefault(); cerrarMenu(); cambiarContextoConsulta(false); enfocarDestino(codigo);
+    });
+});
+document.getElementById('salir-alertas').addEventListener('click', function () {
+    definirEntradaAlertas(false); configurarBusqueda('general');
+});
 
 function mostrarDato(id, texto) {
     document.getElementById(id).textContent = textoDisponible(texto);
@@ -400,8 +482,9 @@ function limpiarLoteActivo() {
     ['dato-codigo', 'dato-producto', 'dato-origen', 'dato-productor', 'dato-proveedor', 'dato-cosecha', 'dato-estado'].forEach(function (id) {
         document.getElementById(id).textContent = '—';
     });
-    document.getElementById('resultado-titulo').textContent = 'Ficha de lote';
-    document.getElementById('pasaporte-codigo').textContent = '';
+    document.getElementById('pasaporte-contexto-producto').textContent = 'Ficha de lote';
+    document.getElementById('pasaporte-contexto-lote').textContent = '';
+    document.getElementById('pasaporte-origen-resumen').textContent = '';
     ['confirmacion-producto', 'resumen-codigo', 'resumen-origen', 'resumen-disponibilidad'].forEach(function (id) {
         document.getElementById(id).textContent = '';
     });
@@ -449,15 +532,21 @@ function mostrarConfirmacion(id, origen = 'busqueda') {
     mostrarDato('resumen-codigo', resumen.id);
     mostrarDato('resumen-origen', resumen.origen);
     mostrarDato('resumen-disponibilidad', resumen.disponibilidad);
-    document.getElementById('confirmacion-contexto').textContent = origen === 'qr' ? 'LOTE RECONOCIDO POR QR' : 'LOTE SELECCIONADO';
+    document.getElementById('confirmacion-contexto').textContent = origen === 'qr' ? 'CONFIRMA EL LOTE RECONOCIDO POR QR' : 'CONFIRMA EL LOTE';
     confirmacion.setAttribute('data-lote-id', contexto.lote.id);
     confirmacion.hidden = false;
     actualizarPaso(2);
     actualizarMensaje('Lote identificado. Confirma el producto y el código antes de continuar.', 'ok');
-    confirmacion.focus();
+    enfocarDocumento(confirmacion);
 }
 
 function mostrarResultados(respuesta) {
+    // Una coincidencia no necesita una lista intermedia; la confirmación se conserva.
+    if (respuesta.lotes.length === 1) {
+        codigo.removeAttribute('aria-invalid');
+        mostrarConfirmacion(respuesta.lotes[0].id);
+        return;
+    }
     listaResultados.replaceChildren();
     const entradaInvalida = respuesta.estado === 'entrada-invalida' || respuesta.estado === 'formato-invalido';
     codigo.setAttribute('aria-invalid', entradaInvalida.toString());
@@ -487,12 +576,13 @@ function mostrarResultados(respuesta) {
         listaResultados.appendChild(item);
     });
     resultados.hidden = false;
+    actualizarApertura();
     actualizarMensaje(respuesta.mensaje, entradaInvalida ? 'error' : respuesta.lotes.length ? 'ok' : '');
     if (entradaInvalida) codigo.focus();
-    else resultados.focus();
+    else enfocarDocumento(resultados);
 }
 
-// Etapa 2: respaldo por dato. La leyenda no asigna niveles al dataset.
+// Respaldo por dato. La leyenda no asigna niveles al dataset.
 const nivelesEvidencia = congelarDatos({
     declarada: { texto: 'Declarada', icono: '▤' },
     verificada: { texto: 'Verificada por terceros', icono: '▦' },
@@ -617,7 +707,7 @@ function seleccionarEtapa(indice, loteEsperadoId) {
     else detalle.removeAttribute('data-evento-id');
     document.getElementById('traza-sin-seleccion').hidden = true;
     detalle.hidden = false;
-    detalle.focus();
+    enfocarDocumento(detalle);
 }
 
 function pintarRecorrido(contexto) {
@@ -640,6 +730,8 @@ function pintarRecorrido(contexto) {
         contenido.appendChild(crearElemento('strong', '', textoDisponible(evento.etapa)));
         contenido.appendChild(crearElemento('span', 'traza-fecha', textoDisponible(evento.fecha)));
         contenido.appendChild(crearEtiquetaRespaldo(describirRespaldo(evento.etapa, metadatosDeDato(evento, 'etapa'))));
+        contenido.appendChild(crearElemento('span', 'nivel-demo', 'Simulado'));
+        contenido.appendChild(crearElemento('span', 'traza-fuente', 'Fuente: ' + describirRespaldo(evento.etapa, metadatosDeDato(evento, 'etapa')).fuente));
         if (!ordenConocido || ![evento.etapa, evento.fecha, evento.descripcion].every(tieneTexto)) {
             contenido.appendChild(crearElemento('span', 'traza-dato-faltante', !ordenConocido ? 'Orden no disponible' : 'Hay datos no disponibles'));
         }
@@ -652,7 +744,7 @@ function pintarRecorrido(contexto) {
     });
 }
 
-// Etapa 3: controles documentales como metadatos, sin generar archivos adjuntos.
+// Controles documentales como metadatos, sin generar archivos adjuntos.
 function esEvidenciaConsultable(registro) {
     return tieneTexto(registro.id) && registro.disponibilidad !== 'no_disponible' &&
         [registro.nombre, registro.tipo, registro.entidad, registro.fecha, registro.alcance, registro.tipoAnalisis, registro.resultado].some(tieneTexto);
@@ -727,6 +819,7 @@ function crearTarjetaEvidencia(registro, loteId) {
     tarjeta.appendChild(cabecera);
     tarjeta.appendChild(crearElemento('p', 'evidencia-disponibilidad estado-' + estado.clave, estado.texto));
     tarjeta.appendChild(etiquetasEvidencia(registro));
+    tarjeta.appendChild(crearElemento('p', 'evidencia-sin-archivo', textoAdjunto(registro)));
     const metadatos = crearElemento('dl', 'evidencia-tarjeta-datos');
     const campos = [['Tipo', registro.tipo], ['Entidad', registro.entidad], ['Fecha', registro.fecha], ['Vigencia registrada', registro.vigencia]];
     if (registro.categoria === 'laboratorio') campos.push(['Tipo de análisis', registro.tipoAnalisis]);
@@ -739,7 +832,7 @@ function crearTarjetaEvidencia(registro, loteId) {
     tarjeta.appendChild(metadatos);
     tarjeta.appendChild(crearElemento('p', 'evidencia-tarjeta-fuente', 'Fuente: ' + textoDisponible(registro.metadatos && registro.metadatos.fuente)));
     if (estado.clave === 'parcial') tarjeta.appendChild(crearElemento('p', 'evidencia-parcial-ayuda', 'Evidencia documental no disponible o incompleta. Consulta qué datos faltan en el registro.'));
-    tarjeta.appendChild(crearElemento('p', 'evidencia-sin-archivo', textoAdjunto(registro)));
+    tarjeta.appendChild(crearElemento('p', 'evidencia-tarjeta-alcance', 'Alcance: ' + textoDisponible(registro.alcance)));
     if (esEvidenciaConsultable(registro)) {
         const boton = crearElemento('button', 'secondary-btn', estado.clave === 'parcial' ? 'Consultar registro parcial' : 'Ver detalle del registro');
         boton.type = 'button';
@@ -804,7 +897,7 @@ function seleccionarEvidencia(id, loteEsperadoId) {
     detalle.setAttribute('data-evidencia-id', registro.id);
     document.getElementById('evidencias-vista-lista').hidden = true;
     detalle.hidden = false;
-    detalle.focus();
+    enfocarDocumento(detalle);
 }
 
 function volverAListaEvidencias() {
@@ -818,7 +911,7 @@ function volverAListaEvidencias() {
     else document.getElementById('pasaporte-evidencias').focus();
 }
 
-// Etapa 4: consulta local de avisos. Las predicciones no forman parte de alertas.
+// Consulta local de avisos. Las predicciones no forman parte de alertas.
 function esAvisoPredictivo(registro) {
     return registro.naturaleza === 'predictiva' || (registro.metadatos && registro.metadatos.nivelEvidencia === 'predictiva');
 }
@@ -952,7 +1045,7 @@ function pintarResultadosAlertas(respuesta, enfocar = false) {
     region.hidden = false;
     document.getElementById('alertas-codigo').removeAttribute('aria-invalid');
     mensajeAlertas(respuesta.mensaje);
-    if (enfocar) region.focus();
+    if (enfocar) enfocarDocumento(region);
 }
 
 function inicializarAlertas(contexto) {
@@ -1006,7 +1099,7 @@ function seleccionarAlerta(id, loteEsperadoId) {
     detalle.setAttribute('data-alerta-id', registro.id);
     document.getElementById('alertas-vista-lista').hidden = true;
     detalle.hidden = false;
-    detalle.focus();
+    enfocarDocumento(detalle);
 }
 
 function volverAListaAlertas() {
@@ -1018,7 +1111,7 @@ function volverAListaAlertas() {
     else document.getElementById('alertas-resultados').focus();
 }
 
-// Etapa 6: regla transparente de revisión documental. No es IA ni un modelo sanitario.
+// Regla transparente de revisión documental. No es IA ni un modelo sanitario.
 const reglaPreventivaDemo = congelarDatos({
     id: 'regla_documental_demo_v1', minimoFactores: 2,
     categorias: {
@@ -1143,7 +1236,7 @@ function solicitarEstimacionPreventiva() {
     ['analisis-factores', 'analisis-explicacion'].forEach(function (id) { document.getElementById(id).hidden = true; });
     ['analisis-ver-factores', 'analisis-explicar'].forEach(function (id) { document.getElementById(id).setAttribute('aria-expanded', 'false'); });
     mensajeAnalisis(disponible ? 'Estimación predictiva de demostración disponible para ' + contexto.lote.id + '.' : 'Estimación no disponible para ' + contexto.lote.id + '. Revisa la limitación indicada.');
-    region.focus();
+    enfocarDocumento(region);
 }
 
 function alternarFactoresPreventivos() {
@@ -1169,7 +1262,7 @@ function alternarFactoresPreventivos() {
     document.getElementById('analisis-factores-estado').textContent = resultado.estado === 'disponible' ? resultado.factores.length + ' factores válidos de demostración. Cada adjunto ausente suma una señal de revisión documental.' :
         resultado.motivo + ' Los factores disponibles no bastan para justificar una categoría; no se inventan causas.';
     region.setAttribute('data-lote-id', contexto.lote.id);
-    region.focus();
+    enfocarDocumento(region);
 }
 
 function construirExplicacionPreventiva(contexto, resultado) {
@@ -1206,7 +1299,7 @@ function alternarExplicacionPreventiva() {
     document.getElementById('analisis-explicacion-estimacion').textContent = texto.estimacion;
     region.setAttribute('data-lote-id', contexto.lote.id);
     mensajeAnalisis('Explicación simulada construida con datos locales de ' + contexto.lote.id + '. No interviene una IA conectada.');
-    region.focus();
+    enfocarDocumento(region);
 }
 
 function crearTarjetaPrioridadPreventiva(item, posicion, loteOrigenId) {
@@ -1244,7 +1337,7 @@ function consultarPrioridadPreventiva() {
     region.setAttribute('data-lote-id', contexto.lote.id);
     region.hidden = false;
     mensajeAnalisis('Prioridad documental de demostración consultada. No es un diagnóstico sanitario.');
-    region.focus();
+    enfocarDocumento(region);
 }
 
 function abrirLoteDesdePrioridad(loteId, loteOrigenId) {
@@ -1331,8 +1424,7 @@ function mostrarLoteActivo() {
     mostrarDato('pasaporte-contexto-producto', lote.producto);
     mostrarDato('pasaporte-contexto-lote', lote.id);
 
-    mostrarDato('resultado-titulo', lote.producto);
-    document.getElementById('pasaporte-codigo').textContent = lote.id;
+    mostrarDato('pasaporte-origen-resumen', lote.origen);
     confirmacion.hidden = true;
     confirmacion.removeAttribute('data-lote-id');
     ficha.setAttribute('data-lote-id', lote.id);
@@ -1343,7 +1435,12 @@ function mostrarLoteActivo() {
     document.getElementById('volver-resumen').textContent = recepcionActiva ? '← Volver a recepción' : '← Volver al resumen del lote';
     actualizarPaso(3);
     actualizarMensaje('Pasaporte de ' + lote.id + ' abierto. Los datos son ficticios y no han sido verificados.', 'ok');
-    ficha.focus();
+    enfocarDocumento(ficha);
+    if (entradaAlertas && !recepcionActiva) {
+        definirEntradaAlertas(false);
+        activarPestanaPasaporte('alertas');
+        enfocarDestino(document.getElementById('pestana-alertas'));
+    }
 }
 
 formulario.addEventListener('submit', function (evento) {
@@ -1368,14 +1465,13 @@ formulario.addEventListener('reset', function () {
     actualizarMensaje('Escribe un producto o un código para comenzar.');
 });
 
-// Accesos directos a dos códigos para probar sin tener que escribirlos.
+// Ejemplo → confirmación → pasaporte. Reutiliza la búsqueda y el contexto de Alertas.
 document.querySelectorAll('.codigo-sugerido').forEach(function (boton) {
     boton.addEventListener('click', function () {
         limpiarLoteActivo();
         codigo.value = boton.getAttribute('data-codigo');
-        codigo.focus();
         codigo.removeAttribute('aria-invalid');
-        actualizarMensaje('Código de ejemplo cargado. Pulsa Buscar lote para continuar.');
+        mostrarResultados(resolverBusqueda(codigo.value, modoConsulta));
     });
 });
 
@@ -1425,7 +1521,7 @@ document.getElementById('volver-etapas').addEventListener('click', function () {
         botonesEtapas[eventoActivoIndice].focus();
     }
 });
-document.getElementById('otra-consulta').addEventListener('click', function () { configurarBusqueda('general'); });
+document.getElementById('otra-consulta').addEventListener('click', function () { definirEntradaAlertas(false); configurarBusqueda('general'); });
 document.getElementById('corregir-busqueda').addEventListener('click', function () { codigo.focus(); });
 document.getElementById('volver-resumen').addEventListener('click', function () {
     if (recepcionActiva) { volverARecepcion(); return; }
@@ -1439,7 +1535,7 @@ document.getElementById('volver-resumen').addEventListener('click', function () 
     confirmacion.focus();
 });
 
-// Etapa 5: recepción guiada y revisión interna simulada, sin certificación sanitaria.
+// Recepción guiada y revisión interna simulada, sin certificación sanitaria.
 function mensajeRecepcion(texto, error = false) {
     const region = document.getElementById('recepcion-mensaje');
     region.textContent = texto;
@@ -1459,7 +1555,7 @@ function mostrarPasoRecepcion(paso, enfocar = true) {
         if (indice === paso - 1) indicador.setAttribute('aria-current', 'step');
         else indicador.removeAttribute('aria-current');
     });
-    if (enfocar) document.getElementById(['recepcion-identificar', 'recepcion-revisar', 'recepcion-registrar'][paso - 1]).focus();
+    if (enfocar) enfocarDocumento(document.getElementById(['recepcion-identificar', 'recepcion-revisar', 'recepcion-registrar'][paso - 1]));
 }
 
 function cerrarConfirmacionDescarte() {
@@ -1482,7 +1578,7 @@ function limpiarVistaRecepcion() {
     document.getElementById('recepcion-codigo').removeAttribute('aria-invalid');
     document.getElementById('recepcion-recuperacion').hidden = true;
     document.getElementById('recepcion-guardar').disabled = false;
-    document.getElementById('recepcion-guardar').textContent = 'Registrar verificación';
+    document.getElementById('recepcion-guardar').textContent = 'Registrar revisión interna';
     cerrarConfirmacionDescarte();
     retornoRecepcionId = 'recepcion-trazabilidad';
     mensajeRecepcion('');
@@ -1492,10 +1588,11 @@ function limpiarVistaRecepcion() {
 
 function cambiarContextoConsulta(paraRecepcion) {
     cerrarEscaner();
+    definirEntradaAlertas(false);
     if (recepcionActiva === paraRecepcion) {
         if (paraRecepcion && !ficha.hidden) volverARecepcion();
         else if (paraRecepcion) mostrarPasoRecepcion(pasoRecepcion);
-        else codigo.focus();
+        else enfocarDestino(codigo);
         return;
     }
     recepcionActiva = paraRecepcion;
@@ -1508,7 +1605,7 @@ function cambiarContextoConsulta(paraRecepcion) {
     if (paraRecepcion) {
         mensajeRecepcion('Paso 1 de 3. Identifica el lote recibido mediante código o QR.');
         document.getElementById('recepcion-codigo').focus();
-    } else configurarBusqueda('general');
+    } else { configurarBusqueda('general'); enfocarDestino(codigo); }
 }
 
 function identificarLoteRecepcion() {
@@ -1568,9 +1665,10 @@ function volverARecepcion() {
     ficha.removeAttribute('data-lote-id');
     document.getElementById('volver-recepcion').hidden = true;
     document.getElementById('recepcion-comercial').hidden = false;
+    actualizarApertura();
     pintarRevisionRecepcion();
     mostrarPasoRecepcion(2, false);
-    mensajeRecepcion('De vuelta en la recepción de ' + contexto.lote.id + '. Puedes continuar al registro.');
+    mensajeRecepcion('Paso 2 de 3. Revisa la información de ' + contexto.lote.id + '. ' + (leerRevisionRecepcion(contexto.lote.id).estado === 'guardado' ? 'Ya existe una revisión local; puedes consultar su registro.' : 'Consulta los detalles antes de continuar al registro.'));
     document.getElementById(retornoRecepcionId).focus();
 }
 
@@ -1619,13 +1717,13 @@ function pintarRevisionRecepcion(lectura) {
         invalido ? 'Registro local inválido' : error ? 'Almacenamiento local no disponible' : 'Revisión aún no registrada';
     document.getElementById('recepcion-registro-detalle').textContent = guardado ? 'Registro recuperado para ' + contexto.lote.id + ' en este navegador. No es una certificación sanitaria.' :
         invalido ? 'No se puede recuperar una revisión válida. Puedes descartar expresamente el registro inválido para este lote.' :
-            error ? 'No pudimos leer el almacenamiento del navegador. Puedes volver a intentar; no se confirma ningún registro guardado.' : 'Al seleccionar Registrar verificación se guardará la constancia interna simulada de este lote.';
+            error ? 'No pudimos leer el almacenamiento del navegador. Puedes volver a intentar; no se confirma ningún registro guardado.' : 'Al seleccionar Registrar revisión interna se guardará la constancia interna simulada de este lote.';
     document.getElementById('recepcion-revision-previa').textContent = guardado ? 'Revisión interna simulada previa: ' + formatearFechaRecepcion(lectura.registro.fechaHora) + '. Disponible en este navegador.' :
         invalido ? 'La revisión local no puede recuperarse: contiene datos inválidos. Revisa las opciones en Registrar revisión.' :
             error ? 'No se pudo comprobar si hay una revisión previa: almacenamiento local no disponible.' : 'Este lote aún no tiene una revisión interna registrada en este navegador.';
     const boton = document.getElementById('recepcion-guardar');
     boton.disabled = guardado || invalido || guardandoRecepcion;
-    boton.textContent = guardado ? 'Revisión ya registrada' : error ? 'Reintentar registro' : 'Registrar verificación';
+    boton.textContent = guardado ? 'Revisión ya registrada' : error ? 'Reintentar registro' : 'Registrar revisión interna';
     document.getElementById('recepcion-recuperacion').hidden = !invalido;
     cerrarConfirmacionDescarte();
 }
@@ -1658,7 +1756,7 @@ function registrarRevisionRecepcion() {
         document.getElementById('recepcion-registro').setAttribute('aria-busy', 'false');
         pintarRevisionRecepcion();
         if (errorGuardado && !document.getElementById('recepcion-guardar').disabled) document.getElementById('recepcion-guardar').textContent = 'Reintentar registro';
-        if (!errorGuardado) document.getElementById('recepcion-registro').focus();
+        if (!errorGuardado) enfocarDocumento(document.getElementById('recepcion-registro'));
     }
 }
 
@@ -1685,7 +1783,7 @@ document.getElementById('recepcion-continuar').addEventListener('click', functio
     if (!recepcionActiva || !obtenerContextoLoteActivo()) return;
     pintarRevisionRecepcion();
     mostrarPasoRecepcion(3);
-    mensajeRecepcion('Paso 3 de 3. Registra únicamente que realizaste una revisión interna simulada.');
+    mensajeRecepcion(leerRevisionRecepcion(obtenerContextoLoteActivo().lote.id).estado === 'guardado' ? 'Paso 3 de 3. Consulta la revisión interna ya guardada en este navegador.' : 'Paso 3 de 3. Revisa el estado del registro antes de guardar tu revisión interna simulada.');
 });
 document.getElementById('recepcion-volver-revisar').addEventListener('click', function () {
     if (!recepcionActiva || !obtenerContextoLoteActivo()) return;
@@ -1982,7 +2080,7 @@ function informarErrorVideo(video) {
 const videos = document.querySelectorAll('.video-player');
 videos.forEach(function (video) {
     video.addEventListener('loadstart', function () {
-        mostrarEstadoVideo(video, 'cargando', 'Cargando información del video…');
+        mostrarEstadoVideo(video, video.getAttribute('preload') === 'none' && video.readyState === 0 ? 'listo' : 'cargando', video.getAttribute('preload') === 'none' && video.readyState === 0 ? 'Video sin cargar. Usa los controles para reproducirlo.' : 'Cargando información del video…');
     });
     video.addEventListener('loadedmetadata', function () {
         mostrarEstadoVideo(video, 'listo', 'Información del video cargada. Usa los controles para reproducirlo.');
@@ -2006,6 +2104,5 @@ videos.forEach(function (video) {
         mostrarEstadoVideo(video, 'incompatible', 'Este navegador no indica compatibilidad con el formato del video. Usa otro navegador para intentar reproducirlo.');
         return;
     }
-    mostrarEstadoVideo(video, 'cargando', 'Cargando información del video…');
-    video.load();
+    mostrarEstadoVideo(video, 'listo', 'Video sin cargar. Usa los controles para reproducirlo.');
 });

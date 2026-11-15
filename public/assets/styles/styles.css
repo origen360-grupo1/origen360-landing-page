@@ -1,4 +1,4 @@
-/* Etapa 0: identidad y valores compartidos, sin dependencias externas. */
+/* Identidad visual y valores compartidos, sin dependencias externas. */
 :root {
     --color-brand: #214F42;
     --color-primary: #2F6B57;
@@ -39,7 +39,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
 body {
     font-family: var(--font-body);
     background-color: var(--color-background);
@@ -54,73 +54,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 button, input, a { transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }
 button:disabled { opacity: .65; cursor: not-allowed; }
 
-/* Encabezado */
-.header {
-    width: 100%;
-    min-height: 76px;
-    padding: 5px 7%;
-    background-color: var(--color-surface);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 13px rgba(22, 75, 43, .07);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-/* Logo oficial del proyecto, guardado en assets/images */
-.brand-link { display: flex; align-items: center; }
-.brand-logo { display: block; width: 192px; height: auto; }
-.nav { display: flex; gap: var(--space-6); align-items: center; }
-.nav a { font-size: 14px; font-weight: 700; color: var(--color-muted); }
-.nav a:hover { color: var(--color-primary); }
-.nav .nav-contacto { background: var(--color-primary); color: var(--color-surface); padding: 10px 15px; border-radius: var(--radius-control); }
-.nav .nav-contacto:hover { background: var(--color-brand); color: var(--color-surface); }
-.menu-btn { display: none; }
-
+/* La navegación exterior se define en el bloque «Apertura y navegación exterior». */
 /* Sección principal */
-.hero {
-    background: linear-gradient(110deg, var(--color-background), var(--color-surface-tint));
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 45px;
-    align-items: center;
-    padding: 74px 7%;
-    overflow: hidden;
-}
-.hero-content { max-width: 610px; }
-.etiqueta-verde { background: var(--color-surface-tint); color: var(--color-primary); border-radius: 22px; font-size: 13px; font-weight: 700; padding: 8px 14px; display: inline-block; margin-bottom: 23px; }
-.hero h1 { font-size: clamp(37px, 4vw, 58px); line-height: 1.12; font-weight: 800; letter-spacing: -1.7px; color: var(--color-brand); margin-bottom: 20px; }
-.hero h1 span { color: var(--color-primary); }
-.hero-content > p { color: var(--color-muted); font-size: 18px; max-width: 510px; margin-bottom: 25px; }
-.hero-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
 .primary-btn, .secondary-btn, .cta-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3); font-size: 14px; font-weight: 700; border-radius: var(--radius-control); padding: 13px 19px; cursor: pointer; border: 1px solid transparent; }
 .primary-btn { background-color: var(--color-primary); color: var(--color-surface); }
 .primary-btn:hover { background-color: var(--color-brand); }
 .secondary-btn { border: 1px solid var(--color-border-control); background: var(--color-surface); color: var(--color-primary); }
 .secondary-btn:hover { background: var(--color-surface-tint); }
-.hero-content .hero-note { font-size: 13px; color: var(--color-muted); margin-top: 18px; margin-bottom: 0; }
-.hero-image { display: flex; align-items: center; justify-content: center; }
-
-/* Pasaporte ilustrativo: los datos son ficticios, no certificados. */
-.passport { width: 100%; max-width: 590px; min-height: 354px; border: 5px solid var(--color-primary); border-radius: var(--radius-panel); background: var(--color-surface); box-shadow: 0 24px 45px rgba(28, 72, 40, .16); display: grid; grid-template-columns: 118px minmax(0, 1fr); overflow: hidden; transform: rotate(1deg); }
-.passport-sidebar { background: var(--color-brand); padding: 20px 12px; color: var(--color-surface); }
-.passport-logo { font-weight: 800; font-size: 15px; margin-bottom: 20px; }
-.sidebar-item { display: block; font-size: 12px; color: var(--color-footer-text); padding: 9px 7px; border-radius: 6px; }
-.sidebar-item.active { background: var(--color-primary); color: var(--color-surface); }
-.passport-info { min-width: 0; padding: 19px; }
-.passport-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); border-bottom: 1px solid var(--color-border); padding-bottom: 11px; }
-.passport-top strong { font-size: 17px; }
-.demo-tag { background: var(--color-warning-bg); color: var(--color-warning); font-weight: 800; font-size: 11px; border-radius: 20px; padding: 5px 9px; }
-.passport-data { display: flex; gap: 13px; align-items: center; margin-top: 18px; }
-.product-emoji { background: var(--color-surface-tint); height: 90px; width: 90px; flex-shrink: 0; border-radius: var(--radius-card); display: flex; align-items: center; justify-content: center; font-size: 58px; }
-.passport-summary { min-width: 0; }
-.passport-data h2 { font-size: 22px; color: var(--color-brand); margin-bottom: 4px; }
-.passport-data p { color: var(--color-muted); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
-.passport-status { color: var(--color-warning); background: var(--color-warning-bg); font-size: 12px; font-weight: 700; padding: 9px; margin-top: 18px; border-radius: 7px; }
-.passport-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; list-style: none; text-align: center; margin-top: 13px; }
-.passport-steps li { color: var(--color-muted); font-size: 12px; display: flex; align-items: center; flex-direction: column; gap: 6px; }
-.passport-steps li span { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-surface-tint); color: var(--color-primary); font-size: 13px; font-weight: 800; }
 
 /* Contenido */
 .section { padding: var(--space-16) 7%; scroll-margin-top: 83px; }
@@ -197,35 +137,13 @@ button:disabled { opacity: .65; cursor: not-allowed; }
 
 /* Diseño responsive */
 @media (max-width: 960px) {
-    .header { padding: 5px 5%; min-height: 70px; }
-    .menu-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--color-surface-tint); border: 1px solid var(--color-border-control); border-radius: var(--radius-control); width: 41px; height: 39px; color: var(--color-primary); font-size: 23px; cursor: pointer; }
-    .nav { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 20px 5%; background: var(--color-surface); box-shadow: 0 9px 16px rgba(0, 0, 0, .12); flex-direction: column; align-items: stretch; gap: 14px; }
-    .nav.open { display: flex; }
-    .nav a { padding: 5px 0; }
-    .nav .nav-contacto { padding: 12px; text-align: center; }
     .video-cards { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 1100px) {
-    .header { padding-left: 5%; padding-right: 5%; }
-    .nav { gap: 13px; }
-    .hero { padding-left: 5%; padding-right: 5%; gap: 25px; }
     .section { padding-left: 5%; padding-right: 5%; }
     .cards { grid-template-columns: repeat(2, 1fr); }
-    .passport { grid-template-columns: 112px 1fr; }
-    .passport-sidebar { padding: 16px 8px; }
 }
 @media (max-width: 768px) {
-    .header { padding: 5px 5%; min-height: 70px; }
-    .brand-logo { width: 174px; }
-    .menu-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--color-surface-tint); border: 1px solid var(--color-border-control); border-radius: var(--radius-control); width: 41px; height: 39px; color: var(--color-primary); font-size: 23px; cursor: pointer; }
-    .nav { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 20px 5%; background: var(--color-surface); box-shadow: 0 9px 16px rgba(0, 0, 0, .12); flex-direction: column; align-items: stretch; gap: 14px; }
-    .nav.open { display: flex; }
-    .nav a { padding: 5px 0; }
-    .nav .nav-contacto { padding: 12px; text-align: center; }
-    .hero { grid-template-columns: 1fr; padding: 55px 6% 45px; }
-    .hero h1 { max-width: 550px; }
-    .hero-image { padding: 20px 0; }
-    .passport { max-width: 550px; min-height: 325px; }
     .section { padding: 48px 6%; }
     .steps, .tech-cards { grid-template-columns: 1fr; gap: 9px; }
     .video-cards { grid-template-columns: 1fr; }
@@ -236,20 +154,6 @@ button:disabled { opacity: .65; cursor: not-allowed; }
     .footer-note { text-align: left; }
 }
 @media (max-width: 480px) {
-    .brand-logo { width: 160px; }
-    .hero { padding-top: 43px; }
-    .hero h1 { font-size: 36px; letter-spacing: -1.2px; }
-    .hero-content > p { font-size: 16px; }
-    .hero-actions { flex-direction: column; align-items: stretch; }
-    .hero-actions a { width: 100%; }
-    .passport { min-height: 0; grid-template-columns: 1fr; transform: none; border-width: 4px; }
-    .passport-sidebar { display: none; }
-    .passport-info { padding: 16px; }
-    .passport-data { flex-wrap: wrap; }
-    .passport-data p { font-size: 13px; }
-    .product-emoji { width: 72px; height: 72px; font-size: 45px; }
-    .passport-status { font-size: 12px; }
-    .passport-steps li { font-size: 12px; }
     .section-title h2 { font-size: 26px; }
     .cards { grid-template-columns: 1fr; }
     .card { min-height: 0; padding: 20px; }
@@ -270,13 +174,13 @@ button:disabled { opacity: .65; cursor: not-allowed; }
 .skip-link { position: absolute; top: -80px; left: 18px; background: var(--color-brand); color: var(--color-surface); padding: 12px 16px; border-radius: 0 0 9px 9px; z-index: 100; }
 .skip-link:focus { position: fixed; top: 0; }
 main:focus { outline: none; }
-.nav a { min-height: 42px; display: inline-flex; align-items: center; }
 .primary-btn, .secondary-btn, .cta-button { min-height: 46px; }
-.hero-content .hero-note { font-size: 13px; }
 .video-media { background-size: cover; background-position: center; }
-.video-campo { background-image: linear-gradient(rgba(12,42,25,.38),rgba(12,42,25,.58)), url('../images/portada-cosecha.svg'); }
-.video-transporte { background-image: linear-gradient(rgba(12,42,25,.38),rgba(12,42,25,.58)), url('../images/portada-distribucion.svg'); }
-.video-mercado { background-image: linear-gradient(rgba(12,42,25,.38),rgba(12,42,25,.58)), url('../images/portada-mercado.svg'); }
+/* Los SVG originales quedan como respaldo: el navegador solo los solicita si el video falla o no es compatible.
+   En estado normal el poster WebP del propio <video> es la portada y no se descarga ningún fondo duplicado. */
+.video-campo[data-estado-video="error"], .video-campo[data-estado-video="incompatible"] { background-image: linear-gradient(rgba(12,42,25,.38),rgba(12,42,25,.58)), url('../images/portada-cosecha.svg'); }
+.video-transporte[data-estado-video="error"], .video-transporte[data-estado-video="incompatible"] { background-image: linear-gradient(rgba(12,42,25,.38),rgba(12,42,25,.58)), url('../images/portada-distribucion.svg'); }
+.video-mercado[data-estado-video="error"], .video-mercado[data-estado-video="incompatible"] { background-image: linear-gradient(rgba(12,42,25,.38),rgba(12,42,25,.58)), url('../images/portada-mercado.svg'); }
 .video-placeholder { text-shadow: 0 2px 8px rgba(0,0,0,.7); }
 .video-placeholder small { font-size: 13px; color: var(--color-surface); }
 .video-info p, .card p, .step p, .audience p, .tech-card p { font-size: 15px; }
@@ -304,24 +208,24 @@ main:focus { outline: none; }
 .trazabilidad-lista strong { color: var(--color-brand); }
 .aviso-demo { background: var(--color-warning-bg); padding: 13px; border-radius: var(--radius-control); margin-top: 20px; border-left: 4px solid #b67a20; color: var(--color-warning) !important; font-size: 14px !important; }
 #resultado-consulta { font-size: 14px; line-height: 1.5; }
-.footer p, .footer a, .footer small { font-size: 13px; }
-@media (max-width: 960px) {
-    .nav a { min-height: 44px; padding: 8px; }
-    .nav { top: 100%; }
-}
+.footer p, .footer small { font-size: 14px; }
+.footer-links { gap: 8px; }
+.footer-links a { display: flex; align-items: center; min-height: 48px; font-size: 16px; text-underline-offset: .2em; }
+.footer-links a:active { text-decoration: underline; }
+.section .overline, .video-numero, #videos .video-info .video-estado { font-size: 14px; }
+.cta-section .cta-button { min-height: 48px; font-size: 16px; white-space: normal; text-align: center; }
+.cta-section p, .cta-section .overline { color: var(--color-brand); }
+
 @media (max-width: 768px) {
     .resultado-contenido { grid-template-columns: 1fr; }
-    .passport { transform: none; }
 }
 @media (max-width: 480px) {
     .lote-datos { grid-template-columns: 1fr; }
     .resultado-card { padding: 17px; }
-    .passport-top strong { font-size: 16px; }
-    .passport-data h2 { font-size: 20px; }
     .form-row button { width: 100%; }
 }
 
-/* Etapa 1: módulo de consulta. Se conservan los estilos de la landing. */
+/* Módulo de consulta. Se conservan los estilos de la landing. */
 #consulta { background: var(--color-background); }
 #consulta [hidden] { display: none !important; }
 .consulta-intro { max-width: 800px; }
@@ -440,31 +344,31 @@ main:focus { outline: none; }
     .consulta-acciones { align-items: stretch; flex-direction: column; }
     .consulta-acciones > button { width: 100%; }
     .escaner-acciones { flex-direction: column; }
-    .escaner-cabecera .overline { font-size: 10px; }
+    .escaner-cabecera .overline { font-size: 14px; }
     .escaner-cabecera h3 { font-size: 21px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .consulta-result-item { transition: none; }
 }
 
-/* Etapa 2: origen, respaldo y recorrido del pasaporte existente. */
+/* Origen, respaldo y recorrido del pasaporte. */
 .consulta-pasaporte .resultado-encabezado { margin-bottom: var(--space-4); }
 .pasaporte-contexto-fijo { position: sticky; top: 82px; z-index: 3; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: 12px 16px; margin-bottom: var(--space-6); background: var(--color-brand); color: var(--color-surface); border-radius: var(--radius-control); box-shadow: var(--shadow-card); }
 .pasaporte-contexto-fijo strong { font-size: 15px; }
-.pasaporte-contexto-fijo > span { font-size: 12px; letter-spacing: .3px; overflow-wrap: anywhere; }
-.pasaporte-contexto-fijo small { margin-left: auto; font-size: 11px; color: var(--color-footer-text); }
+.pasaporte-contexto-fijo > span { font-size: 14px; letter-spacing: .3px; overflow-wrap: anywhere; }
+.pasaporte-contexto-fijo small { margin-left: auto; font-size: 14px; color: var(--color-footer-text); }
 .pasaporte-estado-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
 .pasaporte-estado, .pasaporte-cobertura { padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
 .pasaporte-estado { background: var(--color-surface-tint); }
 .pasaporte-estado h4, .pasaporte-cobertura h4 { color: var(--color-brand); font-size: 16px; }
 .pasaporte-disponibilidad { font-size: clamp(20px, 2.4vw, 26px); line-height: 1.25; font-weight: 700; color: var(--color-brand); margin: var(--space-3) 0; }
-.pasaporte-ayuda { font-size: 13px; line-height: 1.65; color: var(--color-muted); }
+.pasaporte-ayuda { font-size: 14px; line-height: 1.65; color: var(--color-muted); }
 .pasaporte-niveles { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-4); }
-.pasaporte-estado .text-btn { font-size: 12px; text-align: left; justify-content: flex-start; margin-top: var(--space-2); }
+.pasaporte-estado .text-btn { font-size: 14px; text-align: left; justify-content: flex-start; margin-top: var(--space-2); }
 .pasaporte-cobertura dl { margin-top: var(--space-3); }
 .pasaporte-cobertura dl > div { display: flex; justify-content: space-between; gap: var(--space-3); padding: 10px 0; border-bottom: 1px solid var(--color-border); }
 .pasaporte-cobertura dl > div:last-child { border-bottom: 0; }
-.pasaporte-cobertura dt, .pasaporte-cobertura dd { font-size: 12px; }
+.pasaporte-cobertura dt, .pasaporte-cobertura dd { font-size: 14px; }
 .pasaporte-cobertura dt { color: var(--color-muted); }
 .pasaporte-cobertura dd { color: var(--color-brand); text-align: right; font-weight: 700; }
 .consulta-pasaporte .pasaporte-accesos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -476,29 +380,29 @@ main:focus { outline: none; }
 .consulta-pasaporte .lote-datos > div { padding: var(--space-4); background: var(--color-surface); }
 .consulta-pasaporte .lote-datos > div > dd:first-of-type { font-size: 17px; }
 .origen-localizacion { background: var(--color-background); border: 1px solid var(--color-border); border-left: 3px solid var(--color-primary); padding: var(--space-6); border-radius: var(--radius-card); }
-.origen-localizacion > div > dt, .pasaporte-actores > div > dt { font-size: 12px; font-weight: 700; color: var(--color-muted); margin-bottom: var(--space-2); }
+.origen-localizacion > div > dt, .pasaporte-actores > div > dt { font-size: 14px; font-weight: 700; color: var(--color-muted); margin-bottom: var(--space-2); }
 .origen-localizacion > div > dd:first-of-type { font-size: clamp(20px, 2.6vw, 26px); font-weight: 700; color: var(--color-brand); line-height: 1.3; overflow-wrap: anywhere; }
 .pasaporte-actores { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-4) 0; }
 .pasaporte-actores > div { padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); min-width: 0; }
 .pasaporte-actores > div > dt { display: flex; align-items: center; gap: var(--space-2); }
 .pasaporte-actores dt > span { color: var(--color-primary); font-size: 18px; }
 .pasaporte-actores > div > dd:first-of-type { color: var(--color-brand); font-weight: 700; font-size: 17px; overflow-wrap: anywhere; }
-.consulta-pasaporte .dato-respaldo { margin-top: var(--space-3); font-size: 12px; font-weight: 400; color: var(--color-muted); overflow-wrap: anywhere; }
+.consulta-pasaporte .dato-respaldo { margin-top: var(--space-3); font-size: 14px; font-weight: 400; color: var(--color-muted); overflow-wrap: anywhere; }
 .respaldo-etiquetas { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-.nivel-etiqueta { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--color-border-control); border-radius: 6px; padding: 3px 7px; font-size: 11px; font-weight: 700; line-height: 1.5; color: var(--color-primary); background: var(--color-surface-tint); }
+.nivel-etiqueta { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--color-border-control); border-radius: 6px; padding: 3px 7px; font-size: 14px; font-weight: 700; line-height: 1.5; color: var(--color-primary); background: var(--color-surface-tint); }
 .nivel-icono { display: inline-grid; place-items: center; width: 16px; font-size: 14px; flex-shrink: 0; }
 .nivel-verificada { color: var(--color-brand); background: var(--color-surface); border-style: double; }
 .nivel-oficial { color: var(--color-surface); background: var(--color-brand); border-color: var(--color-brand); }
 .nivel-predictiva { color: var(--color-warning); background: var(--color-warning-bg); border-color: var(--color-warning); border-style: dashed; }
 .nivel-no-determinado, .nivel-no-disponible { background: var(--color-surface); color: var(--color-muted); border-style: dashed; }
-.nivel-demo { font-size: 10px; font-weight: 700; letter-spacing: .4px; color: var(--color-muted); }
-.respaldo-predictivo { border-left: 3px solid var(--color-warning); background: var(--color-warning-bg); padding: 10px; margin-top: var(--space-2); color: var(--color-warning); font-size: 12px; line-height: 1.6; }
+.nivel-demo { font-size: 14px; font-weight: 700; letter-spacing: .4px; color: var(--color-muted); }
+.respaldo-predictivo { border-left: 3px solid var(--color-warning); background: var(--color-warning-bg); padding: 10px; margin-top: var(--space-2); color: var(--color-warning); font-size: 14px; line-height: 1.6; }
 .dato-fuente { margin-top: var(--space-2); }
-.dato-fuente summary { padding: 7px 0; color: var(--color-primary); font-size: 12px; font-weight: 700; cursor: pointer; min-height: 32px; }
+.dato-fuente summary { padding: 7px 0; color: var(--color-primary); font-size: 14px; font-weight: 700; cursor: pointer; min-height: 32px; }
 .consulta-pasaporte .fuente-metadatos { border-top: 1px solid var(--color-border); padding-top: var(--space-2); margin-top: 2px; }
 .consulta-pasaporte .fuente-metadatos > div { margin-bottom: 7px; }
-.consulta-pasaporte .fuente-metadatos dt { color: var(--color-muted); font-size: 11px; font-weight: 700; margin-bottom: 2px; }
-.consulta-pasaporte .fuente-metadatos dd { color: var(--color-muted); font-size: 12px; font-weight: 400; line-height: 1.6; }
+.consulta-pasaporte .fuente-metadatos dt { color: var(--color-muted); font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.consulta-pasaporte .fuente-metadatos dd { color: var(--color-muted); font-size: 14px; font-weight: 400; line-height: 1.6; }
 .trazabilidad-interactiva { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: var(--space-6); align-items: start; }
 .consulta-pasaporte .trazabilidad-lista { gap: var(--space-3); }
 .consulta-pasaporte .trazabilidad-lista li { padding: 0; position: relative; }
@@ -507,29 +411,29 @@ main:focus { outline: none; }
 .traza-evento { display: flex; align-items: flex-start; gap: var(--space-3); width: 100%; padding: var(--space-4); border: 1px solid var(--color-border-control); border-radius: var(--radius-control); background: var(--color-surface); color: var(--color-text); cursor: pointer; text-align: left; transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast); }
 .traza-evento:hover { background: var(--color-background); border-color: var(--color-primary); }
 .traza-evento[aria-pressed="true"] { border-color: var(--color-brand); border-left-width: 4px; background: var(--color-surface-tint); box-shadow: var(--shadow-card); padding-left: 13px; }
-.traza-numero { display: grid; place-items: center; width: 29px; height: 29px; flex-shrink: 0; border-radius: 50%; background: var(--color-surface-tint); border: 1px solid var(--color-border); color: var(--color-brand); font-weight: 700; font-size: 11px; }
+.traza-numero { display: grid; place-items: center; width: 29px; height: 29px; flex-shrink: 0; border-radius: 50%; background: var(--color-surface-tint); border: 1px solid var(--color-border); color: var(--color-brand); font-weight: 700; font-size: 14px; }
 .traza-evento[aria-pressed="true"] .traza-numero { background: var(--color-brand); color: var(--color-surface); }
 .traza-evento-contenido { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; min-width: 0; overflow-wrap: anywhere; }
 .traza-evento-contenido > strong { font-size: 15px; color: var(--color-brand); line-height: 1.3; }
-.traza-fecha { color: var(--color-muted); font-size: 12px; }
-.traza-dato-faltante { color: var(--color-warning); background: var(--color-warning-bg); border-radius: 4px; padding: 3px 6px; font-size: 11px; }
+.traza-fecha { color: var(--color-muted); font-size: 14px; }
+.traza-dato-faltante { color: var(--color-warning); background: var(--color-warning-bg); border-radius: 4px; padding: 3px 6px; font-size: 14px; }
 .traza-panel { min-width: 0; }
 .traza-instruccion { padding: var(--space-6); border: 1px dashed var(--color-border-control); border-radius: var(--radius-card); color: var(--color-muted); background: var(--color-background); font-size: 14px; line-height: 1.65; }
 .traza-detalle { padding: var(--space-6); border: 1px solid var(--color-support); border-top: 3px solid var(--color-brand); border-radius: var(--radius-card); background: var(--color-surface-tint); }
 .traza-detalle h5 { font-size: 22px; line-height: 1.3; color: var(--color-brand); }
-.consulta-pasaporte .traza-detalle .consulta-identificador { font-size: 12px; margin: var(--space-2) 0 var(--space-4); }
+.consulta-pasaporte .traza-detalle .consulta-identificador { font-size: 14px; margin: var(--space-2) 0 var(--space-4); }
 .traza-detalle-datos > div { margin-bottom: var(--space-4); }
-.traza-detalle-datos > div > dt { font-size: 11px; font-weight: 700; color: var(--color-muted); margin-bottom: 5px; }
+.traza-detalle-datos > div > dt { font-size: 14px; font-weight: 700; color: var(--color-muted); margin-bottom: 5px; }
 .traza-detalle-datos > div > dd:first-of-type { font-size: 14px; color: var(--color-brand); line-height: 1.6; overflow-wrap: anywhere; }
 .pasaporte-vacio { padding: var(--space-6); border: 1px dashed var(--color-border-control); border-radius: var(--radius-card); background: var(--color-background); color: var(--color-muted); font-size: 14px; line-height: 1.65; }
 .leyenda-evidencia { padding: var(--space-6); margin-top: var(--space-8); background: var(--color-background); border: 1px solid var(--color-border-control); border-radius: var(--radius-card); }
 .leyenda-evidencia > summary { font-size: 16px; font-weight: 700; color: var(--color-brand); cursor: pointer; min-height: 32px; }
-.leyenda-evidencia > p { margin-top: var(--space-4); color: var(--color-muted); font-size: 13px; line-height: 1.65; }
+.leyenda-evidencia > p { margin-top: var(--space-4); color: var(--color-muted); font-size: 14px; line-height: 1.65; }
 .leyenda-niveles { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-6); }
 .leyenda-niveles > div { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-control); background: var(--color-surface); }
-.leyenda-niveles dt { display: flex; align-items: center; gap: var(--space-2); font-size: 13px; color: var(--color-brand); font-weight: 700; margin-bottom: var(--space-2); }
+.leyenda-niveles dt { display: flex; align-items: center; gap: var(--space-2); font-size: 14px; color: var(--color-brand); font-weight: 700; margin-bottom: var(--space-2); }
 .leyenda-niveles dt span { display: inline-grid; place-items: center; flex-shrink: 0; width: 22px; height: 22px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-surface-tint); }
-.leyenda-niveles dd { font-size: 13px; color: var(--color-muted); line-height: 1.65; }
+.leyenda-niveles dd { font-size: 14px; color: var(--color-muted); line-height: 1.65; }
 .leyenda-evidencia .leyenda-separacion { border-left: 3px solid var(--color-warning); padding: var(--space-3); background: var(--color-warning-bg); color: var(--color-warning); }
 .consulta-pasaporte .pasaporte-seccion, #detalle-etapa, #leyenda-evidencia { scroll-margin-top: 180px; }
 @media (max-width: 960px) {
@@ -544,8 +448,8 @@ main:focus { outline: none; }
 @media (max-width: 480px) {
     .pasaporte-contexto-fijo { gap: 6px 12px; padding: 10px 12px; }
     .pasaporte-contexto-fijo > strong { width: 100%; font-size: 14px; }
-    .pasaporte-contexto-fijo > span { font-size: 11px; }
-    .pasaporte-contexto-fijo small { font-size: 10px; }
+    .pasaporte-contexto-fijo > span { font-size: 14px; }
+    .pasaporte-contexto-fijo small { font-size: 14px; }
     .consulta-pasaporte .pasaporte-accesos, .consulta-pasaporte .lote-datos, .pasaporte-actores, .leyenda-niveles { grid-template-columns: 1fr; }
     .pasaporte-cobertura dl > div { flex-direction: column; gap: 3px; }
     .pasaporte-cobertura dd { text-align: left; }
@@ -557,10 +461,10 @@ main:focus { outline: none; }
     .traza-evento { transition: none; }
 }
 
-/* Etapa 3: registros documentales del mismo pasaporte, sin adjuntos nuevos. */
+/* Registros documentales del pasaporte, sin adjuntos nuevos. */
 .evidencias-aviso { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-4); background: var(--color-warning-bg); border-left: 3px solid var(--color-warning); border-radius: var(--radius-control); }
 .evidencias-aviso .nivel-demo { color: var(--color-warning); white-space: nowrap; margin-top: 2px; }
-.evidencias-aviso p { color: var(--color-warning); font-size: 13px; line-height: 1.65; }
+.evidencias-aviso p { color: var(--color-warning); font-size: 14px; line-height: 1.65; }
 .evidencias-cabecera-lista { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); margin: var(--space-6) 0 var(--space-4); }
 .evidencias-cabecera-lista > p { font-size: 14px; color: var(--color-muted); }
 .evidencias-grupos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
@@ -574,18 +478,18 @@ main:focus { outline: none; }
 .evidencia-tarjeta-cabecera > div { min-width: 0; }
 .evidencia-icono { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; font-size: 25px; color: var(--color-brand); background: var(--color-surface-tint); border: 1px solid var(--color-border); border-radius: var(--radius-control); }
 .evidencia-tarjeta h6 { color: var(--color-brand); font-size: 17px; line-height: 1.4; overflow-wrap: anywhere; margin-top: 4px; }
-.consulta-pasaporte .evidencia-tarjeta .consulta-identificador { margin: 0; font-size: 11px; }
-.evidencia-disponibilidad { display: inline-flex; align-items: center; align-self: flex-start; border: 1px solid var(--color-border-control); padding: 4px 9px; margin: var(--space-4) 0 var(--space-3); border-radius: 6px; font-size: 12px; font-weight: 700; color: var(--color-brand); background: var(--color-surface-tint); }
+.consulta-pasaporte .evidencia-tarjeta .consulta-identificador { margin: 0; font-size: 14px; }
+.evidencia-disponibilidad { display: inline-flex; align-items: center; align-self: flex-start; border: 1px solid var(--color-border-control); padding: 4px 9px; margin: var(--space-4) 0 var(--space-3); border-radius: 6px; font-size: 14px; font-weight: 700; color: var(--color-brand); background: var(--color-surface-tint); }
 .evidencia-disponibilidad.estado-parcial { background: var(--color-warning-bg); color: var(--color-warning); border-color: var(--color-warning); }
 .evidencia-disponibilidad.estado-no-disponible { background: var(--color-background); color: var(--color-muted); border-style: dashed; }
 .evidencia-tarjeta-datos { width: 100%; margin-top: var(--space-4); }
 .evidencia-tarjeta-datos > div { display: grid; grid-template-columns: minmax(70px, .65fr) minmax(0, 1.35fr); gap: var(--space-3); padding: 9px 0; border-bottom: 1px solid var(--color-border); }
 .evidencia-tarjeta-datos > div:last-child { border-bottom: 0; }
-.evidencia-tarjeta-datos dt { font-size: 12px; color: var(--color-muted); }
-.evidencia-tarjeta-datos dd { font-size: 13px; color: var(--color-brand); line-height: 1.6; overflow-wrap: anywhere; }
-.evidencia-tarjeta-fuente { font-size: 12px; line-height: 1.65; color: var(--color-muted); margin-top: var(--space-3); overflow-wrap: anywhere; }
-.evidencia-parcial-ayuda { font-size: 12px; color: var(--color-warning); line-height: 1.65; margin-top: var(--space-3); }
-.evidencia-sin-archivo, .evidencia-sin-detalle { font-size: 12px; color: var(--color-muted); line-height: 1.65; margin-top: var(--space-3); }
+.evidencia-tarjeta-datos dt { font-size: 14px; color: var(--color-muted); }
+.evidencia-tarjeta-datos dd { font-size: 14px; color: var(--color-brand); line-height: 1.6; overflow-wrap: anywhere; }
+.evidencia-tarjeta-fuente { font-size: 14px; line-height: 1.65; color: var(--color-muted); margin-top: var(--space-3); overflow-wrap: anywhere; }
+.evidencia-parcial-ayuda { font-size: 14px; color: var(--color-warning); line-height: 1.65; margin-top: var(--space-3); }
+.evidencia-sin-archivo, .evidencia-sin-detalle { font-size: 14px; color: var(--color-muted); line-height: 1.65; margin-top: var(--space-3); }
 .evidencia-tarjeta > .secondary-btn { margin-top: var(--space-6); width: 100%; }
 .evidencias-seccion .pasaporte-vacio h5 { color: var(--color-brand); font-size: 16px; margin-bottom: var(--space-2); }
 .evidencia-detalle { border: 1px solid var(--color-border); border-top: 3px solid var(--color-brand); border-radius: var(--radius-card); padding: clamp(16px, 2.5vw, 28px); background: var(--color-surface); }
@@ -593,22 +497,22 @@ main:focus { outline: none; }
 .evidencia-detalle h5 { color: var(--color-brand); font-size: clamp(21px, 2.5vw, 27px); line-height: 1.35; overflow-wrap: anywhere; }
 .evidencia-contexto { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: var(--color-surface-tint); border: 1px solid var(--color-border); border-radius: var(--radius-control); margin-top: var(--space-4); }
 .evidencia-contexto > strong { color: var(--color-brand); font-size: 14px; }
-.evidencia-contexto > span:not(.nivel-demo) { color: var(--color-muted); font-size: 12px; overflow-wrap: anywhere; }
+.evidencia-contexto > span:not(.nivel-demo) { color: var(--color-muted); font-size: 14px; overflow-wrap: anywhere; }
 .evidencia-metadatos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin: var(--space-3) 0 var(--space-6); }
 .evidencia-metadatos > div { min-width: 0; padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-control); background: var(--color-background); }
-.evidencia-metadatos dt { font-size: 11px; font-weight: 700; color: var(--color-muted); margin-bottom: var(--space-2); }
+.evidencia-metadatos dt { font-size: 14px; font-weight: 700; color: var(--color-muted); margin-bottom: var(--space-2); }
 .evidencia-metadatos dd { color: var(--color-brand); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
 .consulta-pasaporte .evidencia-metadatos .dato-respaldo { margin: 0; }
 .evidencia-laboratorio { padding: var(--space-6); border: 1px solid var(--color-support); background: var(--color-surface-tint); border-radius: var(--radius-card); margin-bottom: var(--space-4); }
 .evidencia-detalle h6 { color: var(--color-brand); font-size: 16px; line-height: 1.4; margin-bottom: var(--space-3); }
 .evidencia-laboratorio dl > div { margin-bottom: var(--space-3); }
-.evidencia-laboratorio dt { font-size: 12px; color: var(--color-muted); font-weight: 700; margin-bottom: 4px; }
+.evidencia-laboratorio dt { font-size: 14px; color: var(--color-muted); font-weight: 700; margin-bottom: 4px; }
 .evidencia-laboratorio dd { font-size: 14px; color: var(--color-brand); line-height: 1.7; overflow-wrap: anywhere; }
-.evidencia-laboratorio > p { color: var(--color-muted); font-size: 12px; line-height: 1.65; }
+.evidencia-laboratorio > p { color: var(--color-muted); font-size: 14px; line-height: 1.65; }
 .evidencia-alcance { padding: var(--space-4); border-left: 3px solid var(--color-warning); background: var(--color-warning-bg); border-radius: var(--radius-control); }
-.evidencia-alcance p { color: var(--color-warning); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.evidencia-alcance p { color: var(--color-warning); font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
 .evidencia-alcance p + p { margin-top: var(--space-2); }
-.evidencia-archivo { padding: var(--space-4); border: 1px dashed var(--color-border-control); border-radius: var(--radius-control); color: var(--color-muted); font-size: 13px; line-height: 1.65; margin: var(--space-4) 0 var(--space-6); }
+.evidencia-archivo { padding: var(--space-4); border: 1px dashed var(--color-border-control); border-radius: var(--radius-control); color: var(--color-muted); font-size: 14px; line-height: 1.65; margin: var(--space-4) 0 var(--space-6); }
 .consulta-pasaporte .pasaporte-pendientes { grid-template-columns: 1fr; }
 .consulta-pasaporte #evidencia-detalle { scroll-margin-top: 180px; }
 @media (max-width: 960px) {
@@ -629,7 +533,7 @@ main:focus { outline: none; }
     .evidencia-tarjeta { transition: none; }
 }
 
-/* Navegación del pasaporte: cinco paneles desde la etapa 6. */
+/* Navegación del pasaporte: cinco paneles. */
 .consulta-pasaporte > .leyenda-evidencia { margin: 0 0 var(--space-4); padding: var(--space-4); }
 .pasaporte-navegacion-fija { position: sticky; top: 82px; z-index: 4; padding: 6px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); box-shadow: var(--shadow-card); }
 .pasaporte-navegacion-fija .pasaporte-contexto-fijo { position: static; margin: 0 0 5px; box-shadow: none; padding: 10px 12px; }
@@ -643,7 +547,7 @@ main:focus { outline: none; }
 .pasaporte-datos-comunes { margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border); }
 .pasaporte-datos-comunes .pasaporte-seccion-titulo h5 { font-size: 18px; color: var(--color-brand); line-height: 1.4; }
 .consulta-pasaporte #detalle-etapa, .consulta-pasaporte #evidencia-detalle { scroll-margin-top: 230px; }
-.pasaporte-panel-entrando { animation: pasaporte-cambio 180ms ease-out; }
+.pasaporte-panel-entrando { animation: none; }
 @keyframes pasaporte-cambio { from { opacity: 0; } to { opacity: 1; } }
 @media (max-width: 960px) {
     .pasaporte-navegacion-fija { top: 78px; }
@@ -657,7 +561,7 @@ main:focus { outline: none; }
 @media (max-width: 480px) {
     .pasaporte-navegacion-fija { padding: 4px; }
     .pasaporte-navegacion-fija .pasaporte-contexto-fijo { gap: 4px 8px; padding: 8px; }
-    .pasaporte-tab { font-size: 13px; min-height: 52px; padding: 10px 8px; }
+    .pasaporte-tab { font-size: 14px; min-height: 52px; padding: 10px 8px; }
 }
 @media (max-height: 500px) and (min-width: 481px) {
     .consulta-pasaporte .pasaporte-tabs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -670,10 +574,10 @@ main:focus { outline: none; }
     .pasaporte-tab { transition: none; }
 }
 
-/* Etapa 4: coincidencias y detalle de avisos académicos. */
+/* Coincidencias y detalle de avisos académicos. */
 .alertas-aviso { padding: var(--space-4); border: 1px solid var(--color-support); border-left: 3px solid var(--color-primary); border-radius: var(--radius-control); background: var(--color-surface-tint); }
-.alertas-aviso strong { display: block; color: var(--color-brand); font-size: 13px; margin-bottom: 5px; }
-.alertas-aviso p { color: var(--color-muted); font-size: 13px; line-height: 1.7; }
+.alertas-aviso strong { display: block; color: var(--color-brand); font-size: 14px; margin-bottom: 5px; }
+.alertas-aviso p { color: var(--color-muted); font-size: 14px; line-height: 1.7; }
 .alertas-form { margin-top: var(--space-6); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); }
 .alertas-form label { display: block; color: var(--color-brand); font-size: 16px; font-weight: 700; margin-bottom: var(--space-2); }
 .alertas-form .form-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-2); }
@@ -691,17 +595,17 @@ main:focus { outline: none; }
 .alertas-lista > li { min-width: 0; }
 .alerta-tarjeta { display: flex; flex-direction: column; align-items: flex-start; height: 100%; min-width: 0; padding: var(--space-6); border: 1px solid var(--color-border); border-top: 3px solid var(--color-primary); border-radius: var(--radius-card); background: var(--color-surface); transition: border-color var(--transition-fast), box-shadow var(--transition-fast); }
 .alerta-tarjeta:hover, .alerta-tarjeta:focus-within { border-color: var(--color-primary); box-shadow: var(--shadow-card); }
-.alerta-coincidencia { color: var(--color-warning); background: var(--color-warning-bg); font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px; margin-bottom: var(--space-3); }
-.consulta-pasaporte .alerta-tarjeta .consulta-identificador { font-size: 11px; margin: 0; }
+.alerta-coincidencia { color: var(--color-warning); background: var(--color-warning-bg); font-size: 14px; font-weight: 700; padding: 4px 8px; border-radius: 6px; margin-bottom: var(--space-3); }
+.consulta-pasaporte .alerta-tarjeta .consulta-identificador { font-size: 14px; margin: 0; }
 .alerta-tarjeta h6 { color: var(--color-brand); font-size: 18px; line-height: 1.4; margin: var(--space-2) 0 var(--space-3); overflow-wrap: anywhere; }
 .alerta-etiquetas { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
-.alerta-tipo-fuente { border: 1px solid var(--color-border-control); border-radius: 6px; background: var(--color-surface-tint); color: var(--color-brand); padding: 3px 7px; font-size: 11px; font-weight: 700; }
+.alerta-tipo-fuente { border: 1px solid var(--color-border-control); border-radius: 6px; background: var(--color-surface-tint); color: var(--color-brand); padding: 3px 7px; font-size: 14px; font-weight: 700; }
 .alerta-tipo-fuente.fuente-oficial-simulada { color: var(--color-surface); background: var(--color-brand); }
-.alerta-simulacion { color: var(--color-warning); font-size: 11px; font-weight: 700; }
+.alerta-simulacion { color: var(--color-warning); font-size: 14px; font-weight: 700; }
 .alerta-tarjeta-metadatos { width: 100%; margin-top: var(--space-4); }
 .alerta-tarjeta-metadatos > div { border-top: 1px solid var(--color-border); padding: 10px 0; }
-.alerta-tarjeta-metadatos dt { color: var(--color-muted); font-size: 11px; margin-bottom: 4px; }
-.alerta-tarjeta-metadatos dd { color: var(--color-brand); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.alerta-tarjeta-metadatos dt { color: var(--color-muted); font-size: 14px; margin-bottom: 4px; }
+.alerta-tarjeta-metadatos dd { color: var(--color-brand); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
 .alerta-tarjeta > .secondary-btn { width: 100%; margin-top: var(--space-4); }
 .alertas-vacio { padding: var(--space-6); border: 1px dashed var(--color-border-control); border-radius: var(--radius-card); background: var(--color-background); margin-top: var(--space-4); }
 .alertas-vacio h6 { color: var(--color-brand); font-size: 19px; line-height: 1.4; margin-bottom: var(--space-3); }
@@ -711,17 +615,17 @@ main:focus { outline: none; }
 .alerta-detalle h6 { color: var(--color-brand); font-size: 22px; line-height: 1.4; }
 .alerta-contexto { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); background: var(--color-surface-tint); border-radius: var(--radius-control); padding: var(--space-3) var(--space-4); margin: var(--space-4) 0; }
 .alerta-contexto strong { color: var(--color-brand); font-size: 14px; }
-.alerta-contexto > span:not(.alerta-simulacion) { color: var(--color-muted); font-size: 12px; }
+.alerta-contexto > span:not(.alerta-simulacion) { color: var(--color-muted); font-size: 14px; }
 .alerta-descripcion { color: var(--color-text); font-size: 15px; line-height: 1.8; margin-bottom: var(--space-6); overflow-wrap: anywhere; }
 .alerta-metadatos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
 .alerta-metadatos > div { min-width: 0; border: 1px solid var(--color-border); border-radius: var(--radius-control); background: var(--color-background); padding: var(--space-4); }
-.alerta-metadatos dt { font-size: 11px; font-weight: 700; color: var(--color-muted); margin-bottom: var(--space-2); }
+.alerta-metadatos dt { font-size: 14px; font-weight: 700; color: var(--color-muted); margin-bottom: var(--space-2); }
 .alerta-metadatos dd { color: var(--color-brand); font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
 .alerta-alcance { margin: var(--space-6) 0; padding: var(--space-4); border-left: 3px solid var(--color-warning); border-radius: var(--radius-control); background: var(--color-warning-bg); }
 .alerta-alcance h6 { font-size: 16px; margin-bottom: var(--space-2); }
-.alerta-alcance p { color: var(--color-warning); font-size: 13px; line-height: 1.75; overflow-wrap: anywhere; }
+.alerta-alcance p { color: var(--color-warning); font-size: 14px; line-height: 1.75; overflow-wrap: anywhere; }
 .alerta-alcance p + p { margin-top: var(--space-2); }
-.alertas-separacion { color: var(--color-muted); font-size: 12px; line-height: 1.7; padding-top: var(--space-4); margin-top: var(--space-6); border-top: 1px solid var(--color-border); }
+.alertas-separacion { color: var(--color-muted); font-size: 14px; line-height: 1.7; padding-top: var(--space-4); margin-top: var(--space-6); border-top: 1px solid var(--color-border); }
 .consulta-pasaporte #alerta-detalle { scroll-margin-top: 230px; }
 @media (max-width: 960px) {
     .alerta-metadatos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -745,7 +649,7 @@ main:focus { outline: none; }
     .alerta-tarjeta { transition: none; }
 }
 
-/* Etapa 5: flujo compacto de recepción, con los componentes del pasaporte. */
+/* Flujo compacto de recepción, con los componentes del pasaporte. */
 .consulta-modos { display: flex; flex-wrap: wrap; gap: var(--space-2); padding: 6px; margin: var(--space-6) 0; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background); }
 .consulta-modo { flex: 1 1 220px; min-width: 0; min-height: 48px; padding: 10px 16px; color: var(--color-muted); background: transparent; border: 1px solid transparent; border-radius: var(--radius-control); font-size: 14px; font-weight: 600; line-height: 1.5; cursor: pointer; }
 .consulta-modo:hover { background: var(--color-surface-tint); color: var(--color-brand); }
@@ -757,9 +661,9 @@ main:focus { outline: none; }
 .recepcion-progreso { margin-bottom: var(--space-4); }
 .recepcion-contexto { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-4) var(--space-6); background: var(--color-surface-tint); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
 .recepcion-contexto strong { display: block; color: var(--color-brand); font-size: 20px; line-height: 1.4; margin-top: 4px; overflow-wrap: anywhere; }
-.recepcion-contexto .overline { font-size: 10px; letter-spacing: .8px; }
-.recepcion-contexto .consulta-identificador { font-size: 13px; margin: 0; }
-.recepcion-mensaje { min-height: 24px; margin: var(--space-3) 0 var(--space-4); font-size: 13px; line-height: 1.7; color: var(--color-muted); }
+.recepcion-contexto .overline { font-size: 14px; letter-spacing: .8px; }
+.recepcion-contexto .consulta-identificador { font-size: 14px; margin: 0; }
+.recepcion-mensaje { min-height: 24px; margin: var(--space-3) 0 var(--space-4); font-size: 14px; line-height: 1.7; color: var(--color-muted); }
 .recepcion-mensaje.error { color: var(--color-error); font-weight: 700; }
 .recepcion-panel { min-width: 0; border-radius: var(--radius-card); scroll-margin-top: 100px; }
 .recepcion-panel:focus { outline: 3px solid var(--color-focus); outline-offset: 6px; }
@@ -770,17 +674,17 @@ main:focus { outline: none; }
 .recepcion-panel .consulta-entrada { margin-top: var(--space-4); }
 .recepcion-datos { margin: var(--space-4) 0 var(--space-3); padding: var(--space-6); background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-card); gap: var(--space-4) var(--space-6); }
 .recepcion-datos dd { font-size: 15px; }
-.recepcion-fuente { font-size: 12px; line-height: 1.8; color: var(--color-muted); }
+.recepcion-fuente { font-size: 14px; line-height: 1.8; color: var(--color-muted); }
 .recepcion-alertas { margin: var(--space-4) 0; padding: var(--space-4) var(--space-6); border: 1px solid var(--color-border); border-left: 3px solid var(--color-border-control); border-radius: var(--radius-card); background: var(--color-background); }
 .recepcion-alertas h5 { font-size: 16px; color: var(--color-brand); margin-bottom: var(--space-2); }
-.recepcion-alertas p { font-size: 13px; line-height: 1.75; color: var(--color-muted); }
+.recepcion-alertas p { font-size: 14px; line-height: 1.75; color: var(--color-muted); }
 .recepcion-alertas p + p { margin-top: var(--space-2); }
 .recepcion-alertas.con-coincidencias { background: var(--color-warning-bg); border-left-color: var(--color-warning); }
 .recepcion-alertas.con-coincidencias h5, .recepcion-alertas.con-coincidencias p { color: var(--color-warning); }
 .recepcion-accesos, .recepcion-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
 .recepcion-accesos > button { flex: 1 1 220px; }
 .recepcion-acciones { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
-.recepcion-revision-previa { font-size: 12px; color: var(--color-muted); margin-top: var(--space-4); line-height: 1.7; }
+.recepcion-revision-previa { font-size: 14px; color: var(--color-muted); margin-top: var(--space-4); line-height: 1.7; }
 .recepcion-alcance { font-size: 14px; line-height: 1.8; color: var(--color-muted); max-width: 760px; }
 .recepcion-registro { margin: var(--space-6) 0 var(--space-4); padding: var(--space-6); border: 1px solid var(--color-border-control); border-radius: var(--radius-card); background: var(--color-background); }
 .recepcion-registro:focus { outline: 3px solid var(--color-focus); outline-offset: 4px; }
@@ -791,10 +695,10 @@ main:focus { outline: none; }
 .recepcion-registro.registro-error { border-color: var(--color-error); }
 .recepcion-registro.registro-error h5 { color: var(--color-error); }
 .recepcion-recuperacion { margin-top: var(--space-6); padding: var(--space-4); border: 1px dashed var(--color-border-control); border-radius: var(--radius-control); }
-.recepcion-recuperacion p { font-size: 13px; line-height: 1.7; color: var(--color-muted); }
+.recepcion-recuperacion p { font-size: 14px; line-height: 1.7; color: var(--color-muted); }
 #recepcion-confirmar-descarte { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border); }
 #recepcion-confirmar-descarte button { margin-top: var(--space-2); }
-.pasaporte-contexto-fijo #volver-recepcion { color: var(--color-surface); font-size: 12px; padding: 6px 8px; min-height: 44px; }
+.pasaporte-contexto-fijo #volver-recepcion { color: var(--color-surface); font-size: 14px; padding: 6px 8px; min-height: 44px; }
 .pasaporte-contexto-fijo #volver-recepcion:hover { color: var(--color-brand); background: var(--color-surface); }
 .pasaporte-contexto-fijo #volver-recepcion:focus-visible { outline-color: var(--color-surface); box-shadow: none; }
 /* El acceso comercial no tiene el icono lateral del acceso de consulta general. */
@@ -805,8 +709,8 @@ main:focus { outline: none; }
     .recepcion .consulta-qr-acceso button { grid-column: 2; grid-row: 1 / 3; }
 }
 @media (max-width: 768px) {
-    .recepcion-cabecera .resultado-badge { font-size: 10px; }
-    .recepcion-progreso li { font-size: 12px; }
+    .recepcion-cabecera .resultado-badge { font-size: 14px; }
+    .recepcion-progreso li { font-size: 14px; }
     .recepcion-datos { padding: var(--space-4); }
 }
 @media (max-width: 480px) {
@@ -819,24 +723,24 @@ main:focus { outline: none; }
     .pasaporte-contexto-fijo #volver-recepcion { width: 100%; justify-content: flex-start; }
 }
 
-/* Etapa 6: prioridad documental demostrativa, sin gráficos ni métricas sanitarias. */
+/* Prioridad documental demostrativa, sin gráficos ni métricas sanitarias. */
 .analisis-contexto { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-4) var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background); }
 .analisis-contexto strong { display: block; font-size: 18px; color: var(--color-brand); overflow-wrap: anywhere; }
-.analisis-contexto .consulta-identificador { margin: 0; font-size: 12px; }
-.analisis-etiqueta { display: inline-flex; align-items: center; padding: 5px 9px; border: 1px dashed var(--color-primary); border-radius: 6px; background: var(--color-surface-tint); color: var(--color-brand); font-size: 11px; font-weight: 700; }
-.analisis-limite { font-size: 13px; line-height: 1.8; color: var(--color-muted); padding: var(--space-4) 0; }
+.analisis-contexto .consulta-identificador { margin: 0; font-size: 14px; }
+.analisis-etiqueta { display: inline-flex; align-items: center; padding: 5px 9px; border: 1px dashed var(--color-primary); border-radius: 6px; background: var(--color-surface-tint); color: var(--color-brand); font-size: 14px; font-weight: 700; }
+.analisis-limite { font-size: 14px; line-height: 1.8; color: var(--color-muted); padding: var(--space-4) 0; }
 .analisis-limite strong { display: block; color: var(--color-brand); }
-.analisis-mensaje { min-height: 24px; margin-bottom: var(--space-4); color: var(--color-muted); font-size: 13px; line-height: 1.7; }
+.analisis-mensaje { min-height: 24px; margin-bottom: var(--space-4); color: var(--color-muted); font-size: 14px; line-height: 1.7; }
 .analisis-resumen-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--space-4); }
 .analisis-solicitud, .analisis-alertas { min-width: 0; padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
 .analisis-solicitud { background: var(--color-surface-tint); }
 .analisis-solicitud h5, .analisis-alertas h5 { font-size: 19px; line-height: 1.4; color: var(--color-brand); margin: var(--space-3) 0 var(--space-2); }
-.analisis-solicitud p, .analisis-alertas p { color: var(--color-muted); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.analisis-solicitud p, .analisis-alertas p { color: var(--color-muted); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
 .analisis-solicitud > button { margin-top: var(--space-4); }
 .analisis-alertas { border-left: 3px solid var(--color-warning); background: var(--color-warning-bg); }
-.analisis-aviso-etiqueta { font-size: 11px; font-weight: 700; color: var(--color-warning); }
+.analisis-aviso-etiqueta { font-size: 14px; font-weight: 700; color: var(--color-warning); }
 .analisis-alertas h5 { font-size: 16px; }
-.analisis-alertas p + p { margin-top: var(--space-2); font-size: 12px; }
+.analisis-alertas p + p { margin-top: var(--space-2); font-size: 14px; }
 .analisis-resultado { min-width: 0; margin-top: var(--space-6); padding: clamp(16px, 2.5vw, 28px); border: 1px solid var(--color-border-control); border-top: 3px solid var(--color-primary); border-radius: var(--radius-card); background: var(--color-surface); }
 .analisis-resultado-cabecera { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
 .analisis-resultado h5 { font-size: clamp(22px, 2.7vw, 28px); line-height: 1.3; color: var(--color-brand); margin: var(--space-4) 0 var(--space-3); }
@@ -845,48 +749,48 @@ main:focus { outline: none; }
 .analisis-recuento { margin-top: var(--space-2); font-weight: 600; }
 .analisis-metadatos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin: var(--space-6) 0 var(--space-4); }
 .analisis-metadatos > div { min-width: 0; padding-top: var(--space-3); border-top: 1px solid var(--color-border); }
-.analisis-metadatos dt { color: var(--color-muted); font-size: 11px; margin-bottom: 5px; }
-.analisis-metadatos dd { color: var(--color-brand); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
-.analisis-ayuda { color: var(--color-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.analisis-metadatos dt { color: var(--color-muted); font-size: 14px; margin-bottom: 5px; }
+.analisis-metadatos dd { color: var(--color-brand); font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.analisis-ayuda { color: var(--color-muted); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
 .analisis-acciones { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-4) 0; }
-.analisis-desplegable { margin-top: var(--space-4); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background); animation: pasaporte-cambio 180ms ease-out; }
+.analisis-desplegable { margin-top: var(--space-4); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background); animation: none; }
 .analisis-desplegable h5, .analisis-priorizacion h5 { font-size: 20px; line-height: 1.4; color: var(--color-brand); }
-.analisis-desplegable > p { font-size: 13px; color: var(--color-muted); line-height: 1.8; margin-top: var(--space-2); }
+.analisis-desplegable > p { font-size: 14px; color: var(--color-muted); line-height: 1.8; margin-top: var(--space-2); }
 .analisis-factores-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); list-style: none; margin-top: var(--space-4); }
 .analisis-factor { min-width: 0; padding: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-control); }
 .analisis-factor h6 { color: var(--color-brand); font-size: 16px; line-height: 1.5; }
-.analisis-factor > p { margin-top: var(--space-2); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.analisis-factor > p { margin-top: var(--space-2); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
 .analisis-factor .analisis-factor-senal { color: var(--color-brand); font-weight: 600; }
-.analisis-factor .analisis-ayuda { font-size: 11px; }
+.analisis-factor .analisis-ayuda { font-size: 14px; }
 .analisis-explicacion-cabecera { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
 .analisis-explicacion-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-6); }
 .analisis-explicacion-grid > section { min-width: 0; padding: var(--space-4); background: var(--color-surface); border-radius: var(--radius-control); border: 1px solid var(--color-border); }
 .analisis-explicacion-grid h6, .analisis-explicacion-estimacion h6 { color: var(--color-brand); font-size: 14px; margin-bottom: var(--space-3); }
 .analisis-explicacion-grid ul { padding-left: 18px; }
-.analisis-explicacion-grid li { font-size: 13px; line-height: 1.8; color: var(--color-muted); overflow-wrap: anywhere; }
+.analisis-explicacion-grid li { font-size: 14px; line-height: 1.8; color: var(--color-muted); overflow-wrap: anywhere; }
 .analisis-explicacion-grid li + li { margin-top: var(--space-2); }
 .analisis-explicacion-estimacion { margin-top: var(--space-4); padding: var(--space-4); border: 1px dashed var(--color-primary); border-radius: var(--radius-control); background: var(--color-surface-tint); }
-.analisis-explicacion-estimacion p { font-size: 13px; color: var(--color-muted); line-height: 1.8; }
+.analisis-explicacion-estimacion p { font-size: 14px; color: var(--color-muted); line-height: 1.8; }
 .analisis-explicacion-estimacion p + p { margin-top: var(--space-2); }
 .analisis-priorizacion { margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--color-border); }
 .analisis-priorizacion-cabecera { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-4); }
 .analisis-priorizacion-cabecera > div { flex: 1 1 320px; }
-.analisis-priorizacion-cabecera p { color: var(--color-muted); font-size: 13px; line-height: 1.8; margin-top: var(--space-2); }
+.analisis-priorizacion-cabecera p { color: var(--color-muted); font-size: 14px; line-height: 1.8; margin-top: var(--space-2); }
 .analisis-regla { margin: var(--space-4) 0; padding: var(--space-4); border-radius: var(--radius-control); border: 1px solid var(--color-border); background: var(--color-background); }
-.analisis-regla summary { cursor: pointer; color: var(--color-brand); font-size: 13px; font-weight: 700; min-height: 32px; }
-.analisis-regla p { color: var(--color-muted); font-size: 12px; line-height: 1.8; margin-top: var(--space-3); }
+.analisis-regla summary { cursor: pointer; color: var(--color-brand); font-size: 14px; font-weight: 700; min-height: 32px; }
+.analisis-regla p { color: var(--color-muted); font-size: 14px; line-height: 1.8; margin-top: var(--space-3); }
 .analisis-prioridades { padding-top: var(--space-3); }
 .analisis-prioridades h6 { color: var(--color-brand); font-size: 16px; margin-bottom: var(--space-2); }
 .analisis-prioridad-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); list-style: none; margin-top: var(--space-4); }
 .analisis-lote-card { min-width: 0; padding: var(--space-6); border: 1px solid var(--color-border); border-top: 3px solid var(--color-primary); border-radius: var(--radius-card); background: var(--color-surface); transition: border-color var(--transition-fast), box-shadow var(--transition-fast); }
 .analisis-lote-card:focus-within, .analisis-lote-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-card); }
-.analisis-lote-card .consulta-identificador { margin: 0 0 var(--space-2); font-size: 11px; }
+.analisis-lote-card .consulta-identificador { margin: 0 0 var(--space-2); font-size: 14px; }
 .analisis-lote-card h6 { font-size: 18px; line-height: 1.4; overflow-wrap: anywhere; }
 .analisis-prioridad-categoria { color: var(--color-brand); font-size: 14px; font-weight: 700; margin-bottom: var(--space-2); }
 .analisis-lote-card > button { width: 100%; margin-top: var(--space-4); }
 .analisis-prioridad-lista.sin-orden .analisis-lote-card { border-top-style: dashed; border-top-color: var(--color-border-control); background: var(--color-background); }
 #analisis-sin-prioridad { margin-top: var(--space-6); }
-.analisis-vacio { padding: var(--space-4); border: 1px dashed var(--color-border-control); border-radius: var(--radius-control); font-size: 13px; color: var(--color-muted); margin-top: var(--space-4); }
+.analisis-vacio { padding: var(--space-4); border: 1px dashed var(--color-border-control); border-radius: var(--radius-control); font-size: 14px; color: var(--color-muted); margin-top: var(--space-4); }
 .analisis-resultado:focus, .analisis-desplegable:focus, .analisis-prioridades:focus { outline: 2px solid var(--color-support); outline-offset: 5px; }
 .analisis-resultado, .analisis-desplegable, .analisis-prioridades { scroll-margin-top: 230px; }
 @media (max-width: 960px) {
@@ -916,3 +820,473 @@ main:focus { outline: none; }
 .video-info .video-estado { font-size: 13px; line-height: 1.7; margin-top: var(--space-3); }
 .video-estado.estado-listo, .video-estado.estado-esperando { color: var(--color-primary); }
 .video-estado.estado-error, .video-estado.estado-incompatible { color: var(--color-error); font-weight: 600; }
+
+/* Apertura y navegación exterior (sistema «Origen documentado»).
+   Las vistas interiores conservan sus reglas; retícula de doce columnas reales. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.header { display: flex; justify-content: space-between; align-items: center; width: 100%; background: var(--color-surface); position: relative; z-index: 20; min-height: 80px; padding: 12px max(40px, calc((100% - 1200px) / 2)); gap: 24px; box-shadow: none; border-bottom: 1px solid var(--color-border); }
+.header .brand-link { display: flex; align-items: center; min-height: 48px; }
+.header .brand-logo { display: block; width: 192px; height: auto; }
+.header .nav { display: flex; align-items: center; position: static; flex-direction: row; gap: 24px; padding: 0; box-shadow: none; background: transparent; }
+.header .nav a, .header .nav-alertas-mobile { display: inline-flex; min-height: 48px; padding: 12px 4px; align-items: center; font-size: 16px; font-weight: 600; color: var(--color-brand); border-radius: 4px; }
+.header .nav a:hover, .header .nav-alertas-mobile:hover { background: var(--color-surface-tint); text-decoration: underline; text-underline-offset: 6px; }
+.header a:active { background: var(--color-support); }
+.header .menu-btn, .header .nav-alertas-mobile { display: none; }
+.header [hidden] { display: none !important; }
+.origin-entry { --color-info: #21566B; --color-info-bg: #EDF5F8; padding: 64px 40px 96px; scroll-margin-top: 24px; }
+.origin-hero, .origin-operation { width: 100%; max-width: 1200px; margin-inline: auto; }
+.origin-hero { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; align-items: start; }
+.origin-intro { grid-column: span 7; min-width: 0; overflow-wrap: anywhere; }
+.origin-intro h1 { max-width: 16ch; font-size: clamp(36px, 1.5rem + 3vw, 64px); font-weight: 700; line-height: 1.08; letter-spacing: -.025em; color: var(--color-brand); }
+.origin-lead { max-width: 50ch; margin-top: 24px; font-size: 18px; line-height: 1.6; color: var(--color-muted); }
+.origin-demo { display: inline-block; margin-top: 16px; padding: 8px 12px; border-radius: 4px; color: var(--color-info); background: var(--color-info-bg); font-size: 14px; line-height: 1.5; }
+.origin-intro .consulta-modos { margin: 32px 0 24px; padding: 0; gap: 8px; border: 0; border-radius: 0; background: transparent; }
+.origin-intro .consulta-modo { flex: 0 1 auto; padding: 12px 16px; min-height: 48px; font-size: 16px; border: 1px solid var(--color-border-control); border-radius: 8px; color: var(--color-brand); }
+.origin-intro .consulta-modo[aria-pressed="true"] { background: var(--color-surface-tint); border-color: var(--color-primary); box-shadow: inset 0 -3px var(--color-primary); }
+.origin-intro .consulta-entrada { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.origin-intro .demo-form { margin: 0; padding: 0; background: transparent; box-shadow: none; border: 0; }
+.origin-intro .demo-form label { font-size: 16px; margin-bottom: 8px; }
+.origin-intro .form-help { font-size: 14px; margin-bottom: 12px; }
+.origin-intro .form-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.origin-intro input { min-width: 0; min-height: 56px; width: 100%; padding: 12px 16px; border: 1px solid var(--color-border-control); border-radius: 8px; background: var(--color-surface); color: var(--color-text); font-size: 16px; }
+.origin-intro input[aria-invalid="true"] { border-color: var(--color-error); }
+.origin-intro button { min-height: 48px; border-radius: 8px; font-size: 16px; line-height: 1.5; }
+.origin-intro button:active { box-shadow: inset 0 0 0 2px var(--color-brand); }
+.origin-intro .consulta-ejemplos { gap: 8px; margin-top: 16px; }
+.origin-intro .consulta-ejemplos > span { flex-basis: 100%; font-size: 14px; color: var(--color-muted); }
+.origin-intro .codigo-sugerido { font-size: 16px; display: flex; flex-direction: column; align-items: flex-start; padding: 8px 12px; background: transparent; border: 1px solid var(--color-border-control); color: var(--color-brand); font-weight: 600; }
+.origin-intro .codigo-sugerido span { font-size: 14px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.origin-intro .codigo-sugerido:hover { background: var(--color-surface-tint); }
+.origin-intro .form-message { font-size: 14px; margin-top: 12px; }
+.origin-intro .consulta-qr-acceso { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 16px 0 0; border: 0; border-top: 1px solid var(--color-border); border-radius: 0; background: transparent; }
+.origin-intro .consulta-qr-acceso h3 { grid-column: 1; grid-row: 1; font-size: 16px; margin: 0; color: var(--color-brand); }
+.origin-intro .consulta-qr-acceso p { grid-column: 1; grid-row: 2; font-size: 14px; line-height: 1.5; margin: 0; color: var(--color-muted); }
+.origin-intro .consulta-qr-acceso button { grid-column: 2; grid-row: 1 / span 2; align-self: center; margin: 0; }
+.origin-intent { margin-bottom: 24px; padding: 16px; background: var(--color-info-bg); color: var(--color-info); border-radius: 8px; }
+.origin-intent h3 { font-size: 20px; line-height: 1.3; margin-bottom: 8px; }
+.origin-intent p { font-size: 16px; }
+.origin-intent .text-btn { margin-top: 8px; }
+.origin-sample { grid-column: span 5; padding: 32px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; min-width: 0; overflow-wrap: anywhere; }
+.origin-sample-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 24px; border-bottom: 1px solid var(--color-border); font-size: 16px; font-weight: 600; color: var(--color-brand); }
+.origin-sample-heading span:last-child { font-size: 14px; font-weight: 400; }
+.origin-sample-caption { margin-top: 24px; font-size: 14px; color: var(--color-info); }
+.origin-sample h2 { font-size: 28px; line-height: 1.25; font-weight: 600; color: var(--color-brand); margin-top: 12px; }
+.origin-lot-code { font-size: 16px; font-variant-numeric: tabular-nums; margin-top: 8px; color: var(--color-muted); }
+.origin-sample-data { margin-top: 32px; }
+.origin-sample-data div { padding: 16px 0; border-top: 1px solid var(--color-border); }
+.origin-sample-data dt { font-size: 14px; color: var(--color-muted); margin-bottom: 4px; }
+.origin-sample-data dd { font-size: 16px; line-height: 1.6; }
+.origin-sample-limit { padding-top: 16px; border-top: 1px solid var(--color-border); font-size: 14px; line-height: 1.5; color: var(--color-info); }
+.origin-operation { margin-top: 32px; }
+@media (max-width: 1023px) {
+    .header { flex-wrap: wrap; gap: 8px; padding: 12px 32px; }
+    .header .brand { margin-right: auto; min-width: 0; }
+    .header .brand-logo { width: clamp(128px, calc(100vw - 196px), 160px); }
+    .header .menu-btn { display: inline-flex; width: auto; min-width: 64px; height: auto; min-height: 48px; padding: 12px; font-size: 16px; border-radius: 8px; color: var(--color-brand); background: var(--color-surface-tint); border: 1px solid var(--color-border-control); cursor: pointer; align-items: center; justify-content: center; }
+    .header .nav-alertas-mobile { display: flex; flex: 0 0 auto; gap: 8px; }
+    .header .nav { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
+    .header .nav.enhanced:not(.open) { display: none; }
+    .header .nav .acceso-alertas { display: none; }
+    .origin-entry { padding: 48px 32px 64px; }
+    .origin-hero { grid-template-columns: minmax(0, 1fr); }
+    .origin-intro, .origin-sample { grid-column: 1; }
+    .origin-intro h1 { max-width: 16ch; }
+    .origin-sample { padding: 24px; }
+    .origin-sample-heading { padding-bottom: 16px; }
+    .origin-sample-data { display: none; }
+    .origin-sample-limit { margin-top: 16px; }
+}
+@media (max-width: 767px) {
+    .header { padding-inline: 24px; }
+    .origin-entry { padding: 32px 24px 48px; }
+    .origin-intro h1 { max-width: 14ch; }
+    .origin-lead { margin-top: 16px; font-size: 16px; }
+    .origin-intro .consulta-modos { margin-top: 24px; }
+    .origin-intro .consulta-modo { flex-basis: auto; text-align: left; }
+}
+@media (max-width: 479px) {
+    .header { padding-inline: 16px; }
+    .origin-entry { padding-inline: 16px; }
+    .origin-intro h1 { font-size: 36px; }
+    .origin-intro .consulta-modo { flex-basis: 100%; }
+    .origin-intro .form-row { grid-template-columns: minmax(0, 1fr); }
+    .origin-intro .consulta-qr-acceso { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .origin-intro .consulta-qr-acceso button { grid-column: 1; grid-row: auto; justify-self: start; }
+    .origin-sample { padding: 16px; }
+}
+@media (forced-colors: active) {
+    .origin-intro .consulta-modo[aria-pressed="true"] { border-bottom: 3px solid Highlight; }
+    .origin-intro .consulta-modo:focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
+}
+
+/* Consulta y envolvente del pasaporte.
+   No cambia los estilos internos de los cinco paneles ni de recepción. */
+.origin-operation:not([data-contexto="recepcion"]) { padding: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.origin-operation:not([data-contexto="recepcion"]) > .consulta-cabecera { display: none; }
+.origin-operation[data-contexto="pasaporte"] > #consulta-publica { display: none; }
+#consulta-publica > .consulta-progreso { margin: 0 0 24px; }
+#consulta-publica > .consulta-progreso li { font-size: 14px; }
+#busqueda-resultados, #lote-confirmacion { margin-top: 0; scroll-margin-top: 24px; }
+#busqueda-resultados { padding: 32px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+#busqueda-resultados .consulta-resultados-cabecera h3 { font-size: 24px; line-height: 1.25; }
+#busqueda-resultados .consulta-contador { font-size: 14px; background: var(--color-info-bg); color: var(--color-info); border-radius: 4px; }
+#busqueda-resultados .consulta-lista { gap: 0; }
+#busqueda-resultados .consulta-result-item { grid-template-columns: minmax(0, 1fr) auto; padding: 24px 0; border: 0; border-top: 1px solid var(--color-border); border-radius: 0; box-shadow: none; }
+#busqueda-resultados .consulta-result-numero { display: none; }
+#busqueda-resultados .consulta-result-info h4 { font-size: 24px; font-weight: 600; }
+#busqueda-resultados .consulta-identificador { font-size: 16px; font-variant-numeric: tabular-nums; }
+#busqueda-resultados .consulta-result-origen { font-size: 16px; }
+#busqueda-resultados .consulta-result-disponibilidad, #busqueda-resultados .consulta-result-demo { font-size: 14px; color: var(--color-muted); margin-top: 8px; }
+#busqueda-resultados button, #lote-confirmacion button { min-height: 48px; font-size: 16px; border-radius: 8px; }
+#busqueda-resultados .consulta-result-item > button { grid-column: 2; }
+#busqueda-resultados .consulta-vacia { background: var(--color-background); border-radius: 12px; padding: 24px; text-align: left; }
+#busqueda-resultados .consulta-vacia h4 { font-size: 20px; }
+#busqueda-resultados .consulta-vacia p { font-size: 16px; line-height: 1.6; }
+#lote-confirmacion { padding: 32px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; }
+#lote-confirmacion .overline { font-size: 14px; letter-spacing: .04em; }
+#lote-confirmacion h3 { font-size: 28px; font-weight: 600; }
+#lote-confirmacion .resultado-badge, .passport-document .resultado-badge { padding: 8px 12px; font-size: 14px; font-weight: 500; border-radius: 4px; background: var(--color-info-bg); color: var(--color-info); }
+#lote-confirmacion .consulta-resumen-datos { grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; padding: 24px 0; border-block: 1px solid var(--color-border); }
+#lote-confirmacion .consulta-resumen-datos > div { padding: 0; border: 0; background: transparent; }
+#lote-confirmacion dt { font-size: 14px; color: var(--color-muted); margin-bottom: 8px; }
+#lote-confirmacion dd { font-size: 18px; font-weight: 500; }
+#lote-confirmacion .consulta-disponibilidad { font-size: 16px; color: var(--color-text); background: transparent; padding: 0; }
+#lote-confirmacion .consulta-limitacion { font-size: 14px; line-height: 1.6; margin: 16px 0 24px; color: var(--color-info); }
+#pasaporte-resultado.passport-document { margin: 0; padding: 32px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; box-shadow: none; scroll-margin-top: 24px; }
+.passport-document .passport-identity { align-items: flex-start; margin: 0; padding-bottom: 24px; gap: 24px; }
+.passport-document .passport-identity .overline { font-size: 14px; letter-spacing: .04em; font-weight: 600; margin-bottom: 12px; }
+.passport-document .passport-identity h3 { font-size: 28px; font-weight: 600; line-height: 1.25; }
+.passport-document #pasaporte-codigo { font-size: 16px; font-variant-numeric: tabular-nums; margin-top: 8px; }
+.passport-identity-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.passport-document #volver-recepcion { min-height: 48px; color: var(--color-primary); font-size: 16px; }
+.passport-boundary { font-size: 14px; line-height: 1.5; color: var(--color-info); margin: 16px 0 24px; }
+.passport-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 32px; padding-bottom: 24px; }
+.passport-summary dt { font-size: 14px; color: var(--color-muted); margin-bottom: 8px; }
+.passport-summary dd, .passport-summary .pasaporte-disponibilidad { font-size: 16px; line-height: 1.5; font-weight: 600; color: var(--color-text); }
+.passport-document #pasaporte-navegacion { position: static; padding: 0; border: 0; background: transparent; border-radius: 0; box-shadow: none; }
+.passport-tabs-help { font-size: 14px; color: var(--color-muted); margin-bottom: 8px; }
+.passport-tabs-help span { display: none; }
+.passport-document .pasaporte-tabs { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; padding: 6px; margin: 0 -6px; }
+.passport-document .pasaporte-tab { min-height: 56px; padding: 12px; font-size: 16px; line-height: 1.4; border-radius: 8px; border: 1px solid var(--color-border-control); box-shadow: none; }
+.passport-document .pasaporte-tab:last-child { grid-column: auto; }
+.passport-document .pasaporte-tab[aria-selected="true"] { box-shadow: inset 0 -3px var(--color-brand); background: var(--color-surface-tint); border-color: var(--color-primary); }
+.passport-document #pasaporte-paneles { padding-top: 16px; min-height: 0; }
+/* Ajuste de anclaje por retirada de la barra fija, sin rediseñar el contenido. */
+.passport-document #pasaporte-paneles [tabindex], .passport-document #leyenda-evidencia { scroll-margin-top: 24px; }
+.passport-document .pasaporte-estado-grid { grid-template-columns: 1fr 1fr; margin: 48px 0 24px; padding-top: 24px; border-top: 1px solid var(--color-border); gap: 32px; }
+.passport-document .pasaporte-estado, .passport-document .pasaporte-cobertura { padding: 0; border: 0; background: transparent; border-radius: 0; }
+.passport-document .pasaporte-estado h4, .passport-document .pasaporte-cobertura h4 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+.passport-document .pasaporte-estado .pasaporte-ayuda { font-size: 16px; }
+.passport-document .pasaporte-estado .text-btn { font-size: 16px; min-height: 48px; }
+.passport-document .pasaporte-niveles .nivel-etiqueta { font-size: 14px; }
+.passport-document .pasaporte-cobertura dt, .passport-document .pasaporte-cobertura dd { font-size: 14px; }
+.passport-document > .leyenda-evidencia { margin: 0; padding: 16px; border-radius: 12px; }
+.passport-document > .leyenda-evidencia summary { min-height: 48px; padding: 12px 0; font-size: 16px; }
+.passport-document > .leyenda-evidencia p, .passport-document > .leyenda-evidencia dt, .passport-document > .leyenda-evidencia dd { font-size: 14px; line-height: 1.6; }
+.passport-document > .aviso-demo { font-size: 14px; background: var(--color-info-bg); color: var(--color-info); }
+.passport-document > .text-btn { font-size: 16px; min-height: 48px; }
+@media (max-width: 1023px) {
+    .passport-document .pasaporte-tabs { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 6px; }
+    .passport-document .pasaporte-tab { flex: 0 0 auto; width: auto; white-space: nowrap; }
+    .passport-tabs-help span { display: inline; }
+}
+@media (max-width: 767px) {
+    #busqueda-resultados, #lote-confirmacion, #pasaporte-resultado.passport-document { padding: 16px; }
+    #busqueda-resultados .consulta-result-item { grid-template-columns: minmax(0,1fr); gap: 16px; }
+    #busqueda-resultados .consulta-result-item > button { grid-column: 1; justify-self: start; width: auto; }
+    #lote-confirmacion .consulta-resumen-datos, .passport-summary { grid-template-columns: minmax(0,1fr); gap: 16px; }
+    #lote-confirmacion .consulta-acciones { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+    .passport-document .passport-identity { gap: 16px; }
+    .passport-document .pasaporte-estado-grid { grid-template-columns: minmax(0,1fr); }
+}
+@media (forced-colors: active) {
+    .passport-document .pasaporte-tab[aria-selected="true"] { border-bottom: 3px solid Highlight; }
+    .passport-document .pasaporte-tab:focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
+}
+
+/* Interiores documentales: alcance limitado al pasaporte y la recepción. */
+.passport-document .pasaporte-seccion { padding-top: 24px; }
+.passport-document .pasaporte-seccion-titulo { margin-bottom: 24px; }
+.passport-document .pasaporte-seccion-titulo h4 { font-size: 24px; font-weight: 600; }
+.passport-document .pasaporte-seccion-titulo p { font-size: 16px; max-width: 65ch; }
+.passport-document .pasaporte-paneles p, .recepcion p { font-size: 16px; line-height: 1.6; }
+.passport-document .pasaporte-paneles dt, .recepcion dt { font-size: 14px; color: var(--color-muted); }
+.passport-document .pasaporte-paneles dd, .recepcion dd { font-size: 16px; line-height: 1.6; }
+.passport-document .pasaporte-paneles .overline, .recepcion .overline { font-size: 14px; letter-spacing: .04em; }
+.passport-document .pasaporte-paneles .consulta-identificador { font-size: 14px; font-variant-numeric: tabular-nums; }
+.passport-document .pasaporte-paneles button, .passport-document .pasaporte-paneles summary,
+.recepcion button { min-height: 48px; font-size: 16px; border-radius: 8px; white-space: normal; }
+.passport-document .pasaporte-paneles summary { padding: 12px 0; line-height: 1.5; cursor: pointer; }
+.passport-document .pasaporte-paneles input, .recepcion input { font-size: 16px; min-height: 56px; }
+.passport-document .pasaporte-paneles :is(p,dd,dt,h5,h6,button,summary), .recepcion :is(p,dd,dt,button) { overflow-wrap: anywhere; }
+.passport-document .pasaporte-paneles .form-help, .recepcion .form-help { font-size: 14px; }
+.passport-document .pasaporte-paneles .consulta-contador { font-size: 14px; }
+.passport-document .pasaporte-paneles .nivel-demo, .recepcion .resultado-badge,
+.passport-document .alerta-simulacion { color: var(--color-info); background: var(--color-info-bg); font-size: 14px; padding: 4px 8px; border-radius: 4px; letter-spacing: 0; }
+.passport-document .nivel-etiqueta { font-size: 14px; border-radius: 4px; }
+.passport-document .dato-respaldo { font-size: 14px; }
+.passport-document .fuente-metadatos dd { font-size: 14px; }
+.passport-document .pasaporte-paneles [tabindex="-1"]:focus { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.passport-document .pasaporte-panel-entrando, .recepcion .pasaporte-panel-entrando { animation: none; }
+.passport-document .pasaporte-paneles :is(button,article), .recepcion button { transition: none; }
+.passport-document .pasaporte-paneles button:disabled, .recepcion button:disabled { opacity: 1; background: var(--color-background); color: var(--color-muted); border: 1px solid var(--color-border-control); }
+
+/* Origen: el resumen identifica; este panel expone respaldo y roles. */
+.passport-document .origen-localizacion { padding: 24px; background: var(--color-background); border: 0; border-left: 3px solid var(--color-primary); border-radius: 0 12px 12px 0; }
+.passport-document .origen-localizacion > div > dd:first-of-type { font-size: 20px; font-weight: 600; }
+.passport-document .pasaporte-actores { gap: 32px; margin: 24px 0; }
+.passport-document .pasaporte-actores > div { padding: 16px 0; border: 0; border-top: 1px solid var(--color-border); border-radius: 0; }
+.passport-document .pasaporte-actores > div > dd:first-of-type { font-size: 20px; font-weight: 600; }
+.passport-document .pasaporte-datos-comunes { padding: 16px 0; margin-top: 24px; border-top: 1px solid var(--color-border); }
+.passport-document .pasaporte-datos-comunes > summary { color: var(--color-primary); font-weight: 600; }
+.passport-document .lote-datos > div { border-radius: 0; padding: 16px 0; border: 0; border-top: 1px solid var(--color-border); }
+
+/* Recorrido: orden registrado, fecha y fuente; ninguna conexión equivale a verificación. */
+.passport-document .trazabilidad-interactiva { grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: 32px; }
+.passport-document .trazabilidad-lista { gap: 16px; }
+.passport-document .traza-evento { border: 1px solid var(--color-border); border-left: 3px solid var(--color-border-control); padding: 16px; border-radius: 0 8px 8px 0; gap: 16px; box-shadow: none; }
+.passport-document .traza-evento:hover { border-color: var(--color-primary); }
+.passport-document .traza-evento[aria-pressed="true"] { border-color: var(--color-brand); background: var(--color-surface-tint); box-shadow: none; padding-left: 16px; }
+.passport-document .traza-numero { width: 32px; height: 32px; font-size: 14px; border-radius: 4px; }
+.passport-document .traza-evento-contenido { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
+.passport-document .traza-evento-contenido > :is(strong,.traza-fecha,.traza-fuente,.traza-dato-faltante) { grid-column: 1 / -1; }
+.passport-document .traza-evento-contenido > strong { font-size: 20px; font-weight: 600; }
+.passport-document .traza-evento-contenido .nivel-demo { justify-self: start; align-self: start; }
+.passport-document .traza-fecha, .passport-document .traza-fuente { font-size: 14px; color: var(--color-muted); line-height: 1.5; }
+.passport-document .trazabilidad-lista li:not(:last-child)::after { left: 34px; top: 100%; height: 16px; background: var(--color-border-control); }
+.passport-document .traza-detalle { background: var(--color-background); padding: 24px; border: 0; border-top: 3px solid var(--color-brand); border-radius: 0 0 12px 12px; }
+.passport-document .traza-detalle-datos > div { padding: 16px 0; margin: 0; border-bottom: 1px solid var(--color-border); }
+.passport-document .traza-detalle-datos > div > dd:first-of-type { font-size: 16px; }
+.passport-document .traza-instruccion { border: 0; border-top: 1px solid var(--color-border); border-radius: 0; background: transparent; }
+
+/* Registros: dos niveles de superficie como máximo, sin sellos ni descarga ficticia. */
+.passport-document .evidencias-aviso, .passport-document .alertas-aviso { padding: 16px; background: var(--color-info-bg); border: 0; border-left: 3px solid var(--color-info); border-radius: 0 8px 8px 0; }
+.passport-document .evidencias-aviso p, .passport-document .alertas-aviso p, .passport-document .alertas-aviso strong { color: var(--color-info); font-size: 14px; }
+.passport-document .evidencias-grupos { gap: 32px; }
+.passport-document .evidencia-tarjeta, .passport-document .alerta-tarjeta { padding: 24px; border-radius: 12px; box-shadow: none; }
+.passport-document .evidencia-tarjeta:hover, .passport-document .evidencia-tarjeta:focus-within,
+.passport-document .alerta-tarjeta:hover, .passport-document .alerta-tarjeta:focus-within { box-shadow: none; }
+.passport-document .evidencia-tarjeta h6, .passport-document .alerta-tarjeta h6 { font-size: 20px; font-weight: 600; }
+.passport-document .evidencia-icono { display: none; }
+.passport-document .evidencia-disponibilidad { color: var(--color-info); background: var(--color-info-bg); border: 0; font-size: 14px; }
+.passport-document .evidencia-disponibilidad.estado-parcial { color: var(--color-warning); background: var(--color-warning-bg); }
+.passport-document .evidencia-disponibilidad.estado-no-disponible { color: var(--color-muted); background: var(--color-background); }
+.passport-document .evidencia-tarjeta :is(.evidencia-tarjeta-fuente,.evidencia-tarjeta-alcance,.evidencia-parcial-ayuda,.evidencia-sin-archivo) { font-size: 14px; margin-top: 16px; }
+.passport-document .evidencia-sin-archivo { padding: 12px; background: var(--color-info-bg); color: var(--color-info); border-left: 3px solid var(--color-info); }
+.passport-document .evidencia-tarjeta-alcance { color: var(--color-muted); }
+.passport-document .evidencia-tarjeta > button { margin-top: 24px; }
+.passport-document .evidencia-metadatos, .passport-document .alerta-metadatos { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 32px; }
+.passport-document .evidencia-metadatos > div, .passport-document .alerta-metadatos > div { background: transparent; border: 0; border-top: 1px solid var(--color-border); border-radius: 0; padding: 16px 0; }
+.passport-document .evidencia-laboratorio { padding: 16px 0; background: transparent; border: 0; border-top: 1px solid var(--color-border); border-radius: 0; }
+.passport-document .evidencia-alcance { background: var(--color-info-bg); border-left-color: var(--color-info); }
+.passport-document .evidencia-alcance p { color: var(--color-info); }
+
+/* Avisos: ámbar acotado a coincidencias; ausencia neutral y demo informativa. */
+.passport-document .alertas-form { padding: 24px 0; border: 0; border-block: 1px solid var(--color-border); border-radius: 0; }
+.passport-document .alerta-tarjeta, .passport-document .alerta-detalle { border-top-color: var(--color-warning); }
+.passport-document .alerta-coincidencia { font-size: 14px; }
+.passport-document .alertas-vacio { background: var(--color-background); border: 1px solid var(--color-border); padding: 24px; border-radius: 12px; }
+.passport-document .alertas-vacio h6 { font-size: 20px; font-weight: 600; }
+.passport-document .alerta-tipo-fuente { background: var(--color-info-bg); color: var(--color-info); border: 0; }
+.passport-document .alerta-contexto { background: var(--color-background); }
+
+/* Análisis: lectura de una regla documental, no un indicador de seguridad. */
+.passport-document .analisis-contexto { padding: 12px 0; border: 0; border-bottom: 1px solid var(--color-border); border-radius: 0; background: transparent; }
+.passport-document .analisis-etiqueta { color: var(--color-info); background: var(--color-info-bg); border: 0; border-radius: 4px; }
+.passport-document .analisis-solicitud { background: var(--color-background); border: 0; border-radius: 12px; }
+.passport-document .analisis-alertas { background: transparent; border: 0; border-left: 1px solid var(--color-border); border-radius: 0; }
+.passport-document .analisis-aviso-etiqueta { color: var(--color-muted); }
+.passport-document .analisis-desplegable { animation: none; background: transparent; border: 0; border-top: 1px solid var(--color-border); border-radius: 0; padding: 24px 0; }
+.passport-document .analisis-factor, .passport-document .analisis-explicacion-grid > section { background: var(--color-background); border: 0; border-radius: 12px; padding: 24px; }
+.passport-document .analisis-explicacion-grid li { font-size: 16px; }
+.passport-document .analisis-lote-card:hover, .passport-document .analisis-lote-card:focus-within { box-shadow: none; }
+
+/* Recepción: documento de trabajo, aviso de almacenamiento junto al registro. */
+#consulta-operacion[data-contexto="recepcion"] { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px; box-shadow: none; }
+#consulta-operacion[data-contexto="recepcion"] > .consulta-cabecera { display: none; }
+.recepcion .consulta-progreso { margin: 24px 0; }
+.recepcion .consulta-progreso li { font-size: 16px; gap: 12px; }
+.recepcion .consulta-progreso li span { font-size: 14px; }
+.recepcion .consulta-progreso [aria-current="step"] { border-bottom: 3px solid var(--color-brand); }
+.recepcion-contexto { background: var(--color-background); border: 0; border-radius: 12px; }
+.recepcion .recepcion-datos { background: transparent; padding: 24px 0; border: 0; border-block: 1px solid var(--color-border); border-radius: 0; gap: 24px; }
+.recepcion .recepcion-datos > div { background: transparent; padding: 0; border: 0; }
+.recepcion .recepcion-fuente { font-size: 14px; }
+.recepcion .recepcion-alertas { border-radius: 12px; margin: 24px 0; }
+.recepcion .recepcion-alertas h5 { font-size: 20px; }
+.recepcion .recepcion-almacenamiento { padding: 16px; color: var(--color-info); background: var(--color-info-bg); border-left: 3px solid var(--color-info); }
+.recepcion .recepcion-almacenamiento strong { display: block; margin-bottom: 4px; }
+.recepcion .recepcion-registro { border-radius: 12px; }
+.recepcion :is(.recepcion-panel,.recepcion-registro) { scroll-margin-top: 24px; }
+
+@media (max-width: 1023px) {
+    .passport-document .trazabilidad-interactiva { grid-template-columns: minmax(0,1fr); }
+    .passport-document .pasaporte-tabs { scrollbar-width: auto; scrollbar-color: var(--color-border-control) var(--color-background); }
+    .passport-document .pasaporte-tabs::-webkit-scrollbar { height: 8px; }
+    .passport-document .pasaporte-tabs::-webkit-scrollbar-thumb { background: var(--color-border-control); border-radius: 4px; }
+    .passport-document .pasaporte-tabs::-webkit-scrollbar-track { background: var(--color-background); }
+}
+@media (max-width: 767px) {
+    .passport-document .passport-identity { padding-bottom: 8px; gap: 8px; }
+    .passport-document .passport-identity .overline { margin-bottom: 8px; }
+    .passport-boundary { margin: 8px 0 16px; }
+    .passport-summary { gap: 12px; padding-bottom: 16px; }
+    .passport-summary dt { margin-bottom: 4px; }
+    .passport-summary .pasaporte-disponibilidad { margin: 0; }
+    .passport-document .evidencia-metadatos, .passport-document .alerta-metadatos,
+    .passport-document .pasaporte-actores, .passport-document .evidencias-grupos,
+    .passport-document .alertas-lista { grid-template-columns: minmax(0,1fr); }
+    .passport-document .pasaporte-actores { gap: 8px; }
+    .passport-document :is(.origen-localizacion,.traza-detalle,.evidencia-tarjeta,.alerta-tarjeta,.analisis-factor) { padding: 16px; }
+    .passport-document .pasaporte-paneles :is(.evidencia-detalle,.alerta-detalle) { padding: 16px; }
+    #consulta-operacion[data-contexto="recepcion"] { padding: 16px; }
+    .recepcion .consulta-progreso { grid-template-columns: minmax(0,1fr); gap: 8px; }
+    .recepcion .consulta-progreso li { flex-direction: row; align-items: center; justify-content: flex-start; padding: 12px; }
+}
+@media (forced-colors: active) {
+    .passport-document .traza-evento[aria-pressed="true"] { border-left: 3px solid Highlight; }
+    .passport-document .pasaporte-paneles :focus-visible, .recepcion :focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
+}
+
+/* Respuesta visual de los controles, sin animar regiones documentales. */
+html:has(#inicio[data-entrada="teclado"]) { scroll-behavior: auto; }
+#consulta :is(button,input,summary), #inicio :is(button,a) { transition: none; }
+#consulta button:disabled { opacity: 1; color: var(--color-muted); background: var(--color-background); border-color: var(--color-border-control); cursor: not-allowed; transform: none; }
+#consulta button:not(:disabled):active, #inicio button:not(:disabled):active { box-shadow: inset 0 0 0 2px var(--color-brand); }
+#consulta input:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+#consulta input[aria-invalid="true"] { border: 2px solid var(--color-error); }
+#consulta summary { border-radius: 4px; }
+#consulta details[open] > summary { text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 2px; }
+#consulta summary:active { background: var(--color-surface-tint); }
+#consulta :is(button,summary):focus-visible, #inicio :is(button,a):focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+#consulta :is(.pasaporte-tab,.traza-evento)[aria-selected="true"],
+#consulta .traza-evento[aria-pressed="true"] { transition: none; }
+
+@media (hover: hover) and (pointer: fine) {
+    #consulta summary:hover { background: var(--color-surface-tint); }
+    #consulta :is(.text-btn,.secondary-btn):not(:disabled):hover { text-decoration: underline; text-underline-offset: .2em; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    #contenido-principal[data-entrada="puntero"] #consulta :is(.primary-btn,.secondary-btn,.codigo-sugerido),
+    #inicio[data-entrada="puntero"] .menu-btn { transition: transform 120ms cubic-bezier(.23,1,.32,1); }
+    #contenido-principal[data-entrada="puntero"] #consulta :is(.primary-btn,.secondary-btn,.codigo-sugerido):not(:disabled):active,
+    #inicio[data-entrada="puntero"] .menu-btn:active { transform: scale(.97); }
+}
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+    #inicio[data-entrada="puntero"] .nav.open { opacity: 1; transition: opacity 160ms cubic-bezier(.23,1,.32,1); }
+    @starting-style { #inicio[data-entrada="puntero"] .nav.open { opacity: .65; } }
+}
+@media (prefers-reduced-motion: reduce) {
+    #consulta *, #inicio * { animation: none; transition: none; scroll-behavior: auto; }
+}
+@media (forced-colors: active) {
+    #consulta :is(button,summary,input):focus-visible, #inicio :is(button,a):focus-visible { outline-color: Highlight; }
+    #consulta button:not(:disabled):active, #inicio button:active { border-color: Highlight; }
+}
+
+/* Contenido editorial inferior; no afecta al Hero ni al pasaporte. */
+.editorial-icon { flex: 0 0 auto; color: var(--color-primary); }
+#problema { padding-block: 48px; }
+.document-journey { list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 32px; margin-top: 32px; }
+.document-journey li { position: relative; display: flex; align-items: flex-start; gap: 16px; padding: 20px 24px 20px 0; border-top: 1px solid var(--color-border-control); }
+.document-journey h3 { font-size: 18px; line-height: 1.3; margin-bottom: 8px; color: var(--color-brand); }
+.document-journey p { color: var(--color-muted); font-size: 16px; }
+.journey-arrow { position: absolute; right: -20px; top: 15px; color: var(--color-primary); font-size: 24px; }
+.journey-note { font-size: 14px; color: var(--color-muted); margin-top: 16px; }
+.benefit-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
+.benefit-feature { background: var(--color-surface); border: 1px solid var(--color-border-control); border-radius: 16px; padding: 32px; }
+.benefit-feature h3 { font-size: 28px; line-height: 1.2; margin: 16px 0; color: var(--color-brand); }
+.benefit-feature p, .benefit-support p { font-size: 16px; color: var(--color-muted); }
+.benefit-index { list-style: none; margin: 24px 0; border-block: 1px solid var(--color-border); }
+.benefit-index li { padding: 12px 0; }
+.benefit-index li + li { border-top: 1px solid var(--color-border); }
+.benefit-feature .benefit-note { font-size: 14px; }
+.benefit-support { display: grid; align-content: center; }
+.benefit-support article { display: flex; gap: 20px; padding: 24px 0; }
+.benefit-support article + article { border-top: 1px solid var(--color-border); }
+.benefit-support h3 { font-size: 20px; margin-bottom: 8px; color: var(--color-brand); }
+#videos .video-cards { gap: 24px; }
+#videos .video-card { box-shadow: none; display: flex; flex-direction: column; border-radius: 12px; }
+#videos .video-info { display: flex; flex-direction: column; flex: 1; padding: 24px; }
+#videos .video-info h3 { font-size: 22px; line-height: 1.3; }
+#videos .video-info > p:not(.video-estado) { font-size: 16px; margin-bottom: 20px; }
+#videos .video-info .video-estado { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--color-border); }
+#videos .video-media { aspect-ratio: 16 / 9; }
+#videos .video-player:focus-visible { outline-offset: -4px; }
+#para-quien .audience-cards { gap: 24px; }
+#para-quien .audience { align-items: flex-start; padding: 28px; background: var(--color-surface); gap: 20px; }
+#para-quien .audience:first-child { background: var(--color-surface-tint); }
+#para-quien .audience > div { min-width: 0; }
+#para-quien .audience h3 { font-size: 24px; margin-bottom: 12px; }
+#para-quien .audience p { font-size: 16px; }
+#para-quien .audience a { min-height: 48px; font-size: 16px; margin-top: 24px; }
+#tecnologia { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: 48px; background: var(--color-background); border-block: 1px solid var(--color-border); }
+#tecnologia .section-title { margin-bottom: 0; }
+#tecnologia .tech-cards { display: block; }
+#tecnologia .tech-card { background: transparent; border: 0; border-radius: 0; padding: 20px 0; }
+#tecnologia .tech-card:first-child { padding-top: 0; }
+#tecnologia .tech-card + .tech-card { border-top: 1px solid var(--color-border); }
+#tecnologia .tech-card h3 { font-size: 20px; }
+#tecnologia .tech-card p { font-size: 16px; }
+#contacto { padding-block: 32px; gap: 24px; }
+#contacto .cta-text { max-width: 680px; }
+#contacto h2 { font-size: clamp(24px,2.5vw,32px); line-height: 1.2; }
+#contacto .cta-button { flex-shrink: 0; }
+.footer { display: block; padding-block: 32px 20px; }
+.footer-main { display: grid; grid-template-columns: 1.2fr .85fr 1fr; gap: 40px; }
+.footer-main > * { min-width: 0; }
+.footer h2 { color: var(--color-surface); font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.footer-logo { width: 180px; max-width: 100%; }
+.footer p { font-size: 14px; line-height: 1.6; }
+.footer-brand p { max-width: 30ch; }
+.footer .footer-links { gap: 0; }
+.footer .footer-links a, .footer-commercial a { display: flex; align-items: center; min-height: 48px; font-size: 16px; text-underline-offset: .2em; }
+.footer-commercial p { margin: 12px 0 4px; max-width: 36ch; }
+.footer-commercial a:hover { text-decoration: underline; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; border-top: 1px solid var(--color-support); margin-top: 24px; padding-top: 16px; }
+@media (max-width: 960px) {
+    #videos .video-cards { grid-template-columns: 1fr; }
+    #videos .video-card { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+    #videos .video-media { align-self: start; }
+}
+@media (max-width: 768px) {
+    .document-journey { grid-template-columns: 1fr; gap: 12px; }
+    .document-journey li { padding: 16px 0; }
+    .journey-arrow { display: none; }
+    .benefit-layout { grid-template-columns: 1fr; gap: 8px; }
+    .benefit-feature { padding: 24px; }
+    #tecnologia { grid-template-columns: 1fr; gap: 24px; }
+    #contacto { align-items: stretch; }
+    #contacto .cta-button { align-self: flex-start; }
+    .footer-main { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .footer-brand { grid-column: 1 / -1; display: flex; align-items: center; gap: 24px; }
+    .footer-logo { margin-bottom: 0; }
+}
+@media (max-width: 480px) {
+    #videos .video-card { display: flex; }
+    #videos .video-info { padding: 20px; }
+    #para-quien .audience { padding: 24px; }
+    .footer-brand { display: block; }
+    .footer-logo { margin-bottom: 12px; width: 160px; }
+    .footer-main { grid-template-columns: minmax(0,1fr); gap: 20px; }
+    .footer-bottom { display: block; }
+    .footer-bottom p + p { margin-top: 4px; }
+}
+/* Mantener accesos táctiles sin una lista innecesariamente alta en móvil. */
+.footer-commercial a { gap: 8px; }
+@media (max-width: 480px) {
+    .footer .footer-links { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 16px; }
+    .footer-links h2 { grid-column: 1 / -1; }
+}
+/* Imagen conceptual en segmentos. La figura ocupa la primera fila de la tarjeta; el resto conserva icono, título, texto y enlace.
+   Las tarjetas de Comerciantes y Consumidores usan la misma estructura (.audience--media > .audience-media). */
+#para-quien .audience--media { display: grid; grid-template-columns: auto minmax(0,1fr); column-gap: 20px; row-gap: 20px; align-items: start; }
+#para-quien .audience-media { grid-column: 1 / -1; margin: 0; }
+#para-quien .audience-media img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 1; object-fit: cover; object-position: 50% 42%; border-radius: 8px; background: var(--color-background); }
+#para-quien .audience-media figcaption { margin-top: 8px; font-size: 14px; line-height: 1.4; color: var(--color-muted); }
+/* Si alguna tarjeta no tiene imagen, cada una conserva su altura natural; con ambas, se igualan. */
+#para-quien .audience-cards:has(.audience:not(.audience--media)) { align-items: start; }
+@media (max-width: 480px) {
+    #para-quien .audience--media { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
+    #para-quien .audience-media img { aspect-ratio: 16 / 9; }
+}
