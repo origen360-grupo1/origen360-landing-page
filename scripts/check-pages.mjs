@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const publicRoot = path.join(root, 'public');
-const allowedExtensions = new Set(['.html', '.css', '.js', '.ico', '.png', '.svg', '.mp4']);
+const allowedExtensions = new Set(['.html', '.css', '.js', '.ico', '.png', '.svg', '.webp', '.mp4']);
 const files = new Map(), ignored = [], links = [];
 
 async function inventory(directory, prefix = '') {
