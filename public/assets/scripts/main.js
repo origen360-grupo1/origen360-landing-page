@@ -6,7 +6,7 @@ const menu = document.getElementById('menu-principal');
 menu.classList.add('enhanced');
 menuBtn.hidden = false;
 
-// Etapa 5: modalidad visual únicamente; no intercepta ni retrasa acciones.
+// Modalidad visual únicamente; no intercepta ni retrasa acciones.
 const superficiesInteraccion = [document.getElementById('inicio'), document.getElementById('contenido-principal')];
 document.addEventListener('pointerdown', function () {
     superficiesInteraccion.forEach(function (superficie) { superficie.setAttribute('data-entrada', 'puntero'); });
@@ -38,7 +38,7 @@ document.addEventListener('keydown', function (evento) {
     }
 });
 
-// 2. Base de demostración (etapa 0). Ningún registro es oficial o verificado.
+// 2. Base de demostración. Ningún registro es oficial o verificado.
 // El análisis preventivo usa una regla documental demostrativa; no hay IA o ML conectado.
 function congelarDatos(objeto) {
     Object.values(objeto).forEach(function (valor) {
@@ -255,7 +255,7 @@ const prefijoRevisionRecepcion = 'origen360.recepcion.v1.';
 let estimacionConsultadaId = null;
 let priorizacionConsultadaId = null;
 
-// Etapa 3.1: un único panel activo, sin cambiar el lote ni reconstruir secciones.
+// Un único panel activo, sin cambiar el lote ni reconstruir secciones.
 const pestanasPasaporte = [
     { clave: 'origen', botonId: 'pestana-origen', panelId: 'pasaporte-origen' },
     { clave: 'trazabilidad', botonId: 'pestana-trazabilidad', panelId: 'pasaporte-trazabilidad' },
@@ -582,7 +582,7 @@ function mostrarResultados(respuesta) {
     else enfocarDocumento(resultados);
 }
 
-// Etapa 2: respaldo por dato. La leyenda no asigna niveles al dataset.
+// Respaldo por dato. La leyenda no asigna niveles al dataset.
 const nivelesEvidencia = congelarDatos({
     declarada: { texto: 'Declarada', icono: '▤' },
     verificada: { texto: 'Verificada por terceros', icono: '▦' },
@@ -744,7 +744,7 @@ function pintarRecorrido(contexto) {
     });
 }
 
-// Etapa 3: controles documentales como metadatos, sin generar archivos adjuntos.
+// Controles documentales como metadatos, sin generar archivos adjuntos.
 function esEvidenciaConsultable(registro) {
     return tieneTexto(registro.id) && registro.disponibilidad !== 'no_disponible' &&
         [registro.nombre, registro.tipo, registro.entidad, registro.fecha, registro.alcance, registro.tipoAnalisis, registro.resultado].some(tieneTexto);
@@ -911,7 +911,7 @@ function volverAListaEvidencias() {
     else document.getElementById('pasaporte-evidencias').focus();
 }
 
-// Etapa 4: consulta local de avisos. Las predicciones no forman parte de alertas.
+// Consulta local de avisos. Las predicciones no forman parte de alertas.
 function esAvisoPredictivo(registro) {
     return registro.naturaleza === 'predictiva' || (registro.metadatos && registro.metadatos.nivelEvidencia === 'predictiva');
 }
@@ -1111,7 +1111,7 @@ function volverAListaAlertas() {
     else document.getElementById('alertas-resultados').focus();
 }
 
-// Etapa 6: regla transparente de revisión documental. No es IA ni un modelo sanitario.
+// Regla transparente de revisión documental. No es IA ni un modelo sanitario.
 const reglaPreventivaDemo = congelarDatos({
     id: 'regla_documental_demo_v1', minimoFactores: 2,
     categorias: {
@@ -1535,7 +1535,7 @@ document.getElementById('volver-resumen').addEventListener('click', function () 
     confirmacion.focus();
 });
 
-// Etapa 5: recepción guiada y revisión interna simulada, sin certificación sanitaria.
+// Recepción guiada y revisión interna simulada, sin certificación sanitaria.
 function mensajeRecepcion(texto, error = false) {
     const region = document.getElementById('recepcion-mensaje');
     region.textContent = texto;

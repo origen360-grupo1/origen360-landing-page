@@ -1,4 +1,4 @@
-/* Etapa 0: identidad y valores compartidos, sin dependencias externas. */
+/* Identidad visual y valores compartidos, sin dependencias externas. */
 :root {
     --color-brand: #214F42;
     --color-primary: #2F6B57;
@@ -54,7 +54,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 button, input, a { transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }
 button:disabled { opacity: .65; cursor: not-allowed; }
 
-/* La navegación exterior se define en el bloque Etapa 4A. */
+/* La navegación exterior se define en el bloque «Apertura y navegación exterior». */
 /* Sección principal */
 .primary-btn, .secondary-btn, .cta-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3); font-size: 14px; font-weight: 700; border-radius: var(--radius-control); padding: 13px 19px; cursor: pointer; border: 1px solid transparent; }
 .primary-btn { background-color: var(--color-primary); color: var(--color-surface); }
@@ -225,7 +225,7 @@ main:focus { outline: none; }
     .form-row button { width: 100%; }
 }
 
-/* Etapa 1: módulo de consulta. Se conservan los estilos de la landing. */
+/* Módulo de consulta. Se conservan los estilos de la landing. */
 #consulta { background: var(--color-background); }
 #consulta [hidden] { display: none !important; }
 .consulta-intro { max-width: 800px; }
@@ -351,7 +351,7 @@ main:focus { outline: none; }
     .consulta-result-item { transition: none; }
 }
 
-/* Etapa 2: origen, respaldo y recorrido del pasaporte existente. */
+/* Origen, respaldo y recorrido del pasaporte. */
 .consulta-pasaporte .resultado-encabezado { margin-bottom: var(--space-4); }
 .pasaporte-contexto-fijo { position: sticky; top: 82px; z-index: 3; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: 12px 16px; margin-bottom: var(--space-6); background: var(--color-brand); color: var(--color-surface); border-radius: var(--radius-control); box-shadow: var(--shadow-card); }
 .pasaporte-contexto-fijo strong { font-size: 15px; }
@@ -461,7 +461,7 @@ main:focus { outline: none; }
     .traza-evento { transition: none; }
 }
 
-/* Etapa 3: registros documentales del mismo pasaporte, sin adjuntos nuevos. */
+/* Registros documentales del pasaporte, sin adjuntos nuevos. */
 .evidencias-aviso { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-4); background: var(--color-warning-bg); border-left: 3px solid var(--color-warning); border-radius: var(--radius-control); }
 .evidencias-aviso .nivel-demo { color: var(--color-warning); white-space: nowrap; margin-top: 2px; }
 .evidencias-aviso p { color: var(--color-warning); font-size: 14px; line-height: 1.65; }
@@ -533,7 +533,7 @@ main:focus { outline: none; }
     .evidencia-tarjeta { transition: none; }
 }
 
-/* Navegación del pasaporte: cinco paneles desde la etapa 6. */
+/* Navegación del pasaporte: cinco paneles. */
 .consulta-pasaporte > .leyenda-evidencia { margin: 0 0 var(--space-4); padding: var(--space-4); }
 .pasaporte-navegacion-fija { position: sticky; top: 82px; z-index: 4; padding: 6px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); box-shadow: var(--shadow-card); }
 .pasaporte-navegacion-fija .pasaporte-contexto-fijo { position: static; margin: 0 0 5px; box-shadow: none; padding: 10px 12px; }
@@ -574,7 +574,7 @@ main:focus { outline: none; }
     .pasaporte-tab { transition: none; }
 }
 
-/* Etapa 4: coincidencias y detalle de avisos académicos. */
+/* Coincidencias y detalle de avisos académicos. */
 .alertas-aviso { padding: var(--space-4); border: 1px solid var(--color-support); border-left: 3px solid var(--color-primary); border-radius: var(--radius-control); background: var(--color-surface-tint); }
 .alertas-aviso strong { display: block; color: var(--color-brand); font-size: 14px; margin-bottom: 5px; }
 .alertas-aviso p { color: var(--color-muted); font-size: 14px; line-height: 1.7; }
@@ -649,7 +649,7 @@ main:focus { outline: none; }
     .alerta-tarjeta { transition: none; }
 }
 
-/* Etapa 5: flujo compacto de recepción, con los componentes del pasaporte. */
+/* Flujo compacto de recepción, con los componentes del pasaporte. */
 .consulta-modos { display: flex; flex-wrap: wrap; gap: var(--space-2); padding: 6px; margin: var(--space-6) 0; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background); }
 .consulta-modo { flex: 1 1 220px; min-width: 0; min-height: 48px; padding: 10px 16px; color: var(--color-muted); background: transparent; border: 1px solid transparent; border-radius: var(--radius-control); font-size: 14px; font-weight: 600; line-height: 1.5; cursor: pointer; }
 .consulta-modo:hover { background: var(--color-surface-tint); color: var(--color-brand); }
@@ -723,7 +723,7 @@ main:focus { outline: none; }
     .pasaporte-contexto-fijo #volver-recepcion { width: 100%; justify-content: flex-start; }
 }
 
-/* Etapa 6: prioridad documental demostrativa, sin gráficos ni métricas sanitarias. */
+/* Prioridad documental demostrativa, sin gráficos ni métricas sanitarias. */
 .analisis-contexto { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-4) var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-background); }
 .analisis-contexto strong { display: block; font-size: 18px; color: var(--color-brand); overflow-wrap: anywhere; }
 .analisis-contexto .consulta-identificador { margin: 0; font-size: 14px; }
@@ -821,7 +821,7 @@ main:focus { outline: none; }
 .video-estado.estado-listo, .video-estado.estado-esperando { color: var(--color-primary); }
 .video-estado.estado-error, .video-estado.estado-incompatible { color: var(--color-error); font-weight: 600; }
 
-/* Etapa 4A — Origen documentado. Alcance: apertura y navegación exterior.
+/* Apertura y navegación exterior (sistema «Origen documentado»).
    Las vistas interiores conservan sus reglas; retícula de doce columnas reales. */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .header { display: flex; justify-content: space-between; align-items: center; width: 100%; background: var(--color-surface); position: relative; z-index: 20; min-height: 80px; padding: 12px max(40px, calc((100% - 1200px) / 2)); gap: 24px; box-shadow: none; border-bottom: 1px solid var(--color-border); }
@@ -919,7 +919,7 @@ main:focus { outline: none; }
     .origin-intro .consulta-modo:focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
 }
 
-/* Etapa 4B — Consulta y envolvente del pasaporte.
+/* Consulta y envolvente del pasaporte.
    No cambia los estilos internos de los cinco paneles ni de recepción. */
 .origin-operation:not([data-contexto="recepcion"]) { padding: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
 .origin-operation:not([data-contexto="recepcion"]) > .consulta-cabecera { display: none; }
@@ -1004,7 +1004,7 @@ main:focus { outline: none; }
     .passport-document .pasaporte-tab:focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
 }
 
-/* Etapa 4C — interiores documentales. Alcance limitado al pasaporte y recepción. */
+/* Interiores documentales: alcance limitado al pasaporte y la recepción. */
 .passport-document .pasaporte-seccion { padding-top: 24px; }
 .passport-document .pasaporte-seccion-titulo { margin-bottom: 24px; }
 .passport-document .pasaporte-seccion-titulo h4 { font-size: 24px; font-weight: 600; }
@@ -1148,7 +1148,7 @@ main:focus { outline: none; }
     .passport-document .pasaporte-paneles :focus-visible, .recepcion :focus-visible { outline: 3px solid Highlight; outline-offset: 3px; }
 }
 
-/* Etapa 5: feedback de controles, sin animar regiones documentales. */
+/* Respuesta visual de los controles, sin animar regiones documentales. */
 html:has(#inicio[data-entrada="teclado"]) { scroll-behavior: auto; }
 #consulta :is(button,input,summary), #inicio :is(button,a) { transition: none; }
 #consulta button:disabled { opacity: 1; color: var(--color-muted); background: var(--color-background); border-color: var(--color-border-control); cursor: not-allowed; transform: none; }
@@ -1184,7 +1184,7 @@ html:has(#inicio[data-entrada="teclado"]) { scroll-behavior: auto; }
     #consulta button:not(:disabled):active, #inicio button:active { border-color: Highlight; }
 }
 
-/* Etapa 6.5: contenido editorial inferior; Hero y pasaporte conservados. */
+/* Contenido editorial inferior; no afecta al Hero ni al pasaporte. */
 .editorial-icon { flex: 0 0 auto; color: var(--color-primary); }
 #problema { padding-block: 48px; }
 .document-journey { list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 32px; margin-top: 32px; }
@@ -1278,13 +1278,13 @@ html:has(#inicio[data-entrada="teclado"]) { scroll-behavior: auto; }
     .footer .footer-links { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 16px; }
     .footer-links h2 { grid-column: 1 / -1; }
 }
-/* Etapa 6.7: imagen conceptual en segmentos. La figura ocupa la primera fila de la tarjeta; el resto conserva icono, título, texto y enlace.
-   La misma estructura (.audience--media > .audience-media) servirá para Consumidores cuando la imagen se apruebe. */
+/* Imagen conceptual en segmentos. La figura ocupa la primera fila de la tarjeta; el resto conserva icono, título, texto y enlace.
+   Las tarjetas de Comerciantes y Consumidores usan la misma estructura (.audience--media > .audience-media). */
 #para-quien .audience--media { display: grid; grid-template-columns: auto minmax(0,1fr); column-gap: 20px; row-gap: 20px; align-items: start; }
 #para-quien .audience-media { grid-column: 1 / -1; margin: 0; }
 #para-quien .audience-media img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 1; object-fit: cover; object-position: 50% 42%; border-radius: 8px; background: var(--color-background); }
 #para-quien .audience-media figcaption { margin-top: 8px; font-size: 14px; line-height: 1.4; color: var(--color-muted); }
-/* Mientras solo una tarjeta tenga imagen, cada una conserva su altura natural; con ambas, se igualan. */
+/* Si alguna tarjeta no tiene imagen, cada una conserva su altura natural; con ambas, se igualan. */
 #para-quien .audience-cards:has(.audience:not(.audience--media)) { align-items: start; }
 @media (max-width: 480px) {
     #para-quien .audience--media { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
