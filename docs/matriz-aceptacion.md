@@ -1,11 +1,11 @@
-# Matriz de aceptación — etapa 7B
+# Matriz de aceptación
 
 Fuente literal: [Origen360_Requisitos_Codex_AV2.md](../Origen360_Requisitos_Codex_AV2.md). Contiene los 90 criterios de las 30 historias funcionales prioritarias y los 10 criterios de US46–US50. No cambia el documento de requisitos.
 
 ## Alcance de la evidencia
 
 - **A:** comprobaciones estáticas del código y los recursos. **S:** pruebas automáticas con DOM, cámara, video y almacenamiento simulados.
-- Los identificadores F01–F27 remiten a [functional.test.mjs](../tests/functional.test.mjs); T01–T08, a [technical.test.mjs](../tests/technical.test.mjs).
+- Los identificadores F01–F36 remiten a [functional.test.mjs](../tests/functional.test.mjs); T01–T08, a [technical.test.mjs](../tests/technical.test.mjs). Las filas de la matriz citan las pruebas de apoyo que corresponden a cada criterio.
 - La cobertura asociada es parcial cuando lo indica la fila. Una prueba de apoyo no equivale a aprobar todo el criterio.
 - Todas las pruebas manuales siguen pendientes de una evidencia individual. No se infieren aprobaciones de las revisiones generales previas.
 - US42 se evalúa como explicación simulada autorizada, sin IA conectada. US28 no exige incorporar fuentes oficiales reales en esta demostración.
@@ -13,7 +13,7 @@ Fuente literal: [Origen360_Requisitos_Codex_AV2.md](../Origen360_Requisitos_Code
 
 ## Resultado reproducible
 
-Se ejecutó el punto de entrada `tests/run.mjs` mediante el entorno Node de esta sesión: **35/35 pruebas satisfactorias**, sin omisiones (27 funcionales con DOM/APIs simulados y 8 técnicas). El comando `node` no estaba disponible en PATH, por lo que no se comprobó su invocación desde PowerShell ni se instaló un runtime. No se ejecutaron pruebas reales de navegador, cámara, recarga, lector o decodificación; esos resultados siguen pendientes.
+Resultado actual de `tests/run.mjs`: **44/44 pruebas satisfactorias**, sin omisiones (36 funcionales con DOM/APIs simulados y 8 técnicas). Una ejecución anterior de esta matriz, con 27 funcionales y 8 técnicas, dio 35/35. Las pruebas automáticas no incluyen navegador, cámara, recarga, lector ni decodificación reales; esos resultados siguen pendientes.
 
 ## Criterios
 
@@ -124,4 +124,4 @@ Se ejecutó el punto de entrada `tests/run.mjs` mediante el entorno Node de esta
 
 Al ejecutar una prueba real, adjuntar fecha, navegador/versión, dispositivo, origen usado (local/HTTPS), resultado observado y referencia de captura o acta. Actualizar solo la fila correspondiente. Los escenarios QR, recarga, responsive, lector de pantalla, audio y decodificación no pueden aprobarse mediante los mocks de esta suite.
 
-La etapa 7C permanece pendiente de autorización.
+Las pruebas manuales de la tabla permanecen pendientes de su registro individual.

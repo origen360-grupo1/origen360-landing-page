@@ -47,7 +47,7 @@ jobs:
           node-version: '24'
           package-manager-cache: false
 
-      - name: Ejecutar las 35 pruebas de la aplicación
+      - name: Ejecutar las pruebas automáticas
         run: node tests/run.mjs
 
       - name: Verificar contenido publicable y rutas bajo subdirectorio

@@ -1,17 +1,14 @@
 # Preparación técnica de GitHub Pages
 
-Estado: configuración local preparada; **no publicada**. No se crearon commits, no se hizo push y no se cambiaron ajustes remotos. Esto no cierra las pruebas manuales de aceptación ni autoriza la etapa 7C.
+Configuración de publicación del sitio estático. La publicación se realiza únicamente mediante el workflow manual descrito abajo; este documento no registra una ejecución. Las pruebas manuales de aceptación se documentan en `docs/matriz-aceptacion.md`.
 
-## Auditoría del repositorio
+## Repositorio
 
 - Repositorio: `https://github.com/origen360-grupo1/origen360-landing-page`.
-- Rama local y rama predeterminada remota consultada: **main**. El repositorio remoto es público.
-- Al iniciar esta preparación, HEAD local era `37e1d7981b3b4f5ca92748db25c5faa9c4147155`, igual a la referencia local del último `origin/main` conocido. No se hizo fetch; esa igualdad no garantiza sincronización actual con el servidor.
-- No había entradas preparadas ni conflictos en el índice. Había cambios locales en `README.md`, `public/index.html`, CSS y JavaScript.
-- No estaban rastreados los tres MP4, `Origen360_Requisitos_Codex_AV2.md`, los cinco archivos de pruebas y `docs/matriz-aceptacion.md`. Deben incluirse en la revisión del futuro commit; CI necesita las pruebas, los requisitos y la matriz aunque no se publiquen como sitio.
-- Git y Node no estaban accesibles como comandos de PowerShell en esta sesión. La rama/estado se comprobaron mediante lectura de HEAD, índice v2 y objetos de Git, sin escribirlos; los programas de validación se ejecutaron mediante el entorno Node disponible.
+- Rama predeterminada: **main**. El repositorio es público.
+- La validación en CI necesita en el repositorio las pruebas, los requisitos y la matriz de aceptación, aunque no se publiquen como parte del sitio.
 
-La preparación añade el workflow, este documento y el validador de rutas. No modifica `public/`, sus datos, los requisitos o las pruebas de las 30 historias.
+El workflow, este documento y el validador de rutas no modifican `public/`, sus datos, los requisitos ni las pruebas.
 
 ## Contenido y rutas
 
@@ -25,7 +22,7 @@ https://origen360-grupo1.github.io/origen360-landing-page/
 
 Es una URL propuesta, no una publicación verificada. La URL efectiva debe tomarse del resultado del futuro despliegue. La carpeta `public/` se convierte en la raíz del artefacto: no se añade `/public/` a la URL.
 
-El preflight comprobó **11 archivos publicables**, **60 referencias locales** en dos prefijos de repositorio y **cero dependencias de recursos externos**. Incluye las anclas del HTML, las rutas de fondos CSS y el uso exacto de mayúsculas/minúsculas. No realiza peticiones a la URL propuesta.
+En la última comprobación local, el preflight verificó **20 archivos publicables**, **68 referencias locales** en dos prefijos de repositorio y **cero dependencias de recursos externos**. Incluye las anclas del HTML, las rutas de fondos CSS y el uso exacto de mayúsculas/minúsculas. No realiza peticiones a la URL propuesta.
 
 | Recurso | Incluido en Pages |
 |---|---|
@@ -36,7 +33,7 @@ El preflight comprobó **11 archivos publicables**, **60 referencias locales** e
 
 Excluir documentación del artefacto de Pages no la convierte en privada: los archivos que se incorporen a este repositorio público seguirán siendo accesibles desde GitHub Code.
 
-## Workflow propuesto
+## Workflow
 
 Archivo: [`.github/workflows/pages.yml`](../.github/workflows/pages.yml).
 
@@ -60,7 +57,7 @@ node tests/run.mjs
 node scripts/check-pages.mjs
 ```
 
-Se ejecutaron los mismos puntos de entrada mediante el entorno Node de esta sesión: **35/35 pruebas satisfactorias** y **preflight correcto**. El intento literal `node tests/run.mjs` en PowerShell falló porque `node` no estaba en PATH. No se instaló ningún runtime ni paquete.
+Resultado actual: **44/44 pruebas satisfactorias** (36 funcionales y 8 técnicas) y **preflight correcto**. Una ejecución anterior de esta configuración, con 27 pruebas funcionales y 8 técnicas, dio 35/35.
 
 El validador de Pages es de solo lectura y no genera un build o archivo comprimido. Comprueba:
 
@@ -71,24 +68,24 @@ El validador de Pages es de solo lectura y no genera un build o archivo comprimi
 - Exclusión de documentación, tests y extensiones no previstas dentro del sitio. Si se autorizan nuevos tipos de recurso más adelante, debe revisarse su lista permitida.
 - Archivos menores de 100 MiB y contenido total menor de 1 GiB.
 
-El YAML se revisó estáticamente con las definiciones oficiales de las acciones. No se ejecutó GitHub Actions, no se subió un artefacto y no se comprobó la URL desplegada. No había un parser YAML instalado; no se añadió una dependencia para ello. La validación definitiva del workflow corresponde a su primera ejecución en GitHub.
+El YAML se revisó estáticamente con las definiciones oficiales de las acciones. Este documento no registra una ejecución en GitHub Actions: la validación definitiva del workflow corresponde a su ejecución real.
 
-## Pasos exactos en GitHub — únicamente después de autorizar los cambios remotos
+## Pasos en GitHub
 
-1. **Preparar y subir el futuro commit con un cliente Git**, incluyendo el sitio actualizado, los tres MP4, requisitos, matriz, pruebas y los archivos de esta preparación. Revisar antes `git status --short --branch`. No subir solamente el YAML: la validación necesita el resto de los archivos de trabajo. Este documento no ejecuta ese commit o push.
+1. **Subir la rama de trabajo con un cliente Git**, incluyendo el sitio, los tres MP4, requisitos, matriz, pruebas y este documento, e integrarla siguiendo GitFlow (`feature/*` hacia `develop` y luego hacia `main`). Revisar antes `git status --short --branch`. No subir solamente el YAML: la validación necesita el resto de los archivos.
 2. Incorporar los cambios a **main**, siguiendo las reglas o PR del repositorio. El botón manual del workflow aparece cuando el archivo existe en la rama predeterminada.
 3. En el repositorio, abrir **Settings → Actions → General** y comprobar que las acciones oficiales de GitHub estén permitidas. No es necesario habilitar permisos globales de escritura ni crear un PAT.
 4. Abrir **Settings → Pages → Build and deployment → Source** y seleccionar **GitHub Actions**.
 5. Revisar las reglas del entorno **github-pages**, si existen: deben permitir desplegar desde `main`. Si requieren aprobación, la publicación esperará esa aprobación.
 6. Abrir **Actions → Preparar y publicar Origen360 en Pages → Run workflow**. Seleccionar `main` y dejar **publish desmarcado**. Comprobar que `validate` finalice correctamente y `deploy` figure omitido.
-7. **Solo con autorización expresa para publicar**, ejecutar de nuevo el mismo workflow en `main`, marcando **publish**. Comprobar las validaciones, cualquier aprobación del entorno y el resultado de `deploy`.
-8. Tomar la URL de salida del despliegue o de **Settings → Pages**. Abrirla con su barra final, comprobar **Enforce HTTPS** cuando esté disponible y verificar recursos, videos, consulta y recepción. No se ha realizado este paso durante la preparación.
+7. Para publicar, ejecutar de nuevo el mismo workflow en `main`, marcando **publish**. Comprobar las validaciones, cualquier aprobación del entorno y el resultado de `deploy`.
+8. Tomar la URL de salida del despliegue o de **Settings → Pages**. Abrirla con su barra final, comprobar **Enforce HTTPS** cuando esté disponible y verificar recursos, videos, consulta y recepción.
 
 No seleccionar una carpeta de publicación de rama: la carpeta `public/` la decide `path` del artefacto del workflow.
 
 ## Multimedia, HTTPS y limitaciones
 
-El sitio completo suma **62,85 MB**. Los videos ocupan aproximadamente 36,24 MB, 19,52 MB y 6,25 MB; dos son 4K. Los archivos individuales están por debajo del límite de 100 MiB de Git y el sitio por debajo de 1 GiB, pero su reproducción consume ancho de banda. No se optimizaron ni sustituyeron.
+El sitio completo suma unos **63,4 MB**. Los videos ocupan aproximadamente 36,24 MB, 19,52 MB y 6,25 MB; dos son 4K. Los archivos individuales están por debajo del límite de 100 MiB de Git y el sitio por debajo de 1 GiB, pero su reproducción consume ancho de banda. No se optimizaron ni sustituyeron.
 
 El primer MP4 supera 25 MiB: no podrá añadirse mediante la carga de archivos del navegador de GitHub. Debe incorporarse usando un cliente Git. No se necesita Git LFS para los tamaños actuales.
 
@@ -96,6 +93,6 @@ No se encontraron recursos HTTP ni configuraciones que exijan HTTP. La direcció
 
 Las revisiones de recepción son locales al navegador y origen. Los registros de `file:` o `localhost` no se trasladan automáticamente al origen de GitHub Pages. No hay sincronización ni verificación oficial. Inter continúa dependiendo de su instalación local o de las alternativas del sistema.
 
-Siguen pendientes la ejecución real de Actions, permisos efectivos de Pages, reproducción y carga por HTTPS, responsive, lector de pantalla, cámara física y recarga/persistencia en el origen final. Las 35 pruebas siguen usando DOM y APIs controlados.
+Quedan por verificar tras el despliegue: la ejecución real de Actions, los permisos efectivos de Pages, la reproducción y carga por HTTPS, el comportamiento responsive, el lector de pantalla, la cámara física y la recarga/persistencia en el origen final. Las 44 pruebas automáticas usan DOM y APIs controlados.
 
 Referencias oficiales consultadas: [workflows personalizados de Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [fuente de publicación](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site), [límites de Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits), [archivos grandes](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github).
