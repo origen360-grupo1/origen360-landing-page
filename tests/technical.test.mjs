@@ -101,7 +101,8 @@ test('T06 — videos, imágenes y favicon originales conservan sus hashes', () =
 
 test('T07 — las 50 User Stories y sus criterios no se modifican', () => {
     const requirements = readProject('Origen360_Requisitos_Codex_AV2.md').replace(/\r\n/g, '\n');
-    assert.equal(sha256(requirements), '8abff0544a043c66d676b500626b52afa743f7f99399c87bf80cb0d1ae473ddd');
+    // b6edf40 modificó solo el encabezado; las historias y criterios son idénticos a 6a820fb.
+    assert.equal(sha256(requirements), 'e26d09038c46fdd085b1d3f98502d91da52722fab66298b452896f066afe5fcb');
     assert.equal([...requirements.matchAll(/^### US\d{2}/gm)].length, 50);
 });
 
