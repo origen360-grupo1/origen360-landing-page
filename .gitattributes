@@ -1,0 +1,2 @@
+# SVG de texto: conservar los bytes LF protegidos por T06.
+public/assets/images/*.svg text eol=lf
